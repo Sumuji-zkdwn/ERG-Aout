@@ -3,7 +3,12 @@
 この文書は、R002 の次ステップとして **1つの real conversation log excerpt** に対して、
 既存の R001/R002 manual mapping workflow が運用可能かを確認する pilot plan を固定するための計画ノートである。
 
-本 PR の範囲は計画文書のみであり、実際の real log data は追加しない。
+この計画文書の初期追加時点では、実際の real log data は追加しない方針だった。pilot_01 開始後も、full raw conversation log は保存せず、短い抜粋・redacted sidecar に限定する。
+
+## Pilot status update
+
+- `examples/r002/real_log_pilot_01.json` と sidecar / companion doc の追加により、pilot_01 は開始済み。
+- 本計画文書の non-goals は維持し、automatic ingestion や scoring には進めない。
 
 ## 1) Purpose
 
