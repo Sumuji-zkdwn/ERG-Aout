@@ -73,3 +73,12 @@ python tool/check_r002_sidecar_consistency.py \
   examples/r002/larger_manual_conversation_example.json \
   examples/r002/larger_manual_conversation_raw_text_sidecar.md
 ```
+
+## accepted decision warning について
+
+現在の `examples/r002/larger_manual_conversation_example.json` では、defer 系 `KernelDecision`（`acc.defer_full_automatic_ingestion` / `acc.defer_gif_dif_sigma_scoring`）が `accepted_from_candidate` を持たない。
+
+そのため、`tool/check_r002_mapping_consistency.py` 実行時に warning として現れる。
+
+今後の整理候補として、defer decision も raw -> candidate -> accepted の昇格経路で表現する方向がある（詳細は `docs/R002_ACCEPTED_DECISION_PROMOTION_POLICY.md` を参照）。
+

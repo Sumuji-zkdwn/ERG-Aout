@@ -63,7 +63,8 @@ Status: practical checklist (R002 kickoff aid).
 
 補助として、`tool/check_r002_mapping_consistency.py` により本節の一部を機械的に点検できる（ただし validator の代替ではない）。checker 出力では、不整合 warning と確認用 note が分離表示される。
 
-- [ ] `accepted_from_candidate` を持たない accepted がないか。
+- [ ] `KernelDecision` も含め、accepted は原則 `accepted_from_candidate` で candidate から昇格しているか。
+- [ ] `accepted_from_candidate` を持たない accepted decision は warning 対象として明示確認したか。
 - [ ] `unaccepted` と名付けた candidate が accepted に昇格していないか。
 - [ ] branch target が main spine に混ざっていないか。
 - [ ] raw -> candidate の `introduces` が不足していないか。
