@@ -51,6 +51,15 @@ python tool/inspect_r001_graph.py examples/r001/sample_conversation_graph.json
 python tool/inspect_r001_graph.py examples/r001/sample_r001_development_graph.json
 ```
 
+
+Coverage check (graph edge types vs semantics):
+
+```bash
+python tool/check_r001_semantics_coverage.py \
+  examples/r001/sample_r001_development_graph.json \
+  docs/R001_SEMANTICS.md
+```
+
 The validator enforces only documented R001 invariants:
 - `extends_main` acyclic + single linear canonical path.
 - `extends_branch` cannot modify canonical path nodes.
