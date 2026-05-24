@@ -33,7 +33,7 @@
 
 - checklist-driven consistency helper（最小実装: `tool/check_r002_mapping_consistency.py`）
 - accepted decision promotion policy を文書化（`docs/R002_ACCEPTED_DECISION_PROMOTION_POLICY.md`）
-- candidate review table
+- candidate review table（最小実装: `tool/export_r002_candidate_review_table.py`）
 - larger real conversation log mapping
 - raw text attachment strategy（文書化済み: `docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`）
 - external-reference contamination audit 実施（`docs/R002_EXTERNAL_REFERENCE_CONTAMINATION_AUDIT.md`）

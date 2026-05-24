@@ -47,6 +47,7 @@ Codex 作業は、原則として ERG-Aout 内 docs と明示指示を根拠に�
 - Inspector: `tool/inspect_r001_graph.py`
 - R002 mapping consistency helper: `tool/check_r002_mapping_consistency.py` (checklist-driven manual mapping aid; run validator first; outputs WARNINGS and NOTES separately)
 - R002 sidecar consistency helper: `tool/check_r002_sidecar_consistency.py` (supplemental check for `L_raw` node id vs sidecar `raw_id`; not a validator replacement)
+- R002 candidate review table exporter: `tool/export_r002_candidate_review_table.py` (reads existing graph `nodes`/`edges` and lists `L_candidate` review status; does not auto-generate candidates)
 - Minimal examples: `examples/r001/minimal_valid.json`, `examples/r001/invalid_cycle_and_policy.json`, `examples/r001/invalid_duplicate_node_id.json`, `examples/r001/invalid_missing_edge_endpoint.json`, `examples/r001/invalid_extends_main_outside_accepted.json`, `examples/r001/invalid_node_type_for_layer.json`
 - Handmade samples: `examples/r001/sample_conversation_graph.json`, `examples/r001/sample_r001_development_graph.json`, `examples/r001/manual_conversation_to_erg_example.json`, `examples/r001/manual_conversation_cpr_origin_example.json`
 - Larger R002 sample: `examples/r002/larger_manual_conversation_example.json`
@@ -70,6 +71,16 @@ R002 sidecar consistency helper (after validator):
 
 ```bash
 python tool/check_r002_sidecar_consistency.py examples/r002/larger_manual_conversation_example.json examples/r002/larger_manual_conversation_raw_text_sidecar.md
+```
+
+R002 candidate review table exporter (manual review aid):
+
+```bash
+python tool/export_r002_candidate_review_table.py \
+  examples/r002/larger_manual_conversation_example.json
+python tool/export_r002_candidate_review_table.py \
+  examples/r002/larger_manual_conversation_example.json \
+  --sidecar examples/r002/larger_manual_conversation_raw_text_sidecar.md
 ```
 
 Inspect:

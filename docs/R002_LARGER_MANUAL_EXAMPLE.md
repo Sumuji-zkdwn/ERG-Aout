@@ -74,6 +74,16 @@ python tool/check_r002_sidecar_consistency.py \
   examples/r002/larger_manual_conversation_raw_text_sidecar.md
 ```
 
+## candidate review table 参照と実行例
+
+candidate の accepted / unaccepted 状態一覧は、`examples/r002/larger_manual_conversation_candidate_review_table.md` を参照。
+
+```bash
+python tool/export_r002_candidate_review_table.py \
+  examples/r002/larger_manual_conversation_example.json \
+  --sidecar examples/r002/larger_manual_conversation_raw_text_sidecar.md
+```
+
 ## accepted decision warning について
 
 本 example は defer 系 `KernelDecision` を、now candidate から直接昇格する形ではなく、defer decision candidate から accepted decision へ昇格する形に整理した。
@@ -82,4 +92,3 @@ python tool/check_r002_sidecar_consistency.py \
 - `raw.msg.14` -> `cand.defer_gif_dif_sigma_scoring_decision` -> `acc.defer_gif_dif_sigma_scoring`
 
 このため、以前 `tool/check_r002_mapping_consistency.py` で出ていた defer 系 accepted decision の warning は、この example では解消される想定である。
-
