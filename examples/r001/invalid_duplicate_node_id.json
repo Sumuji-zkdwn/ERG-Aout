@@ -1,0 +1,7 @@
+{
+  "nodes": [
+    {"id": "k0", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "k0", "layer": "L_accepted", "type": "KernelExample"}
+  ],
+  "edges": []
+}
