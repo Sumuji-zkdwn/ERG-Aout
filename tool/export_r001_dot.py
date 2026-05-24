@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -15,6 +16,14 @@ from validate_r001_kernel import validate
 
 LAYER_ORDER = ["L_raw", "L_candidate", "L_accepted", "L_gitlog"]
 VIEW_CHOICES = ["full", "accepted", "spine"]
+NODE_LABEL_CHOICES = ["id", "short"]
+EDGE_LABEL_CHOICES = ["id", "type", "none"]
+EDGE_TYPE_SHORT_NAMES = {
+    "extends_main": "main",
+    "extends_branch": "branch",
+    "accepted_from_candidate": "accepts",
+    "observes_kernel_change": "observes",
+}
 
 
 def dot_quote(value: object) -> str:
@@ -23,8 +32,55 @@ def dot_quote(value: object) -> str:
     return f'"{escaped}"'
 
 
-def dot_node_label(node: dict) -> str:
-    return f"{node.get('id', '<missing>')}\\n({node.get('type', '<missing>')})"
+def humanize_tail(value: str) -> str:
+    return value.replace("_", " ")
+
+
+def short_node_name(node_id: str) -> str:
+    pr_match = re.fullmatch(r"acc\.pr(\d+)\.(.+)", node_id)
+    if pr_match:
+        return f"PR {pr_match.group(1)}: {humanize_tail(pr_match.group(2))}"
+
+    git_match = re.fullmatch(r"git\.pr(\d+)\.merged", node_id)
+    if git_match:
+        return f"PR {git_match.group(1)} merged"
+
+    prefix_replacements = [
+        ("acc.branch.", "branch: "),
+        ("cand.", "cand: "),
+        ("raw.user.", "user: "),
+        ("raw.codex.", "codex: "),
+        ("git.", "git: "),
+    ]
+    for prefix, label in prefix_replacements:
+        if node_id.startswith(prefix):
+            return label + humanize_tail(node_id[len(prefix):])
+
+    return humanize_tail(node_id)
+
+
+def dot_node_label(node: dict, label_mode: str = "id") -> str:
+    node_id = str(node.get("id", "<missing>"))
+    node_type = node.get("type", "<missing>")
+
+    if label_mode == "short":
+        return short_node_name(node_id)
+    if label_mode == "id":
+        return f"{node_id}\\n({node_type})"
+    raise ValueError(f"unknown node label mode: {label_mode}")
+
+
+def dot_edge_attributes(edge: dict, edge_label: str = "id") -> str:
+    edge_type = str(edge.get("type", "<missing>"))
+    edge_id = str(edge.get("id", "<missing>"))
+
+    if edge_label == "none":
+        return ""
+    if edge_label == "type":
+        return f" [label={dot_quote(EDGE_TYPE_SHORT_NAMES.get(edge_type, edge_type))}]"
+    if edge_label == "id":
+        return f" [label={dot_quote(edge_type + chr(10) + edge_id)}]"
+    raise ValueError(f"unknown edge label mode: {edge_label}")
 
 
 def canonical_chain(edges: List[dict]) -> List[str]:
@@ -94,7 +150,12 @@ def filtered_payload(payload: dict, view: str) -> dict:
     raise ValueError(f"unknown view: {view}")
 
 
-def emit_dot(payload: dict, view: str = "full") -> str:
+def emit_dot(
+    payload: dict,
+    view: str = "full",
+    node_label: str = "id",
+    edge_label: str = "id",
+) -> str:
     projected = filtered_payload(payload, view)
     nodes: List[dict] = projected.get("nodes", [])
     edges: List[dict] = projected.get("edges", [])
@@ -122,17 +183,17 @@ def emit_dot(payload: dict, view: str = "full") -> str:
         lines.append(f"    label={dot_quote(layer)};")
         for node in sorted(nodes_by_layer[layer], key=lambda item: item.get("id", "")):
             node_id = node.get("id", "<missing>")
-            lines.append(f"    {dot_quote(node_id)} [label={dot_quote(dot_node_label(node))}];")
+            lines.append(
+                f"    {dot_quote(node_id)} [label={dot_quote(dot_node_label(node, node_label))}];"
+            )
         lines.append("  }")
         lines.append("")
 
     for edge in sorted(edges, key=lambda item: item.get("id", "")):
         source = edge.get("source", "<missing>")
         target = edge.get("target", "<missing>")
-        edge_type = edge.get("type", "<missing>")
-        edge_id = edge.get("id", "<missing>")
-        label = f"{edge_type}\\n{edge_id}"
-        lines.append(f"  {dot_quote(source)} -> {dot_quote(target)} [label={dot_quote(label)}];")
+        attrs = dot_edge_attributes(edge, edge_label)
+        lines.append(f"  {dot_quote(source)} -> {dot_quote(target)}{attrs};")
 
     lines.append("}")
     return "\n".join(lines) + "\n"
@@ -152,6 +213,18 @@ def main(argv: Iterable[str] | None = None) -> int:
         default="full",
         help="Projection view to export: full, accepted, or spine",
     )
+    parser.add_argument(
+        "--node-label",
+        choices=NODE_LABEL_CHOICES,
+        default="id",
+        help="Node label mode: id preserves raw node ids; short uses compact display names",
+    )
+    parser.add_argument(
+        "--edge-label",
+        choices=EDGE_LABEL_CHOICES,
+        default="id",
+        help="Edge label mode: id preserves full labels; type shows compact edge types; none hides labels",
+    )
     args = parser.parse_args(argv)
 
     payload = load_payload(args.graph)
@@ -162,7 +235,12 @@ def main(argv: Iterable[str] | None = None) -> int:
             print(f"- {err}", file=sys.stderr)
         return 1
 
-    dot_text = emit_dot(payload, view=args.view)
+    dot_text = emit_dot(
+        payload,
+        view=args.view,
+        node_label=args.node_label,
+        edge_label=args.edge_label,
+    )
     if args.output:
         args.output.write_text(dot_text, encoding="utf-8")
     else:
