@@ -34,7 +34,7 @@ R002 完了時に最低限そろえる成果物を次とする。
 1. larger manual conversation example
 2. mapping candidate checklist（`docs/R002_MAPPING_CHECKLIST.md`）
 3. consistency check checklist（`docs/R002_MAPPING_CHECKLIST.md`）
-4. R002 handoff note
+4. R002 handoff note（`docs/R002_HANDOFF.md`）
 
 ## 4) Workstream 分割（R002-A / R002-B / R002-C）
 
