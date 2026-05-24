@@ -85,6 +85,7 @@ def main() -> int:
         incoming.setdefault(edge["target"], []).append(edge)
 
     warnings: List[str] = []
+    notes: List[str] = []
 
     for accepted_id in sorted(accepted_nodes):
         if not any(e.get("type") == "accepted_from_candidate" for e in incoming.get(accepted_id, [])):
@@ -132,7 +133,7 @@ def main() -> int:
     )
     has_acc_from_candidate = any(e.get("type") == "accepted_from_candidate" for e in edges)
     if has_mentions_raw_to_accepted and has_acc_from_candidate:
-        warnings.append(
+        notes.append(
             "graph uses both raw->accepted mentions and candidate->accepted accepted_from_candidate; "
             "confirm they are not being semantically conflated"
         )
@@ -168,6 +169,13 @@ def main() -> int:
             print(f"- {warning}")
     else:
         print("WARNINGS")
+        print("- none")
+
+    print("NOTES")
+    if notes:
+        for note in notes:
+            print(f"- {note}")
+    else:
         print("- none")
 
     print("SUMMARY")
