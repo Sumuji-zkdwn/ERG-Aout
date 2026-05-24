@@ -1,0 +1,1 @@
+{"nodes":[{"id":"m1","layer":"L_raw","type":"RawMessage"},{"id":"k0","layer":"L_accepted","type":"KernelDefinition"}],"edges":[{"id":"e1","type":"extends_main","source":"m1","target":"k0"}]}

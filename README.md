@@ -28,3 +28,26 @@ README is not a scratchpad.
 Unstable ideas go to `proposals/` or `logs/`.
 Accepted definitions are promoted only after review.
 
+
+## R001 validator (minimal kernel check)
+
+- Schema: `schema/r001_graph.schema.json`
+- Validator: `tool/validate_r001_kernel.py`
+- Examples:
+  - `examples/r001/minimal_valid.json`
+  - `examples/r001/invalid_cycle_and_policy.json`
+  - `examples/r001/invalid_duplicate_node_id.json`
+  - `examples/r001/invalid_missing_edge_endpoint.json`
+  - `examples/r001/invalid_extends_main_outside_accepted.json`
+  - `examples/r001/invalid_node_type_for_layer.json`
+
+Run:
+
+```bash
+python tool/validate_r001_kernel.py examples/r001/minimal_valid.json
+python tool/validate_r001_kernel.py examples/r001/invalid_cycle_and_policy.json
+python tool/validate_r001_kernel.py examples/r001/invalid_duplicate_node_id.json
+python tool/validate_r001_kernel.py examples/r001/invalid_missing_edge_endpoint.json
+python tool/validate_r001_kernel.py examples/r001/invalid_extends_main_outside_accepted.json
+python tool/validate_r001_kernel.py examples/r001/invalid_node_type_for_layer.json
+```

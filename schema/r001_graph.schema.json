@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/schema/r001_graph.schema.json",
+  "title": "R001 ERG Graph",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["nodes", "edges"],
+  "properties": {
+    "nodes": {"type": "array", "items": {"$ref": "#/$defs/node"}},
+    "edges": {"type": "array", "items": {"$ref": "#/$defs/edge"}}
+  },
+  "$defs": {
+    "layer": {"type": "string", "enum": ["L_raw", "L_candidate", "L_accepted", "L_gitlog"]},
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "layer", "type"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "layer": {"$ref": "#/$defs/layer"},
+        "type": {"type": "string", "minLength": 1}
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "type", "source", "target"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "type": {"type": "string", "minLength": 1},
+        "source": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"},
+        "target": {"type": "string", "pattern": "^[A-Za-z0-9_.:-]+$"}
+      }
+    }
+  }
+}
