@@ -35,6 +35,7 @@
 - accepted decision promotion policy を文書化（`docs/R002_ACCEPTED_DECISION_PROMOTION_POLICY.md`）
 - candidate review table（最小実装: `tool/export_r002_candidate_review_table.py`）
 - larger real conversation log mapping
+- real-log pilot plan を次の具体ステップとして固定（`docs/R002_REAL_LOG_PILOT_PLAN.md`）
 - raw text attachment strategy（文書化済み: `docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`）
 - external-reference contamination audit 実施（`docs/R002_EXTERNAL_REFERENCE_CONTAMINATION_AUDIT.md`）
 - optional DOT visualization for R002 example
