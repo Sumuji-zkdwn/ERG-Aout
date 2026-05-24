@@ -19,6 +19,7 @@
 - `docs/CONVERGENCE.md`: convergence criteria and observed changes.
 - `docs/R001_STATUS.md`: R001 の到達点・境界・R002候補の整理。
 - `docs/R001_CLOSEOUT.md`: R001 closeout（到達点・境界・R002へ渡す入力）の固定。
+- `docs/R002_PLAN.md`: R001 closeout を受けた R002 開始計画（目的・入力・最小成果物・非目標）の固定。
 - `docs/R001_MANUAL_EXAMPLE.md`: `manual_conversation_to_erg_example.json` の companion reading note.
 - `docs/R001_MANUAL_MAPPING_RULES.md`: 2つの manual conversation example から読める手動写像ルール。
 - `logs/`: GPT/Codex round logs.
