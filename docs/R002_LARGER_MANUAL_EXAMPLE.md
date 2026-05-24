@@ -57,3 +57,8 @@ accepted の主系列は次の順で進む。
 
 この example は automatic ingestion / automatic concept extraction の実装例ではない。
 あくまで人手中心の写像を、R001 形式で少し大きなログに適用した manual mapping example である。
+
+
+## raw text sidecar 参照
+
+raw node id と発話断片の対応は、人工的 sidecar 実例 `examples/r002/larger_manual_conversation_raw_text_sidecar.md` を参照。
