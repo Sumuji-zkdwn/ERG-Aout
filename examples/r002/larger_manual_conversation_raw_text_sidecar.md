@@ -16,3 +16,5 @@
 | raw.msg.10 | 10 | user | sigma scoring を今すぐ入れる案 | artificial-r002-example | introduces cand.sigma_scoring_now |
 | raw.msg.11 | 11 | assistant | larger log application への言及 | artificial-r002-example | mentions acc.larger_log_application_started |
 | raw.msg.12 | 12 | assistant | full automatic ingestion defer への言及 | artificial-r002-example | mentions acc.defer_full_automatic_ingestion |
+| raw.msg.13 | 13 | assistant | full automatic ingestion は R002 では defer する | artificial-r002-example | introduces cand.defer_full_automatic_ingestion_decision; accepted as acc.defer_full_automatic_ingestion |
+| raw.msg.14 | 14 | assistant | GIF/DIF / sigma / convergence scoring は R002 では defer する | artificial-r002-example | introduces cand.defer_gif_dif_sigma_scoring_decision; accepted as acc.defer_gif_dif_sigma_scoring |
