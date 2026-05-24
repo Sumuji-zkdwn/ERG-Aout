@@ -5,6 +5,11 @@
 
 本 PR の範囲は計画文書のみであり、実際の real log data は追加しない。
 
+## Pilot status update
+
+- `examples/r002/real_log_pilot_01.json` と sidecar / companion doc の追加により、pilot_01 は開始済み。
+- 本計画文書の non-goals は維持し、automatic ingestion や scoring には進めない。
+
 ## 1) Purpose
 
 - 次の R002 ステップとして、R001/R002 で整備した manual mapping workflow を、

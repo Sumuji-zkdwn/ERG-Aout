@@ -23,7 +23,8 @@
 - `docs/R002_MAPPING_CHECKLIST.md`: R002 の manual mapping 補助チェックリスト（候補抽出・判断・整合性確認）。
 - `docs/R002_ACCEPTED_DECISION_PROMOTION_POLICY.md`: accepted decision node（特に KernelDecision）の candidate 昇格原則と warning 解釈の整理。
 - `docs/R002_LARGER_MANUAL_EXAMPLE.md`: R002-C の最初の larger manual conversation example の読み方。
-- `docs/R002_REAL_LOG_PILOT_PLAN.md`: R002-C 次ステップとしての real log pilot（実データ未投入）の計画固定。
+- `docs/R002_REAL_LOG_PILOT_PLAN.md`: R002-C 次ステップとしての real log pilot（計画固定と pilot_01 開始ノート）。
+- `docs/R002_REAL_LOG_PILOT_01.md`: R002-C の bounded real-log manual mapping pilot_01 の目的・境界・読み方。
 - `docs/R002_HANDOFF.md`: R002 初期成果物の handoff（確認事項・未解決点・次フェーズ候補・境界）の整理。
 - `docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`: raw node id と元発話断片の対応を sidecar で固定するための戦略メモ。
 - `docs/R002_EXTERNAL_REFERENCE_CONTAMINATION_AUDIT.md`: external-reference contamination audit（repository hygiene / project-boundary check）の記録。
@@ -53,6 +54,8 @@ Codex 作業は、原則として ERG-Aout 内 docs と明示指示を根拠に�
 - Handmade samples: `examples/r001/sample_conversation_graph.json`, `examples/r001/sample_r001_development_graph.json`, `examples/r001/manual_conversation_to_erg_example.json`, `examples/r001/manual_conversation_cpr_origin_example.json`
 - Larger R002 sample: `examples/r002/larger_manual_conversation_example.json`
 - Larger R002 raw text sidecar (artificial): `examples/r002/larger_manual_conversation_raw_text_sidecar.md`
+- Real-log pilot 01 graph (redacted manual mapping): `examples/r002/real_log_pilot_01.json`
+- Real-log pilot 01 raw text sidecar (redacted excerpts): `examples/r002/real_log_pilot_01_raw_text_sidecar.md`
 
 Validate:
 
