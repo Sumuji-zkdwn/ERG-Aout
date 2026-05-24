@@ -17,6 +17,7 @@
 - `README.md`: stable public-facing summary.
 - `docs/FORMALIZATION.md`: current mathematical formalization.
 - `docs/CONVERGENCE.md`: convergence criteria and observed changes.
+- `docs/R001_STATUS.md`: R001 の到達点・境界・R002候補の整理。
 - `logs/`: GPT/Codex round logs.
 - `decisions/`: accepted decisions.
 - `proposals/`: unaccepted proposals.
