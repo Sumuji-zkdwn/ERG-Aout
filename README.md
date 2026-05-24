@@ -30,6 +30,7 @@
 - `docs/R002_HANDOFF.md`: R002 初期成果物の handoff（確認事項・未解決点・次フェーズ候補・境界）の整理。
 - `docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`: raw node id と元発話断片の対応を sidecar で固定するための戦略メモ。
 - `docs/R002_EXTERNAL_REFERENCE_CONTAMINATION_AUDIT.md`: external-reference contamination audit（repository hygiene / project-boundary check）の記録。
+- `docs/R003_AUTOMATION_POLICY.md`: R003 の自動運用方針（過大主張・漏洩・主線破壊を避けるための運用規則）。
 - `docs/R001_MANUAL_EXAMPLE.md`: `manual_conversation_to_erg_example.json` の companion reading note.
 - `docs/R001_MANUAL_MAPPING_RULES.md`: 2つの manual conversation example から読める手動写像ルール。
 - `logs/`: GPT/Codex round logs.
