@@ -52,6 +52,7 @@ R002 完了時に最低限そろえる成果物を次とする。
 
 - 小規模例より大きい会話ログに対し、R002-A/B で定義した手順を適用する。
 - 適用結果を handoff 可能な形でまとめ、次ラウンドへ渡す。
+- larger manual example（`examples/r002/larger_manual_conversation_example.json`）と companion note（`docs/R002_LARGER_MANUAL_EXAMPLE.md`）を R002-C の最初の適用実例として参照する。
 
 ## 5) R002 でまだやらないこと（明示的に除外）
 

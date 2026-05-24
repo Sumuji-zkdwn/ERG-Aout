@@ -1,0 +1,66 @@
+{
+  "nodes": [
+    {"id": "raw.msg.01", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.msg.02", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.msg.03", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.msg.04", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.msg.05", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.msg.06", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.msg.07", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.msg.08", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.msg.09", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.msg.10", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.msg.11", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.msg.12", "layer": "L_raw", "type": "RawMessage"},
+
+    {"id": "cand.r001_closeout_ready", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.r002_kickoff_scope", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.manual_mapping_checklist", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.larger_log_application", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.candidate_decision_support", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.consistency_checks", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.handoff_ready", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.full_auto_ingestion_now", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.gif_dif_semantics_now", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.sigma_scoring_now", "layer": "L_candidate", "type": "CandidateDefinition"},
+
+    {"id": "acc.r001_closeout_fixed", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.r002_plan_fixed", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.mapping_checklist_fixed", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.larger_log_application_started", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.r002_handoff_prepared", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.defer_full_automatic_ingestion", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.defer_gif_dif_sigma_scoring", "layer": "L_accepted", "type": "KernelDecision"}
+  ],
+  "edges": [
+    {"id": "e.intro.01", "type": "introduces", "source": "raw.msg.01", "target": "cand.r001_closeout_ready"},
+    {"id": "e.intro.02", "type": "introduces", "source": "raw.msg.02", "target": "cand.r002_kickoff_scope"},
+    {"id": "e.intro.03", "type": "introduces", "source": "raw.msg.03", "target": "cand.manual_mapping_checklist"},
+    {"id": "e.intro.04", "type": "introduces", "source": "raw.msg.04", "target": "cand.larger_log_application"},
+    {"id": "e.intro.05", "type": "introduces", "source": "raw.msg.05", "target": "cand.candidate_decision_support"},
+    {"id": "e.intro.06", "type": "introduces", "source": "raw.msg.06", "target": "cand.consistency_checks"},
+    {"id": "e.intro.07", "type": "introduces", "source": "raw.msg.07", "target": "cand.handoff_ready"},
+    {"id": "e.intro.08", "type": "introduces", "source": "raw.msg.08", "target": "cand.full_auto_ingestion_now"},
+    {"id": "e.intro.09", "type": "introduces", "source": "raw.msg.09", "target": "cand.gif_dif_semantics_now"},
+    {"id": "e.intro.10", "type": "introduces", "source": "raw.msg.10", "target": "cand.sigma_scoring_now"},
+
+    {"id": "e.accept.01", "type": "accepted_from_candidate", "source": "cand.r001_closeout_ready", "target": "acc.r001_closeout_fixed"},
+    {"id": "e.accept.02", "type": "accepted_from_candidate", "source": "cand.r002_kickoff_scope", "target": "acc.r002_plan_fixed"},
+    {"id": "e.accept.03", "type": "accepted_from_candidate", "source": "cand.manual_mapping_checklist", "target": "acc.mapping_checklist_fixed"},
+    {"id": "e.accept.04", "type": "accepted_from_candidate", "source": "cand.larger_log_application", "target": "acc.larger_log_application_started"},
+    {"id": "e.accept.05", "type": "accepted_from_candidate", "source": "cand.handoff_ready", "target": "acc.r002_handoff_prepared"},
+
+    {"id": "e.main.01", "type": "extends_main", "source": "acc.r001_closeout_fixed", "target": "acc.r002_plan_fixed"},
+    {"id": "e.main.02", "type": "extends_main", "source": "acc.r002_plan_fixed", "target": "acc.mapping_checklist_fixed"},
+    {"id": "e.main.03", "type": "extends_main", "source": "acc.mapping_checklist_fixed", "target": "acc.larger_log_application_started"},
+    {"id": "e.main.04", "type": "extends_main", "source": "acc.larger_log_application_started", "target": "acc.r002_handoff_prepared"},
+
+    {"id": "e.branch.01", "type": "extends_branch", "source": "acc.r002_plan_fixed", "target": "acc.defer_full_automatic_ingestion"},
+    {"id": "e.branch.02", "type": "extends_branch", "source": "acc.mapping_checklist_fixed", "target": "acc.defer_gif_dif_sigma_scoring"},
+
+    {"id": "e.mentions.01", "type": "mentions", "source": "raw.msg.11", "target": "acc.larger_log_application_started"},
+    {"id": "e.mentions.02", "type": "mentions", "source": "raw.msg.12", "target": "acc.defer_full_automatic_ingestion"},
+    {"id": "e.mentions.03", "type": "mentions", "source": "raw.msg.06", "target": "acc.mapping_checklist_fixed"},
+    {"id": "e.mentions.04", "type": "mentions", "source": "raw.msg.09", "target": "acc.defer_gif_dif_sigma_scoring"}
+  ]
+}
