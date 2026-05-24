@@ -1,0 +1,37 @@
+{
+  "nodes": [
+    {"id": "raw.user.1", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.user.2", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.user.3", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.user.4", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.user.5", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.user.6", "layer": "L_raw", "type": "RawMessage"},
+
+    {"id": "cand.common_update_rule", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.state_transition_system", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.linear_operator_attempt", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.operator_physics_analogy", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.unaccepted_tensor_basis_fixation", "layer": "L_candidate", "type": "CandidateDefinition"},
+
+    {"id": "acc.state_transition_seed", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.linear_operator_form_attempt", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.operator_physics_analogy", "layer": "L_accepted", "type": "KernelDecision"}
+  ],
+  "edges": [
+    {"id": "e.introduces.1", "type": "introduces", "source": "raw.user.1", "target": "cand.common_update_rule"},
+    {"id": "e.introduces.2", "type": "introduces", "source": "raw.user.2", "target": "cand.state_transition_system"},
+    {"id": "e.introduces.3", "type": "introduces", "source": "raw.user.3", "target": "cand.linear_operator_attempt"},
+    {"id": "e.introduces.4", "type": "introduces", "source": "raw.user.4", "target": "cand.operator_physics_analogy"},
+    {"id": "e.introduces.5", "type": "introduces", "source": "raw.user.5", "target": "cand.unaccepted_tensor_basis_fixation"},
+
+    {"id": "e.accepted.1", "type": "accepted_from_candidate", "source": "cand.common_update_rule", "target": "acc.state_transition_seed"},
+    {"id": "e.accepted.2", "type": "accepted_from_candidate", "source": "cand.linear_operator_attempt", "target": "acc.linear_operator_form_attempt"},
+    {"id": "e.accepted.3", "type": "accepted_from_candidate", "source": "cand.operator_physics_analogy", "target": "acc.operator_physics_analogy"},
+
+    {"id": "e.main.1", "type": "extends_main", "source": "acc.state_transition_seed", "target": "acc.linear_operator_form_attempt"},
+    {"id": "e.branch.1", "type": "extends_branch", "source": "acc.linear_operator_form_attempt", "target": "acc.operator_physics_analogy"},
+
+    {"id": "e.mentions.1", "type": "mentions", "source": "raw.user.6", "target": "acc.linear_operator_form_attempt"},
+    {"id": "e.mentions.2", "type": "mentions", "source": "raw.user.2", "target": "acc.state_transition_seed"}
+  ]
+}
