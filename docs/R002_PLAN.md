@@ -35,6 +35,7 @@ R002 完了時に最低限そろえる成果物を次とする。
 2. mapping candidate checklist（`docs/R002_MAPPING_CHECKLIST.md`）
 3. consistency check checklist（`docs/R002_MAPPING_CHECKLIST.md`）
 4. R002 handoff note（`docs/R002_HANDOFF.md`）
+5. raw text attachment strategy note（`docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`）
 
 ## 4) Workstream 分割（R002-A / R002-B / R002-C）
 

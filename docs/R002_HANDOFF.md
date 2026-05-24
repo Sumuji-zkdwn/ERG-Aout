@@ -32,7 +32,7 @@
 - checklist-driven consistency helper（最小実装: `tool/check_r002_mapping_consistency.py`）
 - candidate review table
 - larger real conversation log mapping
-- raw text attachment strategy
+- raw text attachment strategy（文書化済み: `docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`）
 - optional DOT visualization for R002 example
 
 ## 5) R002 の境界再確認
