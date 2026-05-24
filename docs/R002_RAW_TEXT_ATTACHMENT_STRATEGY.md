@@ -78,6 +78,7 @@
 実例参照:
 
 - `examples/r002/larger_manual_conversation_raw_text_sidecar.md`（人工的 raw text sidecar table の最小実例）
+- `tool/check_r002_sidecar_consistency.py` で `L_raw` node id と sidecar `raw_id` の対応を補助的に確認できる（validator の代替ではない）。
 
 ## 8) 運用上の位置づけ
 

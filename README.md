@@ -43,6 +43,7 @@ Accepted definitions are promoted only after review.
 - Validator: `tool/validate_r001_kernel.py`
 - Inspector: `tool/inspect_r001_graph.py`
 - R002 mapping consistency helper: `tool/check_r002_mapping_consistency.py` (checklist-driven manual mapping aid; run validator first; outputs WARNINGS and NOTES separately)
+- R002 sidecar consistency helper: `tool/check_r002_sidecar_consistency.py` (supplemental check for `L_raw` node id vs sidecar `raw_id`; not a validator replacement)
 - Minimal examples: `examples/r001/minimal_valid.json`, `examples/r001/invalid_cycle_and_policy.json`, `examples/r001/invalid_duplicate_node_id.json`, `examples/r001/invalid_missing_edge_endpoint.json`, `examples/r001/invalid_extends_main_outside_accepted.json`, `examples/r001/invalid_node_type_for_layer.json`
 - Handmade samples: `examples/r001/sample_conversation_graph.json`, `examples/r001/sample_r001_development_graph.json`, `examples/r001/manual_conversation_to_erg_example.json`, `examples/r001/manual_conversation_cpr_origin_example.json`
 - Larger R002 sample: `examples/r002/larger_manual_conversation_example.json`
@@ -60,6 +61,12 @@ R002 mapping consistency helper (after validator):
 
 ```bash
 python tool/check_r002_mapping_consistency.py examples/r002/larger_manual_conversation_example.json
+```
+
+R002 sidecar consistency helper (after validator):
+
+```bash
+python tool/check_r002_sidecar_consistency.py examples/r002/larger_manual_conversation_example.json examples/r002/larger_manual_conversation_raw_text_sidecar.md
 ```
 
 Inspect:
