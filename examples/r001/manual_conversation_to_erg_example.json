@@ -1,0 +1,28 @@
+{
+  "nodes": [
+    {"id": "raw.user.1", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.user.2", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.user.3", "layer": "L_raw", "type": "RawMessage"},
+
+    {"id": "cand.common_update_rule", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.unaccepted_avatar_token_cell_shared_rule", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.linear_operator_representation", "layer": "L_candidate", "type": "CandidateDefinition"},
+
+    {"id": "acc.state_transition_graph_seed", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.formalize_dynamic_system_as_state_transition_graph", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.operator_physics_analogy", "layer": "L_accepted", "type": "KernelDecision"}
+  ],
+  "edges": [
+    {"id": "e.introduces.1", "type": "introduces", "source": "raw.user.1", "target": "cand.common_update_rule"},
+    {"id": "e.introduces.2", "type": "introduces", "source": "raw.user.2", "target": "cand.unaccepted_avatar_token_cell_shared_rule"},
+    {"id": "e.introduces.3", "type": "introduces", "source": "raw.user.3", "target": "cand.linear_operator_representation"},
+
+    {"id": "e.accepted.1", "type": "accepted_from_candidate", "source": "cand.common_update_rule", "target": "acc.state_transition_graph_seed"},
+    {"id": "e.accepted.2", "type": "accepted_from_candidate", "source": "cand.linear_operator_representation", "target": "acc.formalize_dynamic_system_as_state_transition_graph"},
+
+    {"id": "e.main.1", "type": "extends_main", "source": "acc.state_transition_graph_seed", "target": "acc.formalize_dynamic_system_as_state_transition_graph"},
+    {"id": "e.branch.1", "type": "extends_branch", "source": "acc.formalize_dynamic_system_as_state_transition_graph", "target": "acc.operator_physics_analogy"},
+
+    {"id": "e.mentions.1", "type": "mentions", "source": "raw.user.2", "target": "acc.formalize_dynamic_system_as_state_transition_graph"}
+  ]
+}

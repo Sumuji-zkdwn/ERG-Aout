@@ -35,6 +35,8 @@ R002 候補として、manual conversation-to-ERG example を追加する。
 意図は、自然言語の会話断片から、手作業で R001 形式の ERG へ写像する手順と最小例を提示し、
 将来の automatic conversation ingestion / automatic concept extraction の前段を与えることにある。
 
+現在の手動例は `examples/r001/manual_conversation_to_erg_example.json`。
+
 ## Scope note
 
 本メモはステータス整理のみを目的とし、新しい理論主張を導入しない。
