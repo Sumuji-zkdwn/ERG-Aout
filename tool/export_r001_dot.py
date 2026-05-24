@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections import defaultdict
 from pathlib import Path
@@ -15,6 +16,7 @@ from validate_r001_kernel import validate
 
 LAYER_ORDER = ["L_raw", "L_candidate", "L_accepted", "L_gitlog"]
 VIEW_CHOICES = ["full", "accepted", "spine"]
+NODE_LABEL_CHOICES = ["id", "short"]
 
 
 def dot_quote(value: object) -> str:
@@ -23,8 +25,42 @@ def dot_quote(value: object) -> str:
     return f'"{escaped}"'
 
 
-def dot_node_label(node: dict) -> str:
-    return f"{node.get('id', '<missing>')}\\n({node.get('type', '<missing>')})"
+def humanize_tail(value: str) -> str:
+    return value.replace("_", " ")
+
+
+def short_node_name(node_id: str) -> str:
+    pr_match = re.fullmatch(r"acc\.pr(\d+)\.(.+)", node_id)
+    if pr_match:
+        return f"PR #{pr_match.group(1)}\\n{humanize_tail(pr_match.group(2))}"
+
+    git_match = re.fullmatch(r"git\.pr(\d+)\.merged", node_id)
+    if git_match:
+        return f"PR #{git_match.group(1)}\\nmerged"
+
+    prefix_replacements = [
+        ("raw.user.", "user"),
+        ("raw.codex.", "codex"),
+        ("cand.", "candidate"),
+        ("acc.branch.", "branch"),
+        ("git.", "git"),
+    ]
+    for prefix, label in prefix_replacements:
+        if node_id.startswith(prefix):
+            return f"{label}\\n{humanize_tail(node_id[len(prefix):])}"
+
+    return humanize_tail(node_id)
+
+
+def dot_node_label(node: dict, label_mode: str = "id") -> str:
+    node_id = str(node.get("id", "<missing>"))
+    node_type = node.get("type", "<missing>")
+
+    if label_mode == "short":
+        return f"{short_node_name(node_id)}\\n({node_type})"
+    if label_mode == "id":
+        return f"{node_id}\\n({node_type})"
+    raise ValueError(f"unknown node label mode: {label_mode}")
 
 
 def canonical_chain(edges: List[dict]) -> List[str]:
@@ -94,7 +130,7 @@ def filtered_payload(payload: dict, view: str) -> dict:
     raise ValueError(f"unknown view: {view}")
 
 
-def emit_dot(payload: dict, view: str = "full") -> str:
+def emit_dot(payload: dict, view: str = "full", node_label: str = "id") -> str:
     projected = filtered_payload(payload, view)
     nodes: List[dict] = projected.get("nodes", [])
     edges: List[dict] = projected.get("edges", [])
@@ -122,7 +158,9 @@ def emit_dot(payload: dict, view: str = "full") -> str:
         lines.append(f"    label={dot_quote(layer)};")
         for node in sorted(nodes_by_layer[layer], key=lambda item: item.get("id", "")):
             node_id = node.get("id", "<missing>")
-            lines.append(f"    {dot_quote(node_id)} [label={dot_quote(dot_node_label(node))}];")
+            lines.append(
+                f"    {dot_quote(node_id)} [label={dot_quote(dot_node_label(node, node_label))}];"
+            )
         lines.append("  }")
         lines.append("")
 
@@ -152,6 +190,12 @@ def main(argv: Iterable[str] | None = None) -> int:
         default="full",
         help="Projection view to export: full, accepted, or spine",
     )
+    parser.add_argument(
+        "--node-label",
+        choices=NODE_LABEL_CHOICES,
+        default="id",
+        help="Node label mode: id preserves raw node ids; short uses readable display names",
+    )
     args = parser.parse_args(argv)
 
     payload = load_payload(args.graph)
@@ -162,7 +206,7 @@ def main(argv: Iterable[str] | None = None) -> int:
             print(f"- {err}", file=sys.stderr)
         return 1
 
-    dot_text = emit_dot(payload, view=args.view)
+    dot_text = emit_dot(payload, view=args.view, node_label=args.node_label)
     if args.output:
         args.output.write_text(dot_text, encoding="utf-8")
     else:
