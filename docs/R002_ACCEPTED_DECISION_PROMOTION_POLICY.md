@@ -40,3 +40,10 @@ mapping rule の境界が露出している。
 
 - 本文書は **R002 manual mapping 運用方針の整理**であり、schema/validator/checker 実装の変更を要求しない。
 - 現時点では warning の意味を固定し、将来の整理（例: decision node 昇格ルールの厳格化）に向けた土台とする。
+
+## 適用例（larger manual example）
+
+`examples/r002/larger_manual_conversation_example.json` は本 policy の適用例として更新され、defer 系 decision についても raw -> candidate -> accepted の昇格経路を持つように整理した。
+
+- `cand.defer_full_automatic_ingestion_decision` -> `acc.defer_full_automatic_ingestion`
+- `cand.defer_gif_dif_sigma_scoring_decision` -> `acc.defer_gif_dif_sigma_scoring`

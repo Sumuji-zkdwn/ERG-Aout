@@ -24,6 +24,7 @@
 - automatic concept extraction は未実装。
 - mapping candidate の自動生成は未実装。
 - consistency check の自動化は未実装。
+- larger_manual_conversation_example.json に関する defer 系 accepted decision warning（accepted_from_candidate 欠落）は解消済み。
 - accepted decision promotion policy の実装強制（schema/checker 振る舞い固定）は未実施（文書化は実施済み）。
 - raw message の本文保持・参照方法はまだ最小例レベル。
 - GIF/DIF / sigma / recency / branch_degree / semantic importance scoring は未導入。
