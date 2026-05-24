@@ -21,6 +21,7 @@
 - `docs/R001_CLOSEOUT.md`: R001 closeout（到達点・境界・R002へ渡す入力）の固定。
 - `docs/R002_PLAN.md`: R001 closeout を受けた R002 開始計画（目的・入力・最小成果物・非目標）の固定。
 - `docs/R002_MAPPING_CHECKLIST.md`: R002 の manual mapping 補助チェックリスト（候補抽出・判断・整合性確認）。
+- `docs/R002_LARGER_MANUAL_EXAMPLE.md`: R002-C の最初の larger manual conversation example の読み方。
 - `docs/R001_MANUAL_EXAMPLE.md`: `manual_conversation_to_erg_example.json` の companion reading note.
 - `docs/R001_MANUAL_MAPPING_RULES.md`: 2つの manual conversation example から読める手動写像ルール。
 - `logs/`: GPT/Codex round logs.
@@ -41,6 +42,7 @@ Accepted definitions are promoted only after review.
 - Inspector: `tool/inspect_r001_graph.py`
 - Minimal examples: `examples/r001/minimal_valid.json`, `examples/r001/invalid_cycle_and_policy.json`, `examples/r001/invalid_duplicate_node_id.json`, `examples/r001/invalid_missing_edge_endpoint.json`, `examples/r001/invalid_extends_main_outside_accepted.json`, `examples/r001/invalid_node_type_for_layer.json`
 - Handmade samples: `examples/r001/sample_conversation_graph.json`, `examples/r001/sample_r001_development_graph.json`, `examples/r001/manual_conversation_to_erg_example.json`, `examples/r001/manual_conversation_cpr_origin_example.json`
+- Larger R002 sample: `examples/r002/larger_manual_conversation_example.json`
 
 Validate:
 
