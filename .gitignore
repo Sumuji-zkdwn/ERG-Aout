@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+memory_store/
+erg_store/generated/
+.DS_Store
