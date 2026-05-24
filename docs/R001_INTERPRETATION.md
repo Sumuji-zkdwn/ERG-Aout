@@ -3,6 +3,7 @@
 Status: explanatory note.
 
 This document explains how to read the current R001 sample graph and DOT projection views. It does not change the R001 kernel, JSON schema, or graph data format.
+For edge-level interpretation details, see `docs/R001_SEMANTICS.md`.
 
 ## Current object
 
