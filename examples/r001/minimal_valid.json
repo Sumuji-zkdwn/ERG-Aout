@@ -1,17 +1,1 @@
-{
-  "nodes": [
-    {"id": "m1", "layer": "L_raw", "type": "RawMessage"},
-    {"id": "c1", "layer": "L_candidate", "type": "CandidateDefinition"},
-    {"id": "k0", "layer": "L_accepted", "type": "KernelDefinition"},
-    {"id": "k1", "layer": "L_accepted", "type": "KernelDefinition"},
-    {"id": "kb1", "layer": "L_accepted", "type": "KernelExample"},
-    {"id": "g1", "layer": "L_gitlog", "type": "GitCommit"}
-  ],
-  "edges": [
-    {"id": "e1", "type": "introduces", "source": "m1", "target": "c1"},
-    {"id": "e2", "type": "accepted_from_candidate", "source": "c1", "target": "k0"},
-    {"id": "e3", "type": "extends_main", "source": "k0", "target": "k1"},
-    {"id": "e4", "type": "extends_branch", "source": "k0", "target": "kb1"},
-    {"id": "e5", "type": "observes_kernel_change", "source": "g1", "target": "k1"}
-  ]
-}
+{"nodes":[{"id":"m1","layer":"L_raw","type":"RawMessage"},{"id":"c1","layer":"L_candidate","type":"CandidateDefinition"},{"id":"k0","layer":"L_accepted","type":"KernelDefinition"},{"id":"k1","layer":"L_accepted","type":"KernelDefinition"},{"id":"kb1","layer":"L_accepted","type":"KernelExample"},{"id":"g1","layer":"L_gitlog","type":"GitCommit"}],"edges":[{"id":"e1","type":"introduces","source":"m1","target":"c1"},{"id":"e2","type":"accepted_from_candidate","source":"c1","target":"k0"},{"id":"e3","type":"extends_main","source":"k0","target":"k1"},{"id":"e4","type":"extends_branch","source":"k0","target":"kb1"},{"id":"e5","type":"observes_kernel_change","source":"g1","target":"k1"}]}
