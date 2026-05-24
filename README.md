@@ -21,6 +21,7 @@
 - `docs/R001_CLOSEOUT.md`: R001 closeout（到達点・境界・R002へ渡す入力）の固定。
 - `docs/R002_PLAN.md`: R001 closeout を受けた R002 開始計画（目的・入力・最小成果物・非目標）の固定。
 - `docs/R002_MAPPING_CHECKLIST.md`: R002 の manual mapping 補助チェックリスト（候補抽出・判断・整合性確認）。
+- `docs/R002_ACCEPTED_DECISION_PROMOTION_POLICY.md`: accepted decision node（特に KernelDecision）の candidate 昇格原則と warning 解釈の整理。
 - `docs/R002_LARGER_MANUAL_EXAMPLE.md`: R002-C の最初の larger manual conversation example の読み方。
 - `docs/R002_HANDOFF.md`: R002 初期成果物の handoff（確認事項・未解決点・次フェーズ候補・境界）の整理。
 - `docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`: raw node id と元発話断片の対応を sidecar で固定するための戦略メモ。

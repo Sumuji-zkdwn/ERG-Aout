@@ -24,12 +24,14 @@
 - automatic concept extraction は未実装。
 - mapping candidate の自動生成は未実装。
 - consistency check の自動化は未実装。
+- accepted decision promotion policy の実装強制（schema/checker 振る舞い固定）は未実施（文書化は実施済み）。
 - raw message の本文保持・参照方法はまだ最小例レベル。
 - GIF/DIF / sigma / recency / branch_degree / semantic importance scoring は未導入。
 
 ## 4) 次フェーズ候補
 
 - checklist-driven consistency helper（最小実装: `tool/check_r002_mapping_consistency.py`）
+- accepted decision promotion policy を文書化（`docs/R002_ACCEPTED_DECISION_PROMOTION_POLICY.md`）
 - candidate review table
 - larger real conversation log mapping
 - raw text attachment strategy（文書化済み: `docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`）
