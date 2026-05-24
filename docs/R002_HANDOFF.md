@@ -33,6 +33,7 @@
 - candidate review table
 - larger real conversation log mapping
 - raw text attachment strategy（文書化済み: `docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`）
+- external-reference contamination audit 実施（`docs/R002_EXTERNAL_REFERENCE_CONTAMINATION_AUDIT.md`）
 - optional DOT visualization for R002 example
 
 ## 5) R002 の境界再確認

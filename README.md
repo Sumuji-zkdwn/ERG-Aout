@@ -24,6 +24,7 @@
 - `docs/R002_LARGER_MANUAL_EXAMPLE.md`: R002-C の最初の larger manual conversation example の読み方。
 - `docs/R002_HANDOFF.md`: R002 初期成果物の handoff（確認事項・未解決点・次フェーズ候補・境界）の整理。
 - `docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`: raw node id と元発話断片の対応を sidecar で固定するための戦略メモ。
+- `docs/R002_EXTERNAL_REFERENCE_CONTAMINATION_AUDIT.md`: external-reference contamination audit（repository hygiene / project-boundary check）の記録。
 - `docs/R001_MANUAL_EXAMPLE.md`: `manual_conversation_to_erg_example.json` の companion reading note.
 - `docs/R001_MANUAL_MAPPING_RULES.md`: 2つの manual conversation example から読める手動写像ルール。
 - `logs/`: GPT/Codex round logs.
@@ -36,6 +37,7 @@
 README is not a scratchpad.
 Unstable ideas go to `proposals/` or `logs/`.
 Accepted definitions are promoted only after review.
+Codex 作業は、原則として ERG-Aout 内 docs と明示指示を根拠に進める。
 
 ## R001 validator (minimal kernel check)
 
