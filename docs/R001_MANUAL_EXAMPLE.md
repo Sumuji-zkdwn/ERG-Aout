@@ -2,7 +2,7 @@
 
 Status: companion note (explanatory only).
 
-この文書は `examples/r001/manual_conversation_to_erg_example.json` の**現在の手作業サンプル**を読み解くための companion document です。
+この文書は `examples/r001/manual_conversation_to_erg_example.json` を中心に、`examples/r001/manual_conversation_cpr_origin_example.json` を含む**手作業サンプル群**を読み解くための companion document です。
 
 - JSON example 自体は変更しない
 - schema は変更しない
