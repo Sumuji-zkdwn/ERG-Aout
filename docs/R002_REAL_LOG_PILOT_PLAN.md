@@ -30,11 +30,11 @@
 
 ## 3) Planned artifacts
 
-pilot 実施時に作成予定の成果物（この PR では未追加）は次の通り。
+pilot 実施時の成果物は次の通り（pilot_01 で作成済みのものを含む）。
 
 - `examples/r002/real_log_pilot_01.json`
 - `examples/r002/real_log_pilot_01_raw_text_sidecar.md`
-- `examples/r002/real_log_pilot_01_candidate_review_table.md`
+- `examples/r002/real_log_pilot_01_candidate_review_table.md`（produced for pilot_01）
 - `docs/R002_REAL_LOG_PILOT_HANDOFF.md`
 
 ## 4) Mapping workflow

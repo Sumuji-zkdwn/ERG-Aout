@@ -53,7 +53,16 @@ python tool/check_r002_sidecar_consistency.py examples/r002/real_log_pilot_01.js
 
 回帰確認として既存 larger manual example も併せて実行する。
 
-## 6) Explicit boundary (non-automation)
+## 6) Candidate review table availability
+
+`real_log_pilot_01` の candidate review table は次で参照できる。
+
+- `examples/r002/real_log_pilot_01_candidate_review_table.md`
+
+この表は pilot_01 に含まれる `L_candidate` の accepted / unaccepted 状態を一覧化し、
+manual review 時に候補の扱いを追跡しやすくする補助成果物である。
+
+## 7) Explicit boundary (non-automation)
 
 この pilot は manual mapping 実証用であり、次は実施しない。
 
