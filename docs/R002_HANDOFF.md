@@ -2,6 +2,7 @@
 
 この文書は、R002 初期成果物（larger manual mapping の最初の固定）を受けて、
 確認できたこと・未解決点・次フェーズ候補を整理し、次ラウンドへ引き渡すための handoff note である。
+補足: pilot_01 handoff 後の現行ステータス要約は `docs/R002_STATUS.md` を参照する。
 
 ## 1) R002 でそろった成果物
 

@@ -26,6 +26,7 @@
 - `docs/R002_REAL_LOG_PILOT_PLAN.md`: R002-C 次ステップとしての real log pilot（計画固定と pilot_01 開始ノート）。
 - `docs/R002_REAL_LOG_PILOT_01.md`: R002-C の bounded real-log manual mapping pilot_01 の目的・境界・読み方。
 - `docs/R002_REAL_LOG_PILOT_HANDOFF.md`: R002-C real-log pilot_01 の handoff（到達点・弱点・defer 範囲・R003 への引き渡し）。
+- `docs/R002_STATUS.md`: real-log pilot_01 handoff 後の R002 状態サマリ（到達点・境界・defer 方針）の固定。
 - `docs/R002_HANDOFF.md`: R002 初期成果物の handoff（確認事項・未解決点・次フェーズ候補・境界）の整理。
 - `docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`: raw node id と元発話断片の対応を sidecar で固定するための戦略メモ。
 - `docs/R002_EXTERNAL_REFERENCE_CONTAMINATION_AUDIT.md`: external-reference contamination audit（repository hygiene / project-boundary check）の記録。
