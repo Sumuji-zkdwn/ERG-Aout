@@ -29,7 +29,7 @@
 
 ## 4) 次フェーズ候補
 
-- checklist-driven consistency helper
+- checklist-driven consistency helper（最小実装: `tool/check_r002_mapping_consistency.py`）
 - candidate review table
 - larger real conversation log mapping
 - raw text attachment strategy
