@@ -1,746 +1,139 @@
 {
   "nodes": [
-    {
-      "id": "raw.user.propose_r001_kernel",
-      "layer": "L_raw",
-      "type": "RawMessage"
-    },
-    {
-      "id": "raw.codex.pr10_kernel",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "raw.codex.pr11_schema_validator",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "raw.codex.pr14_hardening",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "raw.codex.pr16_sample",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "raw.codex.pr17_inspector",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "raw.codex.pr18_development_sample",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "raw.codex.pr19_workflow_docs",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "raw.codex.pr20_dot_exporter",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "raw.codex.pr21_projection_views",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "raw.codex.pr22_clean_labels",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "raw.codex.pr23_interpretation_notes",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "cand.r001_four_layer_kernel",
-      "layer": "L_candidate",
-      "type": "CandidateDefinition"
-    },
-    {
-      "id": "cand.r001_json_schema_validator",
-      "layer": "L_candidate",
-      "type": "CandidateDefinition"
-    },
-    {
-      "id": "cand.validator_hardening",
-      "layer": "L_candidate",
-      "type": "CandidateClaim"
-    },
-    {
-      "id": "cand.handmade_sample_graph",
-      "layer": "L_candidate",
-      "type": "CandidateExample"
-    },
-    {
-      "id": "cand.graph_inspection_cli",
-      "layer": "L_candidate",
-      "type": "CandidateDefinition"
-    },
-    {
-      "id": "cand.r001_development_sample_graph",
-      "layer": "L_candidate",
-      "type": "CandidateExample"
-    },
-    {
-      "id": "cand.r001_workflow_docs",
-      "layer": "L_candidate",
-      "type": "CandidateDefinition"
-    },
-    {
-      "id": "cand.r001_dot_exporter",
-      "layer": "L_candidate",
-      "type": "CandidateDefinition"
-    },
-    {
-      "id": "cand.r001_projection_views",
-      "layer": "L_candidate",
-      "type": "CandidateDefinition"
-    },
-    {
-      "id": "cand.r001_clean_rendering",
-      "layer": "L_candidate",
-      "type": "CandidateDefinition"
-    },
-    {
-      "id": "cand.r001_interpretation_notes",
-      "layer": "L_candidate",
-      "type": "CandidateDefinition"
-    },
-    {
-      "id": "acc.pr10.r001_kernel",
-      "layer": "L_accepted",
-      "type": "KernelDefinition"
-    },
-    {
-      "id": "acc.pr11.schema_validator",
-      "layer": "L_accepted",
-      "type": "KernelDefinition"
-    },
-    {
-      "id": "acc.pr14.validator_hardening",
-      "layer": "L_accepted",
-      "type": "KernelDecision"
-    },
-    {
-      "id": "acc.pr16.sample_graph",
-      "layer": "L_accepted",
-      "type": "KernelExample"
-    },
-    {
-      "id": "acc.pr17.inspection_cli",
-      "layer": "L_accepted",
-      "type": "KernelDecision"
-    },
-    {
-      "id": "acc.pr18.development_sample",
-      "layer": "L_accepted",
-      "type": "KernelExample"
-    },
-    {
-      "id": "acc.pr19.workflow_docs",
-      "layer": "L_accepted",
-      "type": "KernelDecision"
-    },
-    {
-      "id": "acc.pr20.dot_exporter",
-      "layer": "L_accepted",
-      "type": "KernelDecision"
-    },
-    {
-      "id": "acc.pr21.projection_views",
-      "layer": "L_accepted",
-      "type": "KernelDecision"
-    },
-    {
-      "id": "acc.pr22.clean_rendering",
-      "layer": "L_accepted",
-      "type": "KernelDecision"
-    },
-    {
-      "id": "acc.pr23.interpretation_notes",
-      "layer": "L_accepted",
-      "type": "KernelDecision"
-    },
-    {
-      "id": "acc.branch.postponed_convergence_scoring",
-      "layer": "L_accepted",
-      "type": "KernelDecision"
-    },
-    {
-      "id": "git.pr10.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "git.pr11.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "git.pr14.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "git.pr16.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "git.pr17.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "git.pr18.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "git.pr19.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "git.pr20.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "git.pr21.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "git.pr22.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "git.pr23.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "raw.codex.pr25_edge_semantics",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "raw.codex.pr26_semantics_link_document",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "raw.codex.pr28_semantics_coverage_checker",
-      "layer": "L_raw",
-      "type": "RawArtifact"
-    },
-    {
-      "id": "cand.r001_edge_semantics",
-      "layer": "L_candidate",
-      "type": "CandidateDefinition"
-    },
-    {
-      "id": "cand.r001_semantics_link_document_connection",
-      "layer": "L_candidate",
-      "type": "CandidateDefinition"
-    },
-    {
-      "id": "cand.r001_semantics_coverage_checker",
-      "layer": "L_candidate",
-      "type": "CandidateDefinition"
-    },
-    {
-      "id": "acc.pr25.edge_semantics",
-      "layer": "L_accepted",
-      "type": "KernelDecision"
-    },
-    {
-      "id": "acc.pr26.semantics_link_document_connection",
-      "layer": "L_accepted",
-      "type": "KernelDecision"
-    },
-    {
-      "id": "acc.pr28.semantics_coverage_checker",
-      "layer": "L_accepted",
-      "type": "KernelDecision"
-    },
-    {
-      "id": "git.pr25.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "git.pr26.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    },
-    {
-      "id": "git.pr28.merged",
-      "layer": "L_gitlog",
-      "type": "GitCommit"
-    }
+    {"id": "raw.user.propose_r001_kernel", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.codex.pr10_kernel", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr11_schema_validator", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr14_hardening", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr16_sample", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr17_inspector", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr18_development_sample", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr19_workflow_docs", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr20_dot_exporter", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr21_projection_views", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr22_clean_labels", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr23_interpretation_notes", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "cand.r001_four_layer_kernel", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.r001_json_schema_validator", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.validator_hardening", "layer": "L_candidate", "type": "CandidateClaim"},
+    {"id": "cand.handmade_sample_graph", "layer": "L_candidate", "type": "CandidateExample"},
+    {"id": "cand.graph_inspection_cli", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.r001_development_sample_graph", "layer": "L_candidate", "type": "CandidateExample"},
+    {"id": "cand.r001_workflow_docs", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.r001_dot_exporter", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.r001_projection_views", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.r001_clean_rendering", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.r001_interpretation_notes", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "acc.pr10.r001_kernel", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.pr11.schema_validator", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.pr14.validator_hardening", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.pr16.sample_graph", "layer": "L_accepted", "type": "KernelExample"},
+    {"id": "acc.pr17.inspection_cli", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.pr18.development_sample", "layer": "L_accepted", "type": "KernelExample"},
+    {"id": "acc.pr19.workflow_docs", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.pr20.dot_exporter", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.pr21.projection_views", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.pr22.clean_rendering", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.pr23.interpretation_notes", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.branch.postponed_convergence_scoring", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "git.pr10.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr11.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr14.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr16.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr17.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr18.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr19.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr20.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr21.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr22.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr23.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "raw.codex.pr25_edge_semantics", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr26_semantics_link_document", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr28_semantics_coverage_checker", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "cand.r001_edge_semantics", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.r001_semantics_link_document_connection", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.r001_semantics_coverage_checker", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "acc.pr25.edge_semantics", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.pr26.semantics_link_document_connection", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.pr28.semantics_coverage_checker", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "git.pr25.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr26.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr28.merged", "layer": "L_gitlog", "type": "GitCommit"}
   ],
   "edges": [
-    {
-      "id": "e.reply.1",
-      "type": "reply",
-      "source": "raw.codex.pr10_kernel",
-      "target": "raw.user.propose_r001_kernel"
-    },
-    {
-      "id": "e.reply.2",
-      "type": "reply",
-      "source": "raw.codex.pr11_schema_validator",
-      "target": "raw.codex.pr10_kernel"
-    },
-    {
-      "id": "e.reply.3",
-      "type": "reply",
-      "source": "raw.codex.pr14_hardening",
-      "target": "raw.codex.pr11_schema_validator"
-    },
-    {
-      "id": "e.reply.4",
-      "type": "reply",
-      "source": "raw.codex.pr16_sample",
-      "target": "raw.codex.pr14_hardening"
-    },
-    {
-      "id": "e.reply.5",
-      "type": "reply",
-      "source": "raw.codex.pr17_inspector",
-      "target": "raw.codex.pr16_sample"
-    },
-    {
-      "id": "e.reply.6",
-      "type": "reply",
-      "source": "raw.codex.pr18_development_sample",
-      "target": "raw.codex.pr17_inspector"
-    },
-    {
-      "id": "e.reply.7",
-      "type": "reply",
-      "source": "raw.codex.pr19_workflow_docs",
-      "target": "raw.codex.pr18_development_sample"
-    },
-    {
-      "id": "e.reply.8",
-      "type": "reply",
-      "source": "raw.codex.pr20_dot_exporter",
-      "target": "raw.codex.pr19_workflow_docs"
-    },
-    {
-      "id": "e.reply.9",
-      "type": "reply",
-      "source": "raw.codex.pr21_projection_views",
-      "target": "raw.codex.pr20_dot_exporter"
-    },
-    {
-      "id": "e.reply.10",
-      "type": "reply",
-      "source": "raw.codex.pr22_clean_labels",
-      "target": "raw.codex.pr21_projection_views"
-    },
-    {
-      "id": "e.reply.11",
-      "type": "reply",
-      "source": "raw.codex.pr23_interpretation_notes",
-      "target": "raw.codex.pr22_clean_labels"
-    },
-    {
-      "id": "e.introduces.1",
-      "type": "introduces",
-      "source": "raw.user.propose_r001_kernel",
-      "target": "cand.r001_four_layer_kernel"
-    },
-    {
-      "id": "e.introduces.2",
-      "type": "introduces",
-      "source": "raw.codex.pr11_schema_validator",
-      "target": "cand.r001_json_schema_validator"
-    },
-    {
-      "id": "e.introduces.3",
-      "type": "introduces",
-      "source": "raw.codex.pr14_hardening",
-      "target": "cand.validator_hardening"
-    },
-    {
-      "id": "e.introduces.4",
-      "type": "introduces",
-      "source": "raw.codex.pr16_sample",
-      "target": "cand.handmade_sample_graph"
-    },
-    {
-      "id": "e.introduces.5",
-      "type": "introduces",
-      "source": "raw.codex.pr17_inspector",
-      "target": "cand.graph_inspection_cli"
-    },
-    {
-      "id": "e.introduces.6",
-      "type": "introduces",
-      "source": "raw.codex.pr18_development_sample",
-      "target": "cand.r001_development_sample_graph"
-    },
-    {
-      "id": "e.introduces.7",
-      "type": "introduces",
-      "source": "raw.codex.pr19_workflow_docs",
-      "target": "cand.r001_workflow_docs"
-    },
-    {
-      "id": "e.introduces.8",
-      "type": "introduces",
-      "source": "raw.codex.pr20_dot_exporter",
-      "target": "cand.r001_dot_exporter"
-    },
-    {
-      "id": "e.introduces.9",
-      "type": "introduces",
-      "source": "raw.codex.pr21_projection_views",
-      "target": "cand.r001_projection_views"
-    },
-    {
-      "id": "e.introduces.10",
-      "type": "introduces",
-      "source": "raw.codex.pr22_clean_labels",
-      "target": "cand.r001_clean_rendering"
-    },
-    {
-      "id": "e.introduces.11",
-      "type": "introduces",
-      "source": "raw.codex.pr23_interpretation_notes",
-      "target": "cand.r001_interpretation_notes"
-    },
-    {
-      "id": "e.accepted.1",
-      "type": "accepted_from_candidate",
-      "source": "cand.r001_four_layer_kernel",
-      "target": "acc.pr10.r001_kernel"
-    },
-    {
-      "id": "e.accepted.2",
-      "type": "accepted_from_candidate",
-      "source": "cand.r001_json_schema_validator",
-      "target": "acc.pr11.schema_validator"
-    },
-    {
-      "id": "e.accepted.3",
-      "type": "accepted_from_candidate",
-      "source": "cand.validator_hardening",
-      "target": "acc.pr14.validator_hardening"
-    },
-    {
-      "id": "e.accepted.4",
-      "type": "accepted_from_candidate",
-      "source": "cand.handmade_sample_graph",
-      "target": "acc.pr16.sample_graph"
-    },
-    {
-      "id": "e.accepted.5",
-      "type": "accepted_from_candidate",
-      "source": "cand.graph_inspection_cli",
-      "target": "acc.pr17.inspection_cli"
-    },
-    {
-      "id": "e.accepted.6",
-      "type": "accepted_from_candidate",
-      "source": "cand.r001_development_sample_graph",
-      "target": "acc.pr18.development_sample"
-    },
-    {
-      "id": "e.accepted.7",
-      "type": "accepted_from_candidate",
-      "source": "cand.r001_workflow_docs",
-      "target": "acc.pr19.workflow_docs"
-    },
-    {
-      "id": "e.accepted.8",
-      "type": "accepted_from_candidate",
-      "source": "cand.r001_dot_exporter",
-      "target": "acc.pr20.dot_exporter"
-    },
-    {
-      "id": "e.accepted.9",
-      "type": "accepted_from_candidate",
-      "source": "cand.r001_projection_views",
-      "target": "acc.pr21.projection_views"
-    },
-    {
-      "id": "e.accepted.10",
-      "type": "accepted_from_candidate",
-      "source": "cand.r001_clean_rendering",
-      "target": "acc.pr22.clean_rendering"
-    },
-    {
-      "id": "e.accepted.11",
-      "type": "accepted_from_candidate",
-      "source": "cand.r001_interpretation_notes",
-      "target": "acc.pr23.interpretation_notes"
-    },
-    {
-      "id": "e.main.1",
-      "type": "extends_main",
-      "source": "acc.pr10.r001_kernel",
-      "target": "acc.pr11.schema_validator"
-    },
-    {
-      "id": "e.main.2",
-      "type": "extends_main",
-      "source": "acc.pr11.schema_validator",
-      "target": "acc.pr14.validator_hardening"
-    },
-    {
-      "id": "e.main.3",
-      "type": "extends_main",
-      "source": "acc.pr14.validator_hardening",
-      "target": "acc.pr16.sample_graph"
-    },
-    {
-      "id": "e.main.4",
-      "type": "extends_main",
-      "source": "acc.pr16.sample_graph",
-      "target": "acc.pr17.inspection_cli"
-    },
-    {
-      "id": "e.main.5",
-      "type": "extends_main",
-      "source": "acc.pr17.inspection_cli",
-      "target": "acc.pr18.development_sample"
-    },
-    {
-      "id": "e.main.6",
-      "type": "extends_main",
-      "source": "acc.pr18.development_sample",
-      "target": "acc.pr19.workflow_docs"
-    },
-    {
-      "id": "e.main.7",
-      "type": "extends_main",
-      "source": "acc.pr19.workflow_docs",
-      "target": "acc.pr20.dot_exporter"
-    },
-    {
-      "id": "e.main.8",
-      "type": "extends_main",
-      "source": "acc.pr20.dot_exporter",
-      "target": "acc.pr21.projection_views"
-    },
-    {
-      "id": "e.main.9",
-      "type": "extends_main",
-      "source": "acc.pr21.projection_views",
-      "target": "acc.pr22.clean_rendering"
-    },
-    {
-      "id": "e.main.10",
-      "type": "extends_main",
-      "source": "acc.pr22.clean_rendering",
-      "target": "acc.pr23.interpretation_notes"
-    },
-    {
-      "id": "e.branch.1",
-      "type": "extends_branch",
-      "source": "acc.pr10.r001_kernel",
-      "target": "acc.branch.postponed_convergence_scoring"
-    },
-    {
-      "id": "e.mentions.1",
-      "type": "mentions",
-      "source": "raw.codex.pr17_inspector",
-      "target": "acc.pr16.sample_graph"
-    },
-    {
-      "id": "e.mentions.2",
-      "type": "mentions",
-      "source": "raw.codex.pr20_dot_exporter",
-      "target": "acc.pr18.development_sample"
-    },
-    {
-      "id": "e.mentions.3",
-      "type": "mentions",
-      "source": "raw.codex.pr23_interpretation_notes",
-      "target": "acc.pr20.dot_exporter"
-    },
-    {
-      "id": "e.mentions.4",
-      "type": "mentions",
-      "source": "raw.codex.pr23_interpretation_notes",
-      "target": "acc.pr21.projection_views"
-    },
-    {
-      "id": "e.mentions.5",
-      "type": "mentions",
-      "source": "raw.codex.pr23_interpretation_notes",
-      "target": "acc.pr22.clean_rendering"
-    },
-    {
-      "id": "e.observe.10",
-      "type": "observes_kernel_change",
-      "source": "git.pr10.merged",
-      "target": "acc.pr10.r001_kernel"
-    },
-    {
-      "id": "e.observe.11",
-      "type": "observes_kernel_change",
-      "source": "git.pr11.merged",
-      "target": "acc.pr11.schema_validator"
-    },
-    {
-      "id": "e.observe.14",
-      "type": "observes_kernel_change",
-      "source": "git.pr14.merged",
-      "target": "acc.pr14.validator_hardening"
-    },
-    {
-      "id": "e.observe.16",
-      "type": "observes_kernel_change",
-      "source": "git.pr16.merged",
-      "target": "acc.pr16.sample_graph"
-    },
-    {
-      "id": "e.observe.17",
-      "type": "observes_kernel_change",
-      "source": "git.pr17.merged",
-      "target": "acc.pr17.inspection_cli"
-    },
-    {
-      "id": "e.observe.18",
-      "type": "observes_kernel_change",
-      "source": "git.pr18.merged",
-      "target": "acc.pr18.development_sample"
-    },
-    {
-      "id": "e.observe.19",
-      "type": "observes_kernel_change",
-      "source": "git.pr19.merged",
-      "target": "acc.pr19.workflow_docs"
-    },
-    {
-      "id": "e.observe.20",
-      "type": "observes_kernel_change",
-      "source": "git.pr20.merged",
-      "target": "acc.pr20.dot_exporter"
-    },
-    {
-      "id": "e.observe.21",
-      "type": "observes_kernel_change",
-      "source": "git.pr21.merged",
-      "target": "acc.pr21.projection_views"
-    },
-    {
-      "id": "e.observe.22",
-      "type": "observes_kernel_change",
-      "source": "git.pr22.merged",
-      "target": "acc.pr22.clean_rendering"
-    },
-    {
-      "id": "e.observe.23",
-      "type": "observes_kernel_change",
-      "source": "git.pr23.merged",
-      "target": "acc.pr23.interpretation_notes"
-    },
-    {
-      "id": "e.reply.12",
-      "type": "reply",
-      "source": "raw.codex.pr25_edge_semantics",
-      "target": "raw.codex.pr23_interpretation_notes"
-    },
-    {
-      "id": "e.reply.13",
-      "type": "reply",
-      "source": "raw.codex.pr26_semantics_link_document",
-      "target": "raw.codex.pr25_edge_semantics"
-    },
-    {
-      "id": "e.reply.14",
-      "type": "reply",
-      "source": "raw.codex.pr28_semantics_coverage_checker",
-      "target": "raw.codex.pr26_semantics_link_document"
-    },
-    {
-      "id": "e.introduces.12",
-      "type": "introduces",
-      "source": "raw.codex.pr25_edge_semantics",
-      "target": "cand.r001_edge_semantics"
-    },
-    {
-      "id": "e.introduces.13",
-      "type": "introduces",
-      "source": "raw.codex.pr26_semantics_link_document",
-      "target": "cand.r001_semantics_link_document_connection"
-    },
-    {
-      "id": "e.introduces.14",
-      "type": "introduces",
-      "source": "raw.codex.pr28_semantics_coverage_checker",
-      "target": "cand.r001_semantics_coverage_checker"
-    },
-    {
-      "id": "e.accepted.12",
-      "type": "accepted_from_candidate",
-      "source": "cand.r001_edge_semantics",
-      "target": "acc.pr25.edge_semantics"
-    },
-    {
-      "id": "e.accepted.13",
-      "type": "accepted_from_candidate",
-      "source": "cand.r001_semantics_link_document_connection",
-      "target": "acc.pr26.semantics_link_document_connection"
-    },
-    {
-      "id": "e.accepted.14",
-      "type": "accepted_from_candidate",
-      "source": "cand.r001_semantics_coverage_checker",
-      "target": "acc.pr28.semantics_coverage_checker"
-    },
-    {
-      "id": "e.main.11",
-      "type": "extends_main",
-      "source": "acc.pr23.interpretation_notes",
-      "target": "acc.pr25.edge_semantics"
-    },
-    {
-      "id": "e.main.12",
-      "type": "extends_main",
-      "source": "acc.pr25.edge_semantics",
-      "target": "acc.pr26.semantics_link_document_connection"
-    },
-    {
-      "id": "e.main.13",
-      "type": "extends_main",
-      "source": "acc.pr26.semantics_link_document_connection",
-      "target": "acc.pr28.semantics_coverage_checker"
-    },
-    {
-      "id": "e.observe.25",
-      "type": "observes_kernel_change",
-      "source": "git.pr25.merged",
-      "target": "acc.pr25.edge_semantics"
-    },
-    {
-      "id": "e.observe.26",
-      "type": "observes_kernel_change",
-      "source": "git.pr26.merged",
-      "target": "acc.pr26.semantics_link_document_connection"
-    },
-    {
-      "id": "e.observe.28",
-      "type": "observes_kernel_change",
-      "source": "git.pr28.merged",
-      "target": "acc.pr28.semantics_coverage_checker"
-    }
+    {"id": "e.reply.1", "type": "reply", "source": "raw.codex.pr10_kernel", "target": "raw.user.propose_r001_kernel"},
+    {"id": "e.reply.2", "type": "reply", "source": "raw.codex.pr11_schema_validator", "target": "raw.codex.pr10_kernel"},
+    {"id": "e.reply.3", "type": "reply", "source": "raw.codex.pr14_hardening", "target": "raw.codex.pr11_schema_validator"},
+    {"id": "e.reply.4", "type": "reply", "source": "raw.codex.pr16_sample", "target": "raw.codex.pr14_hardening"},
+    {"id": "e.reply.5", "type": "reply", "source": "raw.codex.pr17_inspector", "target": "raw.codex.pr16_sample"},
+    {"id": "e.reply.6", "type": "reply", "source": "raw.codex.pr18_development_sample", "target": "raw.codex.pr17_inspector"},
+    {"id": "e.reply.7", "type": "reply", "source": "raw.codex.pr19_workflow_docs", "target": "raw.codex.pr18_development_sample"},
+    {"id": "e.reply.8", "type": "reply", "source": "raw.codex.pr20_dot_exporter", "target": "raw.codex.pr19_workflow_docs"},
+    {"id": "e.reply.9", "type": "reply", "source": "raw.codex.pr21_projection_views", "target": "raw.codex.pr20_dot_exporter"},
+    {"id": "e.reply.10", "type": "reply", "source": "raw.codex.pr22_clean_labels", "target": "raw.codex.pr21_projection_views"},
+    {"id": "e.reply.11", "type": "reply", "source": "raw.codex.pr23_interpretation_notes", "target": "raw.codex.pr22_clean_labels"},
+    {"id": "e.introduces.1", "type": "introduces", "source": "raw.user.propose_r001_kernel", "target": "cand.r001_four_layer_kernel"},
+    {"id": "e.introduces.2", "type": "introduces", "source": "raw.codex.pr11_schema_validator", "target": "cand.r001_json_schema_validator"},
+    {"id": "e.introduces.3", "type": "introduces", "source": "raw.codex.pr14_hardening", "target": "cand.validator_hardening"},
+    {"id": "e.introduces.4", "type": "introduces", "source": "raw.codex.pr16_sample", "target": "cand.handmade_sample_graph"},
+    {"id": "e.introduces.5", "type": "introduces", "source": "raw.codex.pr17_inspector", "target": "cand.graph_inspection_cli"},
+    {"id": "e.introduces.6", "type": "introduces", "source": "raw.codex.pr18_development_sample", "target": "cand.r001_development_sample_graph"},
+    {"id": "e.introduces.7", "type": "introduces", "source": "raw.codex.pr19_workflow_docs", "target": "cand.r001_workflow_docs"},
+    {"id": "e.introduces.8", "type": "introduces", "source": "raw.codex.pr20_dot_exporter", "target": "cand.r001_dot_exporter"},
+    {"id": "e.introduces.9", "type": "introduces", "source": "raw.codex.pr21_projection_views", "target": "cand.r001_projection_views"},
+    {"id": "e.introduces.10", "type": "introduces", "source": "raw.codex.pr22_clean_labels", "target": "cand.r001_clean_rendering"},
+    {"id": "e.introduces.11", "type": "introduces", "source": "raw.codex.pr23_interpretation_notes", "target": "cand.r001_interpretation_notes"},
+    {"id": "e.accepted.1", "type": "accepted_from_candidate", "source": "cand.r001_four_layer_kernel", "target": "acc.pr10.r001_kernel"},
+    {"id": "e.accepted.2", "type": "accepted_from_candidate", "source": "cand.r001_json_schema_validator", "target": "acc.pr11.schema_validator"},
+    {"id": "e.accepted.3", "type": "accepted_from_candidate", "source": "cand.validator_hardening", "target": "acc.pr14.validator_hardening"},
+    {"id": "e.accepted.4", "type": "accepted_from_candidate", "source": "cand.handmade_sample_graph", "target": "acc.pr16.sample_graph"},
+    {"id": "e.accepted.5", "type": "accepted_from_candidate", "source": "cand.graph_inspection_cli", "target": "acc.pr17.inspection_cli"},
+    {"id": "e.accepted.6", "type": "accepted_from_candidate", "source": "cand.r001_development_sample_graph", "target": "acc.pr18.development_sample"},
+    {"id": "e.accepted.7", "type": "accepted_from_candidate", "source": "cand.r001_workflow_docs", "target": "acc.pr19.workflow_docs"},
+    {"id": "e.accepted.8", "type": "accepted_from_candidate", "source": "cand.r001_dot_exporter", "target": "acc.pr20.dot_exporter"},
+    {"id": "e.accepted.9", "type": "accepted_from_candidate", "source": "cand.r001_projection_views", "target": "acc.pr21.projection_views"},
+    {"id": "e.accepted.10", "type": "accepted_from_candidate", "source": "cand.r001_clean_rendering", "target": "acc.pr22.clean_rendering"},
+    {"id": "e.accepted.11", "type": "accepted_from_candidate", "source": "cand.r001_interpretation_notes", "target": "acc.pr23.interpretation_notes"},
+    {"id": "e.main.1", "type": "extends_main", "source": "acc.pr10.r001_kernel", "target": "acc.pr11.schema_validator"},
+    {"id": "e.main.2", "type": "extends_main", "source": "acc.pr11.schema_validator", "target": "acc.pr14.validator_hardening"},
+    {"id": "e.main.3", "type": "extends_main", "source": "acc.pr14.validator_hardening", "target": "acc.pr16.sample_graph"},
+    {"id": "e.main.4", "type": "extends_main", "source": "acc.pr16.sample_graph", "target": "acc.pr17.inspection_cli"},
+    {"id": "e.main.5", "type": "extends_main", "source": "acc.pr17.inspection_cli", "target": "acc.pr18.development_sample"},
+    {"id": "e.main.6", "type": "extends_main", "source": "acc.pr18.development_sample", "target": "acc.pr19.workflow_docs"},
+    {"id": "e.main.7", "type": "extends_main", "source": "acc.pr19.workflow_docs", "target": "acc.pr20.dot_exporter"},
+    {"id": "e.main.8", "type": "extends_main", "source": "acc.pr20.dot_exporter", "target": "acc.pr21.projection_views"},
+    {"id": "e.main.9", "type": "extends_main", "source": "acc.pr21.projection_views", "target": "acc.pr22.clean_rendering"},
+    {"id": "e.main.10", "type": "extends_main", "source": "acc.pr22.clean_rendering", "target": "acc.pr23.interpretation_notes"},
+    {"id": "e.branch.1", "type": "extends_branch", "source": "acc.pr10.r001_kernel", "target": "acc.branch.postponed_convergence_scoring"},
+    {"id": "e.mentions.1", "type": "mentions", "source": "raw.codex.pr17_inspector", "target": "acc.pr16.sample_graph"},
+    {"id": "e.mentions.2", "type": "mentions", "source": "raw.codex.pr20_dot_exporter", "target": "acc.pr18.development_sample"},
+    {"id": "e.mentions.3", "type": "mentions", "source": "raw.codex.pr23_interpretation_notes", "target": "acc.pr20.dot_exporter"},
+    {"id": "e.mentions.4", "type": "mentions", "source": "raw.codex.pr23_interpretation_notes", "target": "acc.pr21.projection_views"},
+    {"id": "e.mentions.5", "type": "mentions", "source": "raw.codex.pr23_interpretation_notes", "target": "acc.pr22.clean_rendering"},
+    {"id": "e.observe.10", "type": "observes_kernel_change", "source": "git.pr10.merged", "target": "acc.pr10.r001_kernel"},
+    {"id": "e.observe.11", "type": "observes_kernel_change", "source": "git.pr11.merged", "target": "acc.pr11.schema_validator"},
+    {"id": "e.observe.14", "type": "observes_kernel_change", "source": "git.pr14.merged", "target": "acc.pr14.validator_hardening"},
+    {"id": "e.observe.16", "type": "observes_kernel_change", "source": "git.pr16.merged", "target": "acc.pr16.sample_graph"},
+    {"id": "e.observe.17", "type": "observes_kernel_change", "source": "git.pr17.merged", "target": "acc.pr17.inspection_cli"},
+    {"id": "e.observe.18", "type": "observes_kernel_change", "source": "git.pr18.merged", "target": "acc.pr18.development_sample"},
+    {"id": "e.observe.19", "type": "observes_kernel_change", "source": "git.pr19.merged", "target": "acc.pr19.workflow_docs"},
+    {"id": "e.observe.20", "type": "observes_kernel_change", "source": "git.pr20.merged", "target": "acc.pr20.dot_exporter"},
+    {"id": "e.observe.21", "type": "observes_kernel_change", "source": "git.pr21.merged", "target": "acc.pr21.projection_views"},
+    {"id": "e.observe.22", "type": "observes_kernel_change", "source": "git.pr22.merged", "target": "acc.pr22.clean_rendering"},
+    {"id": "e.observe.23", "type": "observes_kernel_change", "source": "git.pr23.merged", "target": "acc.pr23.interpretation_notes"},
+    {"id": "e.reply.12", "type": "reply", "source": "raw.codex.pr25_edge_semantics", "target": "raw.codex.pr23_interpretation_notes"},
+    {"id": "e.reply.13", "type": "reply", "source": "raw.codex.pr26_semantics_link_document", "target": "raw.codex.pr25_edge_semantics"},
+    {"id": "e.reply.14", "type": "reply", "source": "raw.codex.pr28_semantics_coverage_checker", "target": "raw.codex.pr26_semantics_link_document"},
+    {"id": "e.introduces.12", "type": "introduces", "source": "raw.codex.pr25_edge_semantics", "target": "cand.r001_edge_semantics"},
+    {"id": "e.introduces.13", "type": "introduces", "source": "raw.codex.pr26_semantics_link_document", "target": "cand.r001_semantics_link_document_connection"},
+    {"id": "e.introduces.14", "type": "introduces", "source": "raw.codex.pr28_semantics_coverage_checker", "target": "cand.r001_semantics_coverage_checker"},
+    {"id": "e.accepted.12", "type": "accepted_from_candidate", "source": "cand.r001_edge_semantics", "target": "acc.pr25.edge_semantics"},
+    {"id": "e.accepted.13", "type": "accepted_from_candidate", "source": "cand.r001_semantics_link_document_connection", "target": "acc.pr26.semantics_link_document_connection"},
+    {"id": "e.accepted.14", "type": "accepted_from_candidate", "source": "cand.r001_semantics_coverage_checker", "target": "acc.pr28.semantics_coverage_checker"},
+    {"id": "e.main.11", "type": "extends_main", "source": "acc.pr23.interpretation_notes", "target": "acc.pr25.edge_semantics"},
+    {"id": "e.main.12", "type": "extends_main", "source": "acc.pr25.edge_semantics", "target": "acc.pr26.semantics_link_document_connection"},
+    {"id": "e.main.13", "type": "extends_main", "source": "acc.pr26.semantics_link_document_connection", "target": "acc.pr28.semantics_coverage_checker"},
+    {"id": "e.observe.25", "type": "observes_kernel_change", "source": "git.pr25.merged", "target": "acc.pr25.edge_semantics"},
+    {"id": "e.observe.26", "type": "observes_kernel_change", "source": "git.pr26.merged", "target": "acc.pr26.semantics_link_document_connection"},
+    {"id": "e.observe.28", "type": "observes_kernel_change", "source": "git.pr28.merged", "target": "acc.pr28.semantics_coverage_checker"}
   ]
 }
