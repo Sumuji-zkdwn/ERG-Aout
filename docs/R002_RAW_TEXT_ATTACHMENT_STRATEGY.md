@@ -74,6 +74,11 @@
 - full raw log storage policy はまだ確定しない
 - GIF/DIF / sigma / convergence scoring は扱わない
 
+
+実例参照:
+
+- `examples/r002/larger_manual_conversation_raw_text_sidecar.md`（人工的 raw text sidecar table の最小実例）
+
 ## 8) 運用上の位置づけ
 
 - 本 strategy は、larger real conversation log mapping へ進む前段の固定ルールである。
