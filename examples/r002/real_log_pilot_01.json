@@ -1,0 +1,263 @@
+{
+  "nodes": [
+    {
+      "id": "raw.msg.01",
+      "layer": "L_raw",
+      "type": "RawMessage"
+    },
+    {
+      "id": "raw.msg.02",
+      "layer": "L_raw",
+      "type": "RawMessage"
+    },
+    {
+      "id": "raw.msg.03",
+      "layer": "L_raw",
+      "type": "RawMessage"
+    },
+    {
+      "id": "raw.msg.04",
+      "layer": "L_raw",
+      "type": "RawMessage"
+    },
+    {
+      "id": "raw.msg.05",
+      "layer": "L_raw",
+      "type": "RawMessage"
+    },
+    {
+      "id": "raw.msg.06",
+      "layer": "L_raw",
+      "type": "RawMessage"
+    },
+    {
+      "id": "raw.msg.07",
+      "layer": "L_raw",
+      "type": "RawMessage"
+    },
+    {
+      "id": "raw.msg.08",
+      "layer": "L_raw",
+      "type": "RawMessage"
+    },
+    {
+      "id": "raw.msg.09",
+      "layer": "L_raw",
+      "type": "RawMessage"
+    },
+    {
+      "id": "cand.pr53_candidate_review_exporter_checked",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.progress_assessment_requested",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.r001_closed_r002_support_layer",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.r002_stop_point_question",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.real_log_mapping_stop_point",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.real_log_pilot_plan_step",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.privacy_preserving_sidecar_policy",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.defer_automation_and_scoring",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.real_log_pilot_execution_start",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "acc.pr53_review_exporter_accepted",
+      "layer": "L_accepted",
+      "type": "KernelDefinition"
+    },
+    {
+      "id": "acc.r002_progress_state_fixed",
+      "layer": "L_accepted",
+      "type": "KernelDefinition"
+    },
+    {
+      "id": "acc.r002_stop_at_real_log_mapping",
+      "layer": "L_accepted",
+      "type": "KernelDecision"
+    },
+    {
+      "id": "acc.real_log_pilot_plan_fixed",
+      "layer": "L_accepted",
+      "type": "KernelDefinition"
+    },
+    {
+      "id": "acc.privacy_preserving_sidecar_policy",
+      "layer": "L_accepted",
+      "type": "KernelDecision"
+    },
+    {
+      "id": "acc.defer_automation_and_scoring",
+      "layer": "L_accepted",
+      "type": "KernelDecision"
+    },
+    {
+      "id": "acc.real_log_pilot_execution_started",
+      "layer": "L_accepted",
+      "type": "KernelDecision"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e.intro.01",
+      "type": "introduces",
+      "source": "raw.msg.01",
+      "target": "cand.pr53_candidate_review_exporter_checked"
+    },
+    {
+      "id": "e.intro.02",
+      "type": "introduces",
+      "source": "raw.msg.02",
+      "target": "cand.progress_assessment_requested"
+    },
+    {
+      "id": "e.intro.03",
+      "type": "introduces",
+      "source": "raw.msg.03",
+      "target": "cand.r001_closed_r002_support_layer"
+    },
+    {
+      "id": "e.intro.04",
+      "type": "introduces",
+      "source": "raw.msg.04",
+      "target": "cand.r002_stop_point_question"
+    },
+    {
+      "id": "e.intro.05",
+      "type": "introduces",
+      "source": "raw.msg.05",
+      "target": "cand.real_log_mapping_stop_point"
+    },
+    {
+      "id": "e.intro.06",
+      "type": "introduces",
+      "source": "raw.msg.06",
+      "target": "cand.real_log_pilot_plan_step"
+    },
+    {
+      "id": "e.intro.07",
+      "type": "introduces",
+      "source": "raw.msg.07",
+      "target": "cand.privacy_preserving_sidecar_policy"
+    },
+    {
+      "id": "e.intro.08",
+      "type": "introduces",
+      "source": "raw.msg.08",
+      "target": "cand.defer_automation_and_scoring"
+    },
+    {
+      "id": "e.intro.09",
+      "type": "introduces",
+      "source": "raw.msg.09",
+      "target": "cand.real_log_pilot_execution_start"
+    },
+    {
+      "id": "e.accept.01",
+      "type": "accepted_from_candidate",
+      "source": "cand.pr53_candidate_review_exporter_checked",
+      "target": "acc.pr53_review_exporter_accepted"
+    },
+    {
+      "id": "e.accept.02",
+      "type": "accepted_from_candidate",
+      "source": "cand.r001_closed_r002_support_layer",
+      "target": "acc.r002_progress_state_fixed"
+    },
+    {
+      "id": "e.accept.03",
+      "type": "accepted_from_candidate",
+      "source": "cand.real_log_mapping_stop_point",
+      "target": "acc.r002_stop_at_real_log_mapping"
+    },
+    {
+      "id": "e.accept.04",
+      "type": "accepted_from_candidate",
+      "source": "cand.real_log_pilot_plan_step",
+      "target": "acc.real_log_pilot_plan_fixed"
+    },
+    {
+      "id": "e.accept.05",
+      "type": "accepted_from_candidate",
+      "source": "cand.privacy_preserving_sidecar_policy",
+      "target": "acc.privacy_preserving_sidecar_policy"
+    },
+    {
+      "id": "e.accept.06",
+      "type": "accepted_from_candidate",
+      "source": "cand.defer_automation_and_scoring",
+      "target": "acc.defer_automation_and_scoring"
+    },
+    {
+      "id": "e.accept.07",
+      "type": "accepted_from_candidate",
+      "source": "cand.real_log_pilot_execution_start",
+      "target": "acc.real_log_pilot_execution_started"
+    },
+    {
+      "id": "e.main.01",
+      "type": "extends_main",
+      "source": "acc.pr53_review_exporter_accepted",
+      "target": "acc.r002_progress_state_fixed"
+    },
+    {
+      "id": "e.main.02",
+      "type": "extends_main",
+      "source": "acc.r002_progress_state_fixed",
+      "target": "acc.r002_stop_at_real_log_mapping"
+    },
+    {
+      "id": "e.main.03",
+      "type": "extends_main",
+      "source": "acc.r002_stop_at_real_log_mapping",
+      "target": "acc.real_log_pilot_plan_fixed"
+    },
+    {
+      "id": "e.main.04",
+      "type": "extends_main",
+      "source": "acc.real_log_pilot_plan_fixed",
+      "target": "acc.real_log_pilot_execution_started"
+    },
+    {
+      "id": "e.branch.01",
+      "type": "extends_branch",
+      "source": "acc.r002_stop_at_real_log_mapping",
+      "target": "acc.defer_automation_and_scoring"
+    },
+    {
+      "id": "e.branch.02",
+      "type": "extends_branch",
+      "source": "acc.real_log_pilot_plan_fixed",
+      "target": "acc.privacy_preserving_sidecar_policy"
+    }
+  ]
+}
