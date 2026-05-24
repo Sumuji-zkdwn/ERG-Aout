@@ -62,6 +62,7 @@ Status: practical checklist (R002 kickoff aid).
 以下は manual mapping 後に毎回確認する。
 
 補助として、`tool/check_r002_mapping_consistency.py` により本節の一部を機械的に点検できる（ただし validator の代替ではない）。checker 出力では、不整合 warning と確認用 note が分離表示される。
+さらに、`tool/export_r002_candidate_review_table.py` を使うと、`L_candidate` の accepted / unaccepted 状態を markdown table で一覧確認しやすい（candidate 自動生成は行わない）。
 
 - [ ] `KernelDecision` も含め、accepted は原則 `accepted_from_candidate` で candidate から昇格しているか。
 - [ ] `accepted_from_candidate` を持たない accepted decision は warning 対象として明示確認したか。
@@ -78,4 +79,3 @@ Status: practical checklist (R002 kickoff aid).
 4. accepted 間の接続を `extends_main` / `extends_branch` で仕分ける。
 5. raw から accepted への参照がある箇所だけ `mentions` を張る。
 6. 最後に consistency checklist を通す。
-
