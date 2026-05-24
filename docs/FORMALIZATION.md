@@ -4,6 +4,13 @@
 
 Round 001 ERG kernel (`R001-kernel`).
 
+## R001 document set (current structure)
+
+- graph shape: this file (`docs/FORMALIZATION.md`)
+- validator: `tool/validate_r001_kernel.py`
+- DOT projections: `docs/R001_INTERPRETATION.md`
+- edge semantics: `docs/R001_SEMANTICS.md`
+
 ## Scope and intent
 
 This document contains only the accepted Round 001 kernel.

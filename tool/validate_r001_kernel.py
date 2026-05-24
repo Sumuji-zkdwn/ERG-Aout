@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Validate R001 ERG graph constraints."""
+"""Validate R001 ERG graph constraints.
+
+Some enforced constraints (for example `extends_main`/`extends_branch` and
+cross-layer endpoint checks) correspond to the edge semantics documented in
+`docs/R001_SEMANTICS.md`.
+"""
 
 from __future__ import annotations
 
