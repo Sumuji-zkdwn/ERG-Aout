@@ -1,0 +1,32 @@
+{
+  "nodes": [
+    {"id": "raw.user.1", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.assistant.1", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.user.2", "layer": "L_raw", "type": "RawMessage"},
+
+    {"id": "cand.def.cache_rule", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.q.ttl", "layer": "L_candidate", "type": "CandidateQuestion"},
+    {"id": "cand.ex.cache_hit", "layer": "L_candidate", "type": "CandidateExample"},
+
+    {"id": "acc.k0", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.k1", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.ex1", "layer": "L_accepted", "type": "KernelExample"},
+
+    {"id": "git.c1", "layer": "L_gitlog", "type": "GitCommit"}
+  ],
+  "edges": [
+    {"id": "e.raw.reply.1", "type": "reply", "source": "raw.assistant.1", "target": "raw.user.1"},
+    {"id": "e.raw.reply.2", "type": "reply", "source": "raw.user.2", "target": "raw.assistant.1"},
+
+    {"id": "e.introduces.1", "type": "introduces", "source": "raw.user.1", "target": "cand.def.cache_rule"},
+    {"id": "e.introduces.2", "type": "introduces", "source": "raw.user.2", "target": "cand.q.ttl"},
+    {"id": "e.introduces.3", "type": "introduces", "source": "raw.assistant.1", "target": "cand.ex.cache_hit"},
+
+    {"id": "e.accepted.1", "type": "accepted_from_candidate", "source": "cand.def.cache_rule", "target": "acc.k0"},
+    {"id": "e.main.1", "type": "extends_main", "source": "acc.k0", "target": "acc.k1"},
+    {"id": "e.branch.1", "type": "extends_branch", "source": "acc.k0", "target": "acc.ex1"},
+
+    {"id": "e.mention.1", "type": "mentions", "source": "raw.assistant.1", "target": "acc.k0"},
+    {"id": "e.observe.1", "type": "observes_kernel_change", "source": "git.c1", "target": "acc.k1"}
+  ]
+}
