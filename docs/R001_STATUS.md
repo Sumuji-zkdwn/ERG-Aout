@@ -14,6 +14,9 @@ R001 の範囲では、次が実装・文書化済みである。
 - edge semantics document
 - semantics coverage checker
 - PR #28 までのR001作業を反映した development sample graph
+- manual conversation examples
+- manual example reading guide
+- manual mapping rules extracted from existing examples
 
 ## R001 でまだできないこと
 
@@ -30,12 +33,18 @@ R001 の範囲では、次は未実装・未確立である。
 
 ## R002 候補
 
-R002 候補として、manual conversation-to-ERG example を追加する。
+manual conversation-to-ERG example は R001 内の手動適用例として追加済みである。
 
-意図は、自然言語の会話断片から、手作業で R001 形式の ERG へ写像する手順と最小例を提示し、
-将来の automatic conversation ingestion / automatic concept extraction の前段を与えることにある。
+R002 以降では、これらの手動例と manual mapping rules をもとに、
+半自動化・検査補助・より大きな会話ログへの適用を検討する。
 
-現在の手動例は `examples/r001/manual_conversation_to_erg_example.json`。
+現在の手動例:
+- `examples/r001/manual_conversation_to_erg_example.json`
+- `examples/r001/manual_conversation_cpr_origin_example.json`
+
+関連文書:
+- `docs/R001_MANUAL_EXAMPLE.md`
+- `docs/R001_MANUAL_MAPPING_RULES.md`
 
 ## Scope note
 
