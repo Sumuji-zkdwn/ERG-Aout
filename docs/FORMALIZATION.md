@@ -71,5 +71,30 @@ A claim `c` may be marked `accepted_as` only if:
 - Whether ERG should remain a directed multigraph or become a DAG at the accepted layer.
 - How to represent cycles without destroying the acyclic proof/history layer.
 - Whether git commits should be first-class nodes or only source metadata.
-- How to define convergence quantitatively.
+- How to calibrate quantitative convergence parameters (`k`, `churn_cap`, status thresholds) from empirical rounds.
 
+
+
+## Quantitative convergence (draft)
+
+Draft source: `proposals/0001-quantitative-convergence-metrics.md` (pending critic review).
+
+For topic `x` at round `t`:
+
+```text
+C_t(x) = 0.30*S_stability
+       + 0.25*S_resolution
+       + 0.20*S_rejection_traceability
+       + 0.15*S_example_failure_coverage
+       + 0.10*S_document_focus
+```
+
+where each sub-score is in `[0,1]`.
+
+Default round window: `k = 3`.
+
+Draft status labels:
+
+- `exploring` if `C_t < 0.50`
+- `stabilizing` if `0.50 <= C_t < 0.80`
+- `converged_candidate` if `C_t >= 0.80` for 3 consecutive rounds and no unresolved critical open question older than 2 rounds.
