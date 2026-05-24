@@ -23,6 +23,7 @@
 - `docs/R002_MAPPING_CHECKLIST.md`: R002 の manual mapping 補助チェックリスト（候補抽出・判断・整合性確認）。
 - `docs/R002_ACCEPTED_DECISION_PROMOTION_POLICY.md`: accepted decision node（特に KernelDecision）の candidate 昇格原則と warning 解釈の整理。
 - `docs/R002_LARGER_MANUAL_EXAMPLE.md`: R002-C の最初の larger manual conversation example の読み方。
+- `docs/R002_REAL_LOG_PILOT_PLAN.md`: R002-C 次ステップとしての real log pilot（実データ未投入）の計画固定。
 - `docs/R002_HANDOFF.md`: R002 初期成果物の handoff（確認事項・未解決点・次フェーズ候補・境界）の整理。
 - `docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`: raw node id と元発話断片の対応を sidecar で固定するための戦略メモ。
 - `docs/R002_EXTERNAL_REFERENCE_CONTAMINATION_AUDIT.md`: external-reference contamination audit（repository hygiene / project-boundary check）の記録。
