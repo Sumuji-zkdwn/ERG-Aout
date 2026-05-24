@@ -61,7 +61,7 @@ Status: practical checklist (R002 kickoff aid).
 
 以下は manual mapping 後に毎回確認する。
 
-補助として、`tool/check_r002_mapping_consistency.py` により本節の一部を機械的に点検できる（ただし validator の代替ではない）。
+補助として、`tool/check_r002_mapping_consistency.py` により本節の一部を機械的に点検できる（ただし validator の代替ではない）。checker 出力では、不整合 warning と確認用 note が分離表示される。
 
 - [ ] `accepted_from_candidate` を持たない accepted がないか。
 - [ ] `unaccepted` と名付けた candidate が accepted に昇格していないか。
