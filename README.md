@@ -18,6 +18,7 @@
 - `docs/FORMALIZATION.md`: current mathematical formalization.
 - `docs/CONVERGENCE.md`: convergence criteria and observed changes.
 - `docs/R001_STATUS.md`: R001 の到達点・境界・R002候補の整理。
+- `docs/R001_MANUAL_EXAMPLE.md`: `manual_conversation_to_erg_example.json` の companion reading note.
 - `logs/`: GPT/Codex round logs.
 - `decisions/`: accepted decisions.
 - `proposals/`: unaccepted proposals.
