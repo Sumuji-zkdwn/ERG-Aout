@@ -28,6 +28,8 @@ R002 は、bounded real-log manual mapping を含む pilot handoff 後の時点�
 - `tool/check_r002_mapping_consistency.py`
 - `tool/check_r002_sidecar_consistency.py`
 - `tool/export_r002_candidate_review_table.py`
+- `tool/export_r002_visual.py`
+- `docs/R002_VISUAL_EXPORT.md`
 
 ## 3. What R002 can currently do
 
@@ -37,6 +39,7 @@ R002 は、bounded real-log manual mapping を含む pilot handoff 後の時点�
 - accepted node で `extends_main` と `extends_branch` を分離して保持できる。
 - unaccepted candidate を acceptance 強制なしで保持できる。
 - human review 用の candidate review table を export できる。
+- review/audit 補助として static PNG 可視化（R002 visual exporter）を使える。
 - R001 validator と並行して supplemental R002 consistency checks を実行できる。
 - artificial larger example と bounded real-log-derived pilot の両方に同一ワークフローを適用できる。
 
@@ -55,6 +58,7 @@ R002 は、bounded real-log manual mapping を含む pilot handoff 後の時点�
 - accepted/unaccepted candidate status は `tool/export_r002_candidate_review_table.py` の出力で確認すべきであり、`tool/check_r002_mapping_consistency.py` の summary だけに依存すべきではない。
 - redacted sidecar は privacy を保持する一方で、後段の再解釈に使える raw context 量を減らす。
 - R002 artifacts は依然として manual / semi-manual workflow support である。
+- visual exporter は review convenience であり、新しい R002 semantic capability ではない。
 
 ## 6. Boundary decision
 
