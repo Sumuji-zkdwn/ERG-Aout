@@ -28,3 +28,22 @@ README is not a scratchpad.
 Unstable ideas go to `proposals/` or `logs/`.
 Accepted definitions are promoted only after review.
 
+
+
+## R001 validator (minimal kernel check)
+
+- Schema: `schema/r001_graph.schema.json`
+- Validator: `tool/validate_r001_kernel.py`
+- Examples: `examples/r001/minimal_valid.json`, `examples/r001/invalid_cycle_and_policy.json`
+
+Run:
+
+```bash
+python tool/validate_r001_kernel.py examples/r001/minimal_valid.json
+python tool/validate_r001_kernel.py examples/r001/invalid_cycle_and_policy.json
+```
+
+The validator enforces only documented R001 invariants:
+- `extends_main` acyclic + single linear canonical path.
+- `extends_branch` cannot modify canonical path nodes.
+- documented cross-layer endpoint policies only.
