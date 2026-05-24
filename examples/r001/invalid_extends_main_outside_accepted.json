@@ -1,0 +1,9 @@
+{
+  "nodes": [
+    {"id": "c0", "layer": "L_candidate", "type": "CandidateClaim"},
+    {"id": "k0", "layer": "L_accepted", "type": "KernelDefinition"}
+  ],
+  "edges": [
+    {"id": "e0", "type": "extends_main", "source": "c0", "target": "k0"}
+  ]
+}

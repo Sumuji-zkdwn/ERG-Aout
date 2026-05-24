@@ -18,6 +18,27 @@ ALLOWED_CROSS_LAYER_ENDPOINTS = {
     "observes_kernel_change": ("L_gitlog", "L_accepted"),
 }
 
+ALLOWED_NODE_TYPES_BY_LAYER = {
+    "L_raw": {"RawMessage", "RawArtifact", "RawObservation"},
+    "L_candidate": {
+        "CandidateDefinition",
+        "CandidateClaim",
+        "CandidateExample",
+        "CandidateFailureCase",
+        "CandidateQuestion",
+        "CandSymbol",
+    },
+    "L_accepted": {
+        "KernelDefinition",
+        "KernelAxiom",
+        "KernelExample",
+        "KernelFailureCase",
+        "KernelDecision",
+        "KConcept",
+    },
+    "L_gitlog": {"GitCommit", "GitFileDelta", "GitTagOrRound", "GitDecisionNote"},
+}
+
 
 def maybe_validate_schema(payload: dict) -> List[str]:
     errors: List[str] = []
@@ -67,7 +88,37 @@ def validate(payload: dict) -> List[str]:
 
     nodes = payload.get("nodes", [])
     edges = payload.get("edges", [])
+
+    node_ids = [n.get("id") for n in nodes if isinstance(n, dict)]
+    duplicated_node_ids = sorted({node_id for node_id in node_ids if node_ids.count(node_id) > 1})
+    if duplicated_node_ids:
+        errors.append(f"node ids must be unique (duplicates: {', '.join(duplicated_node_ids)})")
+
+    edge_ids = [e.get("id") for e in edges if isinstance(e, dict)]
+    duplicated_edge_ids = sorted({edge_id for edge_id in edge_ids if edge_ids.count(edge_id) > 1})
+    if duplicated_edge_ids:
+        errors.append(f"edge ids must be unique (duplicates: {', '.join(duplicated_edge_ids)})")
+
     node_map = {n["id"]: n for n in nodes if isinstance(n, dict) and "id" in n}
+
+    for e in edges:
+        src_id = e.get("source")
+        dst_id = e.get("target")
+        if src_id not in node_map:
+            errors.append(f"edge '{e.get('id', '<unknown>')}' source node does not exist: {src_id}")
+        if dst_id not in node_map:
+            errors.append(f"edge '{e.get('id', '<unknown>')}' target node does not exist: {dst_id}")
+
+    for n in nodes:
+        layer = n.get("layer")
+        node_type = n.get("type")
+        allowed_types = ALLOWED_NODE_TYPES_BY_LAYER.get(layer)
+        if allowed_types is None:
+            continue
+        if node_type not in allowed_types:
+            errors.append(
+                f"node '{n.get('id', '<unknown>')}' has invalid type '{node_type}' for layer '{layer}'"
+            )
 
     extends_main = [(e["source"], e["target"]) for e in edges if e.get("type") == "extends_main"]
     extends_branch = [e for e in edges if e.get("type") == "extends_branch"]
@@ -83,6 +134,11 @@ def validate(payload: dict) -> List[str]:
         outdegree[src] = outdegree.get(src, 0) + 1
         main_nodes.add(src)
         main_nodes.add(dst)
+
+        src_node = node_map.get(src, {})
+        dst_node = node_map.get(dst, {})
+        if src_node.get("layer") != "L_accepted" or dst_node.get("layer") != "L_accepted":
+            errors.append("extends_main endpoints must both be in L_accepted")
 
     if extends_main:
         bad_in = [n for n, d in indegree.items() if d > 1]

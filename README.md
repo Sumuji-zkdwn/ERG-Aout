@@ -34,7 +34,8 @@ Accepted definitions are promoted only after review.
 
 - Schema: `schema/r001_graph.schema.json`
 - Validator: `tool/validate_r001_kernel.py`
-- Examples: `examples/r001/minimal_valid.json`, `examples/r001/invalid_cycle_and_policy.json`
+- Examples: `examples/r001/minimal_valid.json`, `examples/r001/invalid_cycle_and_policy.json`, `examples/r001/invalid_duplicate_node_id.json`, `examples/r001/invalid_missing_edge_endpoint.json`, `examples/r001/invalid_extends_main_outside_accepted.json`, `examples/r001/invalid_node_type_for_layer.json`
+- Sample: `examples/r001/sample_conversation_graph.json` (handmade example, not an automatic log export)
 
 Run:
 
@@ -47,3 +48,5 @@ The validator enforces only documented R001 invariants:
 - `extends_main` acyclic + single linear canonical path.
 - `extends_branch` cannot modify canonical path nodes.
 - documented cross-layer endpoint policies only.
+
+The sample conversation graph demonstrates how raw messages, candidate objects, accepted kernel nodes, and git observations can coexist in R001.
