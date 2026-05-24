@@ -2,6 +2,8 @@
 
 ## 1) Purpose
 
+この文書の checkpoint handoff は `docs/R002_REAL_LOG_PILOT_HANDOFF.md` を参照。
+
 この文書は、R002-C における最初の bounded real-log 由来の手動写像 pilot（`real_log_pilot_01`）の意図と読み方を固定する。
 
 - 対象は short / redacted excerpt ベースの小規模 manual mapping。

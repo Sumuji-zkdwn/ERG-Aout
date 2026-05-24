@@ -36,6 +36,7 @@
 - candidate review table（最小実装: `tool/export_r002_candidate_review_table.py`）
 - larger real conversation log mapping
 - real-log pilot plan を次の具体ステップとして固定（`docs/R002_REAL_LOG_PILOT_PLAN.md`）
+- real-log pilot handoff を作成し、R002-C が bounded real-log manual mapping checkpoint に到達したことを記録（`docs/R002_REAL_LOG_PILOT_HANDOFF.md`）
 - raw text attachment strategy（文書化済み: `docs/R002_RAW_TEXT_ATTACHMENT_STRATEGY.md`）
 - external-reference contamination audit 実施（`docs/R002_EXTERNAL_REFERENCE_CONTAMINATION_AUDIT.md`）
 - optional DOT visualization for R002 example
