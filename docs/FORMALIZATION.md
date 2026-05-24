@@ -2,74 +2,149 @@
 
 ## Version
 
-v0.1 toy model.
+Round 001 ERG kernel (`R001-kernel`).
 
-## Basic objects
+## Scope and intent
 
-Let
+This document contains only the accepted Round 001 kernel.
+Quantitative convergence scoring is postponed and not part of this kernel.
 
-```text
-G = (V, E, type_V, type_E, attr)
-```
+## Four-layer model
 
-where:
-
-- `V` is a finite set of nodes.
-- `E` is a finite set of directed typed edges.
-- `type_V: V -> NodeType`.
-- `type_E: E -> EdgeType`.
-- `attr` assigns metadata to nodes and edges.
-
-## Node types
-
-Initial node types:
+We define ERG as a 4-layer typed directed graph bundle:
 
 ```text
-Message
-Proposal
-Claim
-Definition
-Operation
-Example
-FailureCase
-File
-Commit
-Decision
-OpenQuestion
+ERG = (L_raw, L_candidate, L_accepted, L_gitlog)
 ```
 
-## Edge types
+### Layer 1: raw conversation/artifact layer (`L_raw`)
 
-Initial edge types:
+Purpose: retain unfiltered traces from dialogue and generated artifacts.
+
+#### Node types
+
+- `RawMessage`
+- `RawArtifact`
+- `RawObservation`
+
+#### Edge types
+
+- `responds_to`
+- `references_artifact`
+- `records_observation`
+- `branches_from_raw`
+- `reply` (`M_i -> M_j`)
+- `mentions` (`M_i -> KConcept_j`)
+- `introduces` (`M_i -> CandSymbol_k`)
+
+#### Cycle policy
+
+- **Cycles allowed**.
+
+### Layer 2: candidate mathematical layer (`L_candidate`)
+
+Purpose: represent candidate formal objects not yet accepted as kernel.
+
+#### Node types
+
+- `CandidateDefinition`
+- `CandidateClaim`
+- `CandidateExample`
+- `CandidateFailureCase`
+- `CandidateQuestion`
+- `CandSymbol`
+
+#### Edge types
+
+- `defines_candidate`
+- `supports_candidate`
+- `refutes_candidate`
+- `depends_on_candidate`
+- `revises_candidate`
+
+#### Cycle policy
+
+- **Cycles allowed**.
+
+### Layer 3: accepted kernel layer (`L_accepted`)
+
+Purpose: store accepted ERG kernel objects for the round.
+
+#### Node types
+
+- `KernelDefinition`
+- `KernelAxiom`
+- `KernelExample`
+- `KernelFailureCase`
+- `KernelDecision`
+- `KConcept`
+
+#### Edge types
+
+- `accepted_from_candidate`
+- `extends_main`
+- `extends_branch`
+- `justified_by_example`
+- `bounded_by_failure_case`
+- `supersedes_kernel`
+
+#### Cycle policy
+
+- `extends_main` must be acyclic.
+- `extends_main` is a single linear canonical chain (path invariant).
+- `extends_branch` is non-canonical and may branch from canonical nodes.
+
+### Layer 4: git-log observation layer (`L_gitlog`)
+
+Purpose: append-oriented observations derived from git history.
+
+#### Node types
+
+- `GitCommit`
+- `GitFileDelta`
+- `GitTagOrRound`
+- `GitDecisionNote`
+
+#### Edge types
+
+- `parent_commit`
+- `touches_file`
+- `observes_kernel_change`
+- `annotates_round`
+
+#### Cycle policy
+
+- `parent_commit` is acyclic.
+
+## Semantics of `extends_main` vs `extends_branch`
+
+- `extends_main(a, b)`: `b` is the next canonical accepted node after `a`.
+- `extends_branch(a, b)`: `b` is a non-canonical exploratory accepted branch from `a`.
+
+## Minimal example: why chronological memory is weaker than ERG
+
+Given messages:
+
+1. `m1`: proposes definition `D0`.
+2. `m2`: provides failure case `F0` against `D0`.
+3. `m3`: proposes revised definition `D1`.
+
+Chronological storage alone keeps order `(m1, m2, m3)` but does not encode explicit
+`refutes`, `revises`, and canonical/non-canonical acceptance topology.
+
+## Failure cases
+
+### Failure case A: canonical cycle corruption
+
+If:
 
 ```text
-mentions
-proposes
-refines
-rejects
-depends_on
-contradicts
-implements
-logs
-supersedes
-accepted_as
-needs_test
+extends_main(K0, K1), extends_main(K1, K2), extends_main(K2, K0)
 ```
 
-## Acceptance rule
+canonical order is invalid. This is forbidden.
 
-A claim `c` may be marked `accepted_as` only if:
+### Failure case B: branch/main confusion
 
-1. `c` has a written definition.
-2. `c` has at least one minimum example.
-3. `c` has at least one failure case or boundary case.
-4. `c` has been reviewed by the critic role.
-5. `c` is reflected in the convergence log.
-
-## Open issues
-
-- Whether ERG should remain a directed multigraph or become a DAG at the accepted layer.
-- How to represent cycles without destroying the acyclic proof/history layer.
-- Whether git commits should be first-class nodes or only source metadata.
-- How to define convergence quantitatively.
-
+If exploratory updates are linked by `extends_main` instead of `extends_branch`,
+non-canonical updates are incorrectly treated as canonical.
