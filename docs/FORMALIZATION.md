@@ -39,8 +39,8 @@ Purpose: retain unfiltered traces from dialogue and generated artifacts.
 - `records_observation`
 - `branches_from_raw`
 - `reply` (`M_i -> M_j`)
-- `mentions` (`M_i -> C_j`)
-- `introduces` (`M_i -> C_j`)
+- `mentions` (`M_i -> KConcept_j`)
+- `introduces` (`M_i -> CandSymbol_k`)
 
 #### Cycle policy
 
@@ -57,6 +57,7 @@ Purpose: represent candidate formal objects not yet accepted as kernel.
 - `CandidateExample`
 - `CandidateFailureCase`
 - `CandidateQuestion`
+- `CandSymbol`
 
 #### Edge types
 
@@ -81,6 +82,7 @@ Purpose: store accepted ERG kernel objects for the current round.
 - `KernelExample`
 - `KernelFailureCase`
 - `KernelDecision`
+- `KConcept`
 
 #### Edge types
 
@@ -93,8 +95,9 @@ Purpose: store accepted ERG kernel objects for the current round.
 
 #### Cycle policy
 
-- **Cycles not allowed** in `extends_main` subgraph (must be acyclic).
-- Cycles for non-extension relations are discouraged; if present, they must not induce cycles in `extends_main`.
+- **Cycles not allowed** in `extends_main`.
+- `extends_main` must be a single linear chain (a total order over accepted revision points in the round), not a tree and not a DAG with merges.
+- `extends_branch` may branch from chain nodes, but branch edges are non-canonical.
 
 ### Layer 4: git-log observation layer (`L_gitlog`)
 
@@ -117,7 +120,6 @@ Purpose: external, append-oriented observations derived from git history.
 #### Cycle policy
 
 - **Cycles not allowed** for `parent_commit` (commit DAG).
-- Other edge types should preserve acyclicity with respect to commit ancestry.
 
 ## Legacy Eve/ERG motifs and Round 001 classification
 
@@ -129,17 +131,12 @@ Round 001 classifies these motifs into four buckets.
 
 ### A) accepted kernel candidate
 
-These are admitted into Round 001 semantics:
-
 - `extends_main` / `extends_branch` as accepted-layer evolution primitives.
-- `M_i` as message-indexed raw memory symbol (raw trace identity).
-- `C_j` as candidate-indexed formal symbol (candidate-layer identity).
-- `recency` as local state hint for retrieval priority (not a convergence score).
-- `branch_degree` as local branching-state hint for exploratory pressure.
+- `M_i` as message-indexed raw memory symbol.
+- `recency` as local retrieval hint.
+- `branch_degree` as local branching hint.
 
 ### B) implementation artifact
-
-These are recognized as implementation choices, not kernel axioms:
 
 - `memory_erg_app.py` (or sibling scripts).
 - `memory_store` directory layout.
@@ -147,21 +144,15 @@ These are recognized as implementation choices, not kernel axioms:
 
 ### C) postponed meta-theory
 
-These are meaningful but deferred:
-
-- Global semantics of `features` vector spaces.
-- Global semantics of `sigma` (normalization, proof obligations, probabilistic meaning).
-- Any quantitative convergence-scoring function that composes above signals.
+- Global semantics of `features`.
+- Global semantics of `sigma`.
+- Any quantitative convergence-scoring function.
 - `T_h` / `reconditioning` global semantics.
 
 ### D) unclear legacy term
 
-Terms retained only as legacy placeholders until clarified:
-
-- Exact historical meaning differences among Eve / ERG / HVM labels in old logs.
-- Whether `M_i`/`C_j` should be strict canonical identifiers or merely notation.
-- Whether `sigma` denotes certainty, salience, or routing state in legacy traces.
-
+- Exact historical meaning differences among Eve / ERG / HVM labels.
+- Legacy overloaded `C_j` usage without concept-vs-candidate split.
 
 ## Legacy GIF/DIF transform view
 
@@ -194,30 +185,21 @@ rewriting systems, and state transitions.
 
 - GIF/DIF terms may appear in `L_raw` and `L_candidate` as legacy/candidate viewpoints.
 - GIF/DIF terms are **not promoted** to `L_accepted` as kernel primitives in Round 001.
-- Promotion requires later explicit definitions and failure-case validation.
 
+## Legacy Adam2 matrix view (critic status)
 
-## Legacy Adam2 matrix view
-
-This section is a postponed/candidate formal view inherited from legacy Adam2-style notes.
-It is **not promoted** to the accepted kernel in Round 001.
+This view is retained only as a rejected-for-now candidate block.
+It is **not accepted kernel** in Round 001.
 
 ### Objects
 
-- Message set: `M = {M_1, ..., M_T}`
-- Concept set: `C = {C_1, ..., C_n}`
-- Incidence matrix: `H ∈ {0,1}^{T×n}`
-- Main-path matrix: `P_main ∈ {0,1}^{T×T}`
-- Branch-path matrix: `P_branch ∈ {0,1}^{T×T}`
+- `M = {M_1, ..., M_T}` (messages)
+- `K = {KConcept_1, ..., KConcept_n}` (accepted concepts)
+- `H ∈ {0,1}^{T×n}` (mentions-only incidence)
+- `P_main ∈ {0,1}^{T×T}` (candidate mapping of canonical progression)
+- `P_branch ∈ {0,1}^{T×T}` (candidate mapping of exploratory progression)
 
-Semantics:
-
-- `H_{ij} = 1` iff message `M_i` mentions concept `C_j` (**mentions-only encoding by default**).
-- If a future variant needs both signals, either:
-  - maintain a separate `H_intro` for `introduces`, or
-  - define a typed/incidence tensor instead of overloading `H`.
-- `P_main` encodes `extends_main` relations.
-- `P_branch` encodes `extends_branch` relations.
+`H_{ij} = 1` iff `M_i` mentions `KConcept_j`.
 
 ### Candidate relation matrix
 
@@ -225,67 +207,91 @@ Semantics:
 W = αH^T H + βH^T P_main H + γH^T P_branch H
 ```
 
-where `α, β, γ` are weighting parameters.
+Status:
 
-### Classification in Round 001
+- **legacy proposal / accepted-kernel-candidate only**.
+- **not accepted kernel**.
 
-- Matrix expression itself: **legacy proposal**.
-- Potential use as concept-relation summarizer: **accepted kernel candidate**.
-- Status: **not accepted kernel** in Round 001.
-- `W` remains a candidate/postponed construct and is not part of accepted-kernel primitives.
+## Critic review of PR #7 (what should NOT be accepted)
 
-### Open questions
+### 1) `C_j` ambiguity: reject overload
 
-- Orientation of `P_main` and `P_branch` (row->col or col->row).
-- Interpretation of `H^T P H` terms in graph-theoretic and semantic senses.
-- Relation between `sigma` and rows of `H`.
-- Whether `W` is primarily for description, retrieval, or reconditioning.
+`C_j` was used ambiguously as both concept and candidate symbol. This is unstable.
+Round 001 splits roles:
 
-## ERG-specific kernel behavior (not generic typed graph)
+- `KConcept_j`: accepted concept node.
+- `CandSymbol_k`: candidate formal symbol.
 
-Round 001 adds ERG-specific operational interpretation.
+Any text using unsplit `C_j` as both is rejected.
 
-### 1) Conversation memory
+### 2) `extends_main` ambiguity: resolve to path
 
-- Raw layer stores message-indexed memory atoms `M_i`.
-- Candidate layer stores revisitable formal candidates `C_j`.
-- Accepted layer stores canonicalized kernel steps connected by `extends_main`.
+PR #7 mixed “single canonical spine” with DAG-like wording. For Round 001 this is rejected.
+Accepted rule:
 
-### 2) Semantic revisit
+- `extends_main` is a **single linear chain** (path / total order).
+- Not a tree.
+- Not a DAG with merges.
 
-A revisit operation is modeled as:
+This is the minimum stable invariant for R001 auditability.
 
-1. Select prior `M_i` under local state (`recency`, `branch_degree`).
-2. Map to one or more `C_j` via candidate relations.
-3. Either:
-   - commit to canonical path via `extends_main`, or
-   - keep exploratory continuation via `extends_branch`.
+### 3) `H^T P H` semantics: one working and one misleading minimal case
 
-This makes revisit semantics explicit, not mere time-ordered recall.
+Working case:
 
-### 3) Local state management
+- Messages: `M_1, M_2`
+- Concepts: `A, B`
+- `H = [[1,0],[0,1]]`
+- `P_main(1,2)=1` only
 
-Round 001 allows local per-node/per-branch state:
+Then `H^T P_main H` gives one directed cross-term from `A` to `B`, matching a transition from a message mentioning `A` to one mentioning `B`.
 
-- `recency`: retrieval-priority state.
-- `branch_degree`: divergence-pressure state.
+Misleading case:
 
-Constraints:
+- `M_1` mentions `A` and `B` (`[1,1]`), `M_2` mentions `A` (`[1,0]`)
+- `P_main(1,2)=1`
 
-- These states may guide revisit/routing decisions.
-- They do **not** define truth, acceptance, or convergence by themselves.
-- They are auxiliary control state, not kernel validity axioms.
+`H^T P_main H` now contributes both `A->A` and `B->A`, but this does not distinguish whether `B` was semantically revised, merely co-mentioned, or negated. Co-mention conflation makes interpretation unstable.
 
-## Semantics of `extends_main` vs `extends_branch`
+Therefore `H^T P H` is useful only as coarse co-transition summary, not accepted semantics.
 
-`extends_main` and `extends_branch` are both extension relations in `L_accepted`, but with different merge intent.
+### 4) Should `reply` be in matrix form (`P_reply`)?
 
-- `extends_main(a, b)` means node `b` is a direct canonical extension of `a` on the main accepted trajectory.
-  - Invariant: these edges form the single canonical acyclic spine for the round sequence.
-- `extends_branch(a, b)` means node `b` extends `a` as a non-canonical exploratory accepted branch.
-  - Invariant: branch nodes may later be merged by creating a new node with `extends_main` from the last canonical node and provenance links back to branch nodes.
+Not in Round 001 kernel.
 
-Intuition: `extends_main` = canonical history; `extends_branch` = accepted-but-side trajectory.
+Reason: `reply` is conversational adjacency, while current matrix view is already underdetermined for semantic transitions. Adding `P_reply` multiplies ambiguity (reply graph vs revision graph vs mention graph) without stable interpretation.
+
+So `reply` remains an explicit edge type in `L_raw`, not part of current matrix block.
+
+### 5) Should `W` remain?
+
+Keep it only as a **postponed candidate note**, not as operational kernel logic.
+
+Rationale: deleting it loses review context, but promoting it causes premature formal lock-in on unstable semantics (`H`, orientation, weighting meaning).
+
+### 6) Underdetermined definitions in PR #7 (at least three)
+
+Rejected as underdetermined unless clarified:
+
+1. Orientation convention of `P_main` / `P_branch` indices.
+2. Exact semantics of `H_{ij}=1` under quoting, negation, and hypothetical mention.
+3. Meaning of `branch_degree` (out-degree? weighted? time-windowed?).
+4. Meaning of `recency` (absolute time decay? turn count? bucketed rank?).
+5. Role of `sigma` (confidence, salience, or routing score).
+
+### 7) Smaller R001 kernel (deletion proposal)
+
+For merge, minimum necessary kernel should keep only:
+
+- 4-layer structure.
+- Layer node/edge types.
+- Cycle policies.
+- `extends_main` path invariant.
+- `extends_branch` as non-canonical branch relation.
+- Minimal “chronological memory is weaker” example.
+- At least one failure case.
+
+Everything else stays candidate/postponed (Legacy GIF/DIF, Legacy Adam2 matrix block, `W`, `features/sigma` meta-theory).
 
 ## Minimal example: why pure chronological memory is weaker than ERG
 
@@ -301,9 +307,6 @@ A plain chronological memory can store `(m1, m2, m3)` but cannot explicitly enfo
 - that `D1` **revises** `D0`,
 - and that only `D1` is on canonical `extends_main`.
 
-ERG captures this with typed nodes/edges and local revisit state (`recency`, `branch_degree`),
-making acceptance state and revision topology explicit.
-
 ## Failure case examples
 
 ### Failure case A: canonical-cycle corruption
@@ -314,23 +317,14 @@ If accepted nodes satisfy:
 extends_main(K0, K1), extends_main(K1, K2), extends_main(K2, K0)
 ```
 
-then no topological order exists for canonical kernel evolution.
-This invalidates auditability and round-by-round reasoning.
+then no linear canonical order exists.
 Therefore cycles in `extends_main` are forbidden.
 
 ### Failure case B: branch/main confusion
 
 If an exploratory update is linked with `extends_main` instead of `extends_branch`,
-review tools may incorrectly treat an unverified path as canonical.
-This can cause premature lock-in of unstable definitions.
-
-### Failure case C: local-state absolutization
-
-If high `recency` is treated as automatic acceptance,
-recent but weak candidates can overwrite better-established kernel nodes.
-Local state must remain routing aid, not truth criterion.
+unverified paths are mistaken as canonical.
 
 ## Postponed items
 
 Quantitative convergence scoring is **not part of Round 001 kernel**.
-It remains postponed to a separate proposal document.
