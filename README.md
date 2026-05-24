@@ -56,6 +56,7 @@ Codex 作業は、原則として ERG-Aout 内 docs と明示指示を根拠に�
 - Larger R002 raw text sidecar (artificial): `examples/r002/larger_manual_conversation_raw_text_sidecar.md`
 - Real-log pilot 01 graph (redacted manual mapping): `examples/r002/real_log_pilot_01.json`
 - Real-log pilot 01 raw text sidecar (redacted excerpts): `examples/r002/real_log_pilot_01_raw_text_sidecar.md`
+- Real-log pilot 01 candidate review table: `examples/r002/real_log_pilot_01_candidate_review_table.md`
 
 Validate:
 
