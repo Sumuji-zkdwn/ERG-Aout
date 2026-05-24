@@ -1,0 +1,62 @@
+{
+  "nodes": [
+    {"id": "raw.user.propose_r001_kernel", "layer": "L_raw", "type": "RawMessage"},
+    {"id": "raw.codex.pr10_kernel", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr11_schema_validator", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr14_hardening", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr16_sample", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.codex.pr17_inspector", "layer": "L_raw", "type": "RawArtifact"},
+
+    {"id": "cand.r001_four_layer_kernel", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.r001_json_schema_validator", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.validator_hardening", "layer": "L_candidate", "type": "CandidateClaim"},
+    {"id": "cand.handmade_sample_graph", "layer": "L_candidate", "type": "CandidateExample"},
+    {"id": "cand.graph_inspection_cli", "layer": "L_candidate", "type": "CandidateDefinition"},
+
+    {"id": "acc.pr10.r001_kernel", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.pr11.schema_validator", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "acc.pr14.validator_hardening", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.pr16.sample_graph", "layer": "L_accepted", "type": "KernelExample"},
+    {"id": "acc.pr17.inspection_cli", "layer": "L_accepted", "type": "KernelDecision"},
+    {"id": "acc.branch.postponed_convergence_scoring", "layer": "L_accepted", "type": "KernelDecision"},
+
+    {"id": "git.pr10.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr11.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr14.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr16.merged", "layer": "L_gitlog", "type": "GitCommit"},
+    {"id": "git.pr17.merged", "layer": "L_gitlog", "type": "GitCommit"}
+  ],
+  "edges": [
+    {"id": "e.reply.1", "type": "reply", "source": "raw.codex.pr10_kernel", "target": "raw.user.propose_r001_kernel"},
+    {"id": "e.reply.2", "type": "reply", "source": "raw.codex.pr11_schema_validator", "target": "raw.codex.pr10_kernel"},
+    {"id": "e.reply.3", "type": "reply", "source": "raw.codex.pr14_hardening", "target": "raw.codex.pr11_schema_validator"},
+    {"id": "e.reply.4", "type": "reply", "source": "raw.codex.pr16_sample", "target": "raw.codex.pr14_hardening"},
+    {"id": "e.reply.5", "type": "reply", "source": "raw.codex.pr17_inspector", "target": "raw.codex.pr16_sample"},
+
+    {"id": "e.introduces.1", "type": "introduces", "source": "raw.user.propose_r001_kernel", "target": "cand.r001_four_layer_kernel"},
+    {"id": "e.introduces.2", "type": "introduces", "source": "raw.codex.pr11_schema_validator", "target": "cand.r001_json_schema_validator"},
+    {"id": "e.introduces.3", "type": "introduces", "source": "raw.codex.pr14_hardening", "target": "cand.validator_hardening"},
+    {"id": "e.introduces.4", "type": "introduces", "source": "raw.codex.pr16_sample", "target": "cand.handmade_sample_graph"},
+    {"id": "e.introduces.5", "type": "introduces", "source": "raw.codex.pr17_inspector", "target": "cand.graph_inspection_cli"},
+
+    {"id": "e.accepted.1", "type": "accepted_from_candidate", "source": "cand.r001_four_layer_kernel", "target": "acc.pr10.r001_kernel"},
+    {"id": "e.accepted.2", "type": "accepted_from_candidate", "source": "cand.r001_json_schema_validator", "target": "acc.pr11.schema_validator"},
+    {"id": "e.accepted.3", "type": "accepted_from_candidate", "source": "cand.validator_hardening", "target": "acc.pr14.validator_hardening"},
+    {"id": "e.accepted.4", "type": "accepted_from_candidate", "source": "cand.handmade_sample_graph", "target": "acc.pr16.sample_graph"},
+    {"id": "e.accepted.5", "type": "accepted_from_candidate", "source": "cand.graph_inspection_cli", "target": "acc.pr17.inspection_cli"},
+
+    {"id": "e.main.1", "type": "extends_main", "source": "acc.pr10.r001_kernel", "target": "acc.pr11.schema_validator"},
+    {"id": "e.main.2", "type": "extends_main", "source": "acc.pr11.schema_validator", "target": "acc.pr14.validator_hardening"},
+    {"id": "e.main.3", "type": "extends_main", "source": "acc.pr14.validator_hardening", "target": "acc.pr16.sample_graph"},
+    {"id": "e.main.4", "type": "extends_main", "source": "acc.pr16.sample_graph", "target": "acc.pr17.inspection_cli"},
+    {"id": "e.branch.1", "type": "extends_branch", "source": "acc.pr10.r001_kernel", "target": "acc.branch.postponed_convergence_scoring"},
+
+    {"id": "e.mentions.1", "type": "mentions", "source": "raw.codex.pr17_inspector", "target": "acc.pr16.sample_graph"},
+
+    {"id": "e.observe.10", "type": "observes_kernel_change", "source": "git.pr10.merged", "target": "acc.pr10.r001_kernel"},
+    {"id": "e.observe.11", "type": "observes_kernel_change", "source": "git.pr11.merged", "target": "acc.pr11.schema_validator"},
+    {"id": "e.observe.14", "type": "observes_kernel_change", "source": "git.pr14.merged", "target": "acc.pr14.validator_hardening"},
+    {"id": "e.observe.16", "type": "observes_kernel_change", "source": "git.pr16.merged", "target": "acc.pr16.sample_graph"},
+    {"id": "e.observe.17", "type": "observes_kernel_change", "source": "git.pr17.merged", "target": "acc.pr17.inspection_cli"}
+  ]
+}
