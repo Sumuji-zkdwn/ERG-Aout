@@ -1,0 +1,9 @@
+{
+  "nodes": [
+    {"id": "k0", "layer": "L_accepted", "type": "KernelDefinition"},
+    {"id": "k0", "layer": "L_accepted", "type": "KernelAxiom"}
+  ],
+  "edges": [
+    {"id": "e0", "type": "extends_main", "source": "k0", "target": "k0"}
+  ]
+}
