@@ -17,6 +17,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 from collections import Counter, defaultdict, deque
 from pathlib import Path
 
@@ -38,19 +39,36 @@ NODE_WEIGHT = {
     "unknown": 1,
 }
 
-TECHNICAL_PATTERNS = [
-    "simp", "inst", "coe", "ofnat", "decidable", "classical", "subtype",
-    "mk", "rec", "caseson", "noconfusion", "injeq", "congr", "rfl",
-    "iff.mp", "iff.mpr", "quotient.inductionon",
+TECHNICAL_SUBSTRINGS = [
+    "simp", "ofnat", "decidable", "classical", "subtype", "caseson",
+    "noconfusion", "injeq", "congr", "iff.mp", "iff.mpr",
+    "quotient.inductionon",
 ]
+
+TECHNICAL_SEGMENTS = {"inst", "coe", "mk", "rec", "rfl"}
+DEFINITION_SEGMENTS = {"def", "mk", "of", "to"}
 
 
 def norm_name(x) -> str:
     return str(x).strip()
 
 
-def has_any(text: str, patterns: list[str]) -> bool:
+def split_decl_segments(name: str) -> list[str]:
+    """Split a Lean declaration name into rough namespace/name segments.
+
+    This avoids treating generic substrings such as `of` or `to` as semantic
+    signals inside unrelated identifiers. For example, `top` contains `to` as
+    a substring but should not be classified as a definition for that reason.
+    """
+    return [part for part in re.split(r"[._']+", name.lower()) if part]
+
+
+def has_any_substring(text: str, patterns: list[str]) -> bool:
     return any(pattern in text for pattern in patterns)
+
+
+def has_any_segment(segments: list[str], patterns: set[str]) -> bool:
+    return any(segment in patterns for segment in segments)
 
 
 def role_tags(name: str) -> list[str]:
@@ -61,40 +79,41 @@ def role_tags(name: str) -> list[str]:
     constraint, transfer, lattice, and kernel-related declaration.
     """
     low = name.lower()
+    segments = split_decl_segments(name)
     tags: list[str] = []
 
-    if has_any(low, TECHNICAL_PATTERNS):
+    if has_any_substring(low, TECHNICAL_SUBSTRINGS) or has_any_segment(segments, TECHNICAL_SEGMENTS):
         return ["technical"]
 
-    if has_any(low, ["geneigenspace", "eigenspace", "eigenvalue", "eigenvector"]):
+    if has_any_substring(low, ["geneigenspace", "eigenspace", "eigenvalue", "eigenvector"]):
         tags.append("eigenspace")
-    if has_any(low, ["jordan", "normal", "block"]):
+    if has_any_substring(low, ["jordan", "normal", "block"]):
         tags.append("normal_form")
-    if has_any(low, ["nilpotent", "generalized", "chain"]):
+    if has_any_substring(low, ["nilpotent", "generalized", "chain"]):
         tags.append("failure_repair")
 
-    if has_any(low, ["injective", "surjective", "bijective", "isunit", "eq_bot", "eq_top", "iff"]):
+    if has_any_substring(low, ["injective", "surjective", "bijective", "isunit", "eq_bot", "eq_top", "iff"]):
         tags.append("criterion")
-    if has_any(low, ["disjoint", "independent", "supindep", "commute", "mapsto", "inj_on", "injon"]):
+    if has_any_substring(low, ["disjoint", "independent", "supindep", "commute", "mapsto", "inj_on", "injon"]):
         tags.append("constraint")
 
-    if has_any(low, ["ker", "kernel"]):
+    if has_any_substring(low, ["ker", "kernel"]):
         tags.append("kernel")
-    if has_any(low, ["range", "image"]):
+    if has_any_substring(low, ["range", "image"]):
         tags.append("image")
-    if has_any(low, ["quot", "quotient", "mkq"]):
+    if has_any_substring(low, ["quot", "quotient", "mkq"]):
         tags.append("quotient")
 
-    if has_any(low, ["comap", "map_", "_map", ".map", "codrestrict", "domrestrict", "restrict", "ltensor", "rtensor"]):
+    if has_any_substring(low, ["comap", "map_", "_map", ".map", "codrestrict", "domrestrict", "restrict", "ltensor", "rtensor"]):
         tags.append("transfer")
-    if has_any(low, ["isup", "inf", "sup", "bot", "top", "le_", "_le", "lt_", "_lt"]):
+    if has_any_substring(low, ["isup", "inf", "sup", "bot", "top", "le_", "_le", "lt_", "_lt"]):
         tags.append("lattice_operation")
 
-    if has_any(low, ["dim", "rank", "finrank", "spectrum", "minimalpolynomial", "det", "trace"]):
+    if has_any_substring(low, ["dim", "rank", "finrank", "spectrum", "minimalpolynomial", "det", "trace"]):
         tags.append("invariant")
-    if has_any(low, ["directsum", "iscompl", "decomp", "span", "basis"]):
+    if has_any_substring(low, ["directsum", "iscompl", "decomp", "span", "basis"]):
         tags.append("decomposition")
-    if has_any(low, ["def", ".mk", ".of", ".to"]):
+    if has_any_segment(segments, DEFINITION_SEGMENTS):
         tags.append("definition")
 
     if not tags:
