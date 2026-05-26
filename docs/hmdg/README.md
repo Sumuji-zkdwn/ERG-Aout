@@ -12,5 +12,6 @@ Current concept-patch artifacts:
 - `C003_constraint_to_eigenspace_expansion.md`: candidate high-risk expansion of Boundary 3 only.
 - `C003_split_plan.md`: proposed proof-facing split for over-compressed C003.
 - `concept_bridge_review_summary.md`: status, risk, and next-review summary for C001-C003.
+- `concept_patch_schema_audit_extension.md`: proposed audit metadata schema for parent bridges and proof-facing subbridges.
 
 Machine-readable patch data is stored separately at `data/hmdg/concept_patch.json`.
