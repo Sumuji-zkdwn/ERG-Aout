@@ -15,3 +15,24 @@ Current concept-patch artifacts:
 - `concept_patch_schema_audit_extension.md`: proposed audit metadata schema for parent bridges and proof-facing subbridges.
 
 Machine-readable patch data is stored separately at `data/hmdg/concept_patch.json`.
+
+## Refreshing the rendered graph
+
+After changing `data/hmdg/concept_patch.json` or the concept-patch renderer, refresh the rendered Markdown artifact from the repository root:
+
+```bash
+python prototypes/cognitive_math_graph_v0/render_concept_patch_graph.py \
+  --input data/hmdg/concept_patch.json \
+  --output docs/hmdg/concept_patch_graph.md
+```
+
+The rendered artifact should remain a review aid, not a source of new mathematical claims.
+
+Before opening a generated-artifact PR, check at least:
+
+```text
+node_count / edge_count match the JSON
+ConceptBridge and ProofBridge nodes remain visually distinguishable
+ProofBridge nodes are not described as formal declaration dependencies
+Mermaid renders in GitHub without obvious layout or syntax failure
+```
