@@ -2,8 +2,8 @@
 
 target: `Module.End.iSup_genEigenspace_restrict_eq_top`
 path_length: 10
-node_count: 18
-edge_count: 29
+node_count: 19
+edge_count: 32
 
 ## Mermaid graph
 
@@ -27,6 +27,7 @@ flowchart LR
     C003c(["C003c\nkernel_independence_to_injectivity\nProofBridge / injectivity\nproof_facing_explanation"])
     C003d(["C003d\ninvariant_submodule_surjectivity_transfer\nProofBridge / transfer\nproof_facing_explanation"])
     C003e(["C003e\ncomponentwise_reassembly\nProofBridge / reassembly\nproof_facing_explanation"])
+    C005_ambient_inf_to_restricted_genEigenspace{"C005_ambient_inf_to_restricted_genEigenspace\nambient_intersection_to_restricted_eigenspace\nConceptBridge / eigenspace->eigenspace\nsource_checked"}
     D001 -- main_path_edge --> D002
     D002 -- main_path_edge --> D003
     D003 -- main_path_edge --> D004
@@ -56,6 +57,9 @@ flowchart LR
     C003d -- proof_explanation_next --> C003e
     D007 -. subbridge_uses_declaration .-> C003c
     C003e -. subbridge_explains_target_step .-> D008
+    D009 -- needs_bridge --> C005_ambient_inf_to_restricted_genEigenspace
+    C005_ambient_inf_to_restricted_genEigenspace -- bridges_to --> D010
+    D009 -. original_boundary_edge .-> D010
 ```
 
 ## Typed adjacency list
@@ -89,6 +93,9 @@ flowchart LR
 - `C003d:invariant_submodule_surjectivity_transfer` -[proof_explanation_next]-> `C003e:componentwise_reassembly`
 - `D007:LinearMap.ker_noncommProd_eq_of_supIndep_ker` -[subbridge_uses_declaration]-> `C003c:kernel_independence_to_injectivity`
 - `C003e:componentwise_reassembly` -[subbridge_explains_target_step]-> `D008:Submodule.inf_iSup_genEigenspace`
+- `D009:Submodule.eq_iSup_inf_genEigenspace` -[needs_bridge]-> `C005_ambient_inf_to_restricted_genEigenspace:ambient_intersection_to_restricted_eigenspace`
+- `C005_ambient_inf_to_restricted_genEigenspace:ambient_intersection_to_restricted_eigenspace` -[bridges_to]-> `D010:Module.End.iSup_genEigenspace_restrict_eq_top`
+- `D009:Submodule.eq_iSup_inf_genEigenspace` -[original_boundary_edge]-> `D010:Module.End.iSup_genEigenspace_restrict_eq_top`
 
 ## Concept bridge table
 
@@ -97,6 +104,7 @@ flowchart LR
 | `C001_kernel_to_criterion` | `kernel_to_criterion` | kernel setup -> criterion bridge | kernel -> criterion | 7 | candidate |  |  |
 | `C002_criterion_to_constraint` | `criterion_to_constraint` | criterion bridge -> constraint bridge | criterion -> constraint | 7 | candidate |  |  |
 | `C003_constraint_to_eigenspace` | `constraint_to_eigenspace` | constraint bridge -> eigenspace conclusion | constraint -> eigenspace | 7 | candidate | proof_used_but_over_compressed | C003a, C003b, C003c, C003d, C003e |
+| `C005_ambient_inf_to_restricted_genEigenspace` | `ambient_intersection_to_restricted_eigenspace` | ambient eigenspace decomposition -> restricted endomorphism decomposition | eigenspace -> eigenspace | 7 | candidate | source_checked |  |
 
 ## Proof bridge table
 
