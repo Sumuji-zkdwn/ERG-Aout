@@ -37,6 +37,41 @@ python prototypes/cognitive_math_graph_v0/run_real_graph.py \
   --target-substring ker
 ```
 
+The runner defaults to:
+
+```text
+--edge-direction auto
+```
+
+Auto mode compares ancestor counts in the original edge direction and the reversed edge direction, then chooses the larger one. This matters because some theorem dependency graphs use theorem -> dependency edges, while this extractor wants prerequisite -> theorem edges.
+
+If the result still has `path length: 1`, force the reverse direction:
+
+```bash
+python prototypes/cognitive_math_graph_v0/run_real_graph.py \
+  --input prototypes/cognitive_math_graph_v0/data/external/mathlib4_dependency_graph.gexf \
+  --target-substring LinearMap.ker_eq_bot \
+  --edge-direction reverse
+```
+
+To inspect candidate target names without running path extraction:
+
+```bash
+python prototypes/cognitive_math_graph_v0/run_real_graph.py \
+  --input prototypes/cognitive_math_graph_v0/data/external/mathlib4_dependency_graph.gexf \
+  --target-substring LinearMap \
+  --target-substring ker \
+  --list-targets-only
+```
+
+For exact target selection:
+
+```bash
+python prototypes/cognitive_math_graph_v0/run_real_graph.py \
+  --input prototypes/cognitive_math_graph_v0/data/external/mathlib4_dependency_graph.gexf \
+  --target-exact LinearMap.ker_eq_bot
+```
+
 ## Source B: MathlibGraph
 
 Larger declaration/module/namespace graph:
@@ -74,13 +109,15 @@ python prototypes/cognitive_math_graph_v0/run_real_graph.py \
 The loader:
 
 1. reads GEXF, GraphML, or CSV edge lists;
-2. searches target nodes by substring;
-3. extracts the ancestor subgraph of the chosen target;
-4. condenses SCCs if the graph is not a DAG;
-5. assigns rough cognitive role weights from declaration names;
-6. penalizes likely technical nodes such as simp, inst, coercions, and typeclass artifacts;
-7. extracts a weighted longest path ending at the target;
-8. writes Markdown and JSON outputs.
+2. searches target nodes by substring or exact name;
+3. can list candidate target names without extracting a path;
+4. detects or forces edge direction;
+5. extracts the ancestor subgraph of the chosen target;
+6. condenses SCCs if the graph is not a DAG;
+7. assigns rough cognitive role weights from declaration names;
+8. penalizes likely technical nodes such as simp, inst, coercions, and typeclass artifacts;
+9. extracts a weighted longest path ending at the target;
+10. writes Markdown and JSON outputs.
 
 ## Important limitation
 
