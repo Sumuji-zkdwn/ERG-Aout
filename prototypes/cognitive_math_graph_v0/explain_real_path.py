@@ -148,6 +148,13 @@ def boundary_candidates(chunks):
     return sorted(candidates, key=lambda c: c["rank_key"])
 
 
+def top_boundary_group(boundaries):
+    if not boundaries:
+        return []
+    top_score = boundaries[0]["score"]
+    return [b for b in boundaries if b["score"] == top_score]
+
+
 def render_boundary(candidate):
     lost = ",".join(candidate["lost_tags"]) or "none"
     gained = ",".join(candidate["gained_tags"]) or "none"
@@ -165,6 +172,7 @@ def render_boundary(candidate):
 
 def render_report(data, chunks):
     boundaries = boundary_candidates(chunks)
+    tied_top = top_boundary_group(boundaries)
     lines = [
         "# HMDG cognitive reading report",
         "",
@@ -230,6 +238,11 @@ def render_report(data, chunks):
 
     lines += ["", "## Ranked expansion boundaries", ""]
     if boundaries:
+        if len(tied_top) > 1:
+            tied = ", ".join(f"boundary {b['boundary_index']}" for b in tied_top)
+            lines.append(f"Top score is tied: {tied} all have score {tied_top[0]['score']}.")
+            lines.append("The list below is ordered by path order as a tie-breaker, not by a strict priority difference.")
+            lines.append("")
         for rank, candidate in enumerate(boundaries, start=1):
             lines.append(f"### {rank:02d}. boundary {candidate['boundary_index']}")
             lines.append("")
@@ -242,11 +255,15 @@ def render_report(data, chunks):
 
     lines += ["## Next expansion target", ""]
     if boundaries:
+        if len(tied_top) > 1:
+            lines.append("Multiple boundaries are tied for first priority.")
+            lines.append("Use path order as the default tie-breaker, or choose the boundary that looks least obvious mathematically.")
+            lines.append("")
         top = boundaries[0]
-        lines.append(f"Expand boundary {top['boundary_index']} first:")
+        lines.append(f"Default first expansion: boundary {top['boundary_index']}")
         lines.append(f"`{top['from_node']}` -> `{top['to_node']}`")
         lines.append("")
-        lines.append("Reason: this boundary has the largest role/tag shift in the current path.")
+        lines.append("Reason: it is in the top-scoring boundary group; if tied, it is selected by earliest path order.")
     else:
         lines.append("No boundary expansion target is available.")
     return "\n".join(lines)
@@ -282,8 +299,12 @@ def main():
     print(" -> ".join(chunk["phase"] for chunk in chunks))
     boundaries = boundary_candidates(chunks)
     if boundaries:
+        tied_top = top_boundary_group(boundaries)
+        if len(tied_top) > 1:
+            print("top boundary tie:")
+            print(", ".join(f"boundary {b['boundary_index']}" for b in tied_top))
         top = boundaries[0]
-        print("next expansion target:")
+        print("default next expansion target:")
         print(f"boundary {top['boundary_index']}: {top['from_node']} -> {top['to_node']}")
 
 
