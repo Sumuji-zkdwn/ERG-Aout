@@ -22,8 +22,14 @@ from pathlib import Path
 
 NODE_WEIGHT = {
     "definition": 5,
-    "kernel_image": 6,
+    "kernel": 6,
+    "image": 5,
     "quotient": 6,
+    "criterion": 5,
+    "constraint": 5,
+    "transfer": 4,
+    "lattice_operation": 4,
+    "eigenspace": 6,
     "invariant": 6,
     "decomposition": 6,
     "normal_form": 7,
@@ -35,16 +41,7 @@ NODE_WEIGHT = {
 TECHNICAL_PATTERNS = [
     "simp", "inst", "coe", "ofnat", "decidable", "classical", "subtype",
     "mk", "rec", "caseson", "noconfusion", "injeq", "congr", "rfl",
-]
-
-ROLE_PATTERNS = [
-    ("kernel_image", ["ker", "kernel", "range", "image", "map", "comap"]),
-    ("quotient", ["quot", "quotient", "quotientmap"]),
-    ("invariant", ["dim", "rank", "finrank", "eigen", "spectrum", "minimalpolynomial"]),
-    ("decomposition", ["directsum", "iscompl", "sup", "inf", "decomp", "span"]),
-    ("normal_form", ["normal", "jordan", "block"]),
-    ("failure_repair", ["nilpotent", "generalized", "chain"]),
-    ("definition", ["def", "mk", "of", "to"]),
+    "iff.mp", "iff.mpr", "quotient.inductionon",
 ]
 
 
@@ -52,13 +49,55 @@ def norm_name(x) -> str:
     return str(x).strip()
 
 
+def has_any(text: str, patterns: list[str]) -> bool:
+    return any(pattern in text for pattern in patterns)
+
+
 def classify(name: str) -> str:
+    """Assign a rough human-facing role from a Lean declaration name.
+
+    This is deliberately heuristic. The aim is not semantic truth, but better
+    first-pass labels than treating every occurrence of `map` as kernel/image.
+    """
     low = name.lower()
-    if any(pattern in low for pattern in TECHNICAL_PATTERNS):
+
+    if has_any(low, TECHNICAL_PATTERNS):
         return "technical"
-    for role, patterns in ROLE_PATTERNS:
-        if any(pattern in low for pattern in patterns):
-            return role
+
+    # Very specific cognitive objects first.
+    if has_any(low, ["geneigenspace", "eigenspace", "eigenvalue", "eigenvector"]):
+        return "eigenspace"
+    if has_any(low, ["jordan", "normal", "block"]):
+        return "normal_form"
+    if has_any(low, ["nilpotent", "generalized", "chain"]):
+        return "failure_repair"
+
+    # Criteria should not be swallowed by ker/map substrings.
+    if has_any(low, ["injective", "surjective", "bijective", "isunit", "eq_bot", "eq_top", "iff"]):
+        return "criterion"
+    if has_any(low, ["disjoint", "independent", "supindep", "commute", "mapsTo".lower(), "inj_on", "injon"]):
+        return "constraint"
+
+    # Kernel/image are split. `map` alone is not classified as kernel/image.
+    if has_any(low, ["ker", "kernel"]):
+        return "kernel"
+    if has_any(low, ["range", "image"]):
+        return "image"
+
+    if has_any(low, ["quot", "quotient", "mkq"]):
+        return "quotient"
+    if has_any(low, ["comap", "codrestrict", "domrestrict", "restrict", "lmap", "rmap"]):
+        return "transfer"
+    if has_any(low, ["isup", "inf", "sup", "bot", "top", "le_", "_le", "lt_", "_lt"]):
+        return "lattice_operation"
+
+    if has_any(low, ["dim", "rank", "finrank", "spectrum", "minimalpolynomial", "det", "trace"]):
+        return "invariant"
+    if has_any(low, ["directsum", "iscompl", "decomp", "span", "basis"]):
+        return "decomposition"
+    if has_any(low, ["def", ".mk", ".of", ".to"]):
+        return "definition"
+
     return "unknown"
 
 
