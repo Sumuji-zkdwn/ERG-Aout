@@ -7,6 +7,221 @@ related graph file: `docs/hmdg/concept_patch_graph.md`
 related summary: `docs/hmdg/concept_bridge_review_summary.md`
 related source-check record: `docs/hmdg/D009_D010_source_check_record.md`
 
+## First-read version
+
+The previous explanation can still feel too close to Lean/mathlib notation. This section is the intended entry point.
+
+The theorem is about the following situation.
+
+There is a big space:
+
+```text
+V
+```
+
+There is a linear map:
+
+```text
+f : V -> V
+```
+
+There is a smaller part of the space:
+
+```text
+p ⊆ V
+```
+
+The key condition is:
+
+```text
+x ∈ p なら f x ∈ p
+```
+
+This means:
+
+```text
+p の中から始めたベクトルは、f をかけても p の外へ出ない。
+```
+
+So `p` is closed under the movement/dynamics defined by `f`.
+
+Because of that, we can look at `f` only inside `p`:
+
+```text
+f restricted to p
+```
+
+or informally:
+
+```text
+f|p
+```
+
+The theorem says:
+
+```text
+If V can be decomposed into generalized eigenspace pieces of f,
+then p can also be decomposed into generalized eigenspace pieces of f|p.
+```
+
+In Japanese:
+
+```text
+全体 V が f の一般化固有空間たちで分解できるなら、
+f で閉じている部分 p も、p の中で見た制限写像 f|p の一般化固有空間たちで分解できる。
+```
+
+This is the whole point.
+
+## The main source of confusion
+
+The confusing part is that D009 and D010 say almost the same mathematical content, but in two different languages.
+
+D009 uses the language of the big space `V`.
+
+```text
+p = sum of (p ∩ generalized eigenspace of f in V)
+```
+
+This means:
+
+```text
+p is made by taking the pieces of the big decomposition that lie inside p.
+```
+
+D010 uses the language of the small space `p`.
+
+```text
+p = sum of generalized eigenspaces of f|p
+```
+
+This means:
+
+```text
+If we treat p as its own world, then p is made from the generalized eigenspaces of the restricted map f|p.
+```
+
+So:
+
+```text
+D009:
+  Look from V.
+  Take p ∩ each big generalized eigenspace.
+
+D010:
+  Look from p.
+  Take generalized eigenspaces of f restricted to p.
+```
+
+The theorem ending is mostly the translation:
+
+```text
+same pieces, two viewpoints
+```
+
+## Tile analogy
+
+Imagine the big space `V` is a floor.
+
+The floor is divided into colored tile regions. These colored regions are the generalized eigenspace pieces of `f`.
+
+Now imagine `p` is a smaller marked area on that floor.
+
+D009 says:
+
+```text
+The marked area p is made from the parts of each colored region that lie inside p.
+```
+
+D010 says:
+
+```text
+If we now ignore the rest of the floor and treat p as its own floor,
+then p still has a color decomposition of the same kind.
+```
+
+C005 is the move from the first sentence to the second sentence.
+
+It says:
+
+```text
+The part of a big colored region inside p
+is the same thing as
+one colored region for the restricted map f|p.
+```
+
+## What R004 does
+
+R004 is easier.
+
+It uses the assumption that the whole space is already covered by generalized eigenspaces:
+
+```text
+V = sum of generalized eigenspaces of f
+```
+
+Then it intersects this with `p`:
+
+```text
+p = p ∩ V
+  = p ∩ (sum of generalized eigenspaces of f)
+  = sum of (p ∩ generalized eigenspace of f)
+```
+
+That gives D009.
+
+So R004 is basically:
+
+```text
+Since V is the whole sum, intersect that whole sum with p.
+```
+
+## What C005 does
+
+C005 is harder.
+
+D009 gives:
+
+```text
+p = sum of (p ∩ generalized eigenspace of f in V)
+```
+
+But D010 wants:
+
+```text
+p = sum of generalized eigenspaces of f|p
+```
+
+So C005 must justify the dictionary entry:
+
+```text
+p ∩ generalized eigenspace of f in V
+=
+generalized eigenspace of f|p inside p
+```
+
+That is the conceptual bridge.
+
+Once that dictionary is accepted, D009 becomes D010.
+
+## Minimal reading of the final theorem
+
+Read the target theorem as:
+
+```text
+全体 V で一般化固有空間分解ができる。
+部分 p は f で閉じている。
+だから、p の中だけで f を見ても、p は一般化固有空間分解できる。
+```
+
+Or even shorter:
+
+```text
+全体で分解できるなら、fで閉じた部分も内部で分解できる。
+```
+
+This short sentence is less precise than the Lean theorem, but it is the right first intuition.
+
 ## Purpose
 
 This document explains the target theorem in ordinary mathematical language.
