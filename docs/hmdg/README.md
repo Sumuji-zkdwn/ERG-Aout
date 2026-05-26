@@ -12,6 +12,7 @@ Current concept-patch artifacts:
 - `C001_review_record.md`: first source-check review record for C001.
 - `C002_criterion_to_constraint_expansion.md`: candidate expansion of Boundary 2 only.
 - `C002_review_checklist.md`: review checklist for C002 before any status change.
+- `C002_review_record.md`: first source-check review record for C002.
 - `C003_constraint_to_eigenspace_expansion.md`: candidate high-risk expansion of Boundary 3 only.
 - `C003_split_plan.md`: proposed proof-facing split for over-compressed C003.
 - `C003_proofbridge_review_checklist.md`: review checklist for the C003 parent bridge and C003a-C003e ProofBridge nodes.
