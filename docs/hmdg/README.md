@@ -17,6 +17,7 @@ Current concept-patch artifacts:
 - `C003_split_plan.md`: proposed proof-facing split for over-compressed C003.
 - `C003_proofbridge_review_checklist.md`: review checklist for the C003 parent bridge and C003a-C003e ProofBridge nodes.
 - `C003_proofbridge_review_record.md`: first proof-body review record for the C003 parent bridge and C003a-C003e ProofBridge nodes.
+- `C004_scoping_note.md`: scoping note for the possible next boundary before adding any C004 node.
 - `review_checklist_index.md`: navigation index and recommended order for C001-C003 review.
 - `concept_bridge_review_summary.md`: status, risk, and next-review summary for C001-C003.
 - `concept_patch_schema_audit_extension.md`: proposed audit metadata schema for parent bridges and proof-facing subbridges.
