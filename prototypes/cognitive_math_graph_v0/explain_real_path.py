@@ -3,7 +3,8 @@
 
 This is a lightweight post-processor over real_graph_result.json.
 It does not prove the target theorem. It turns the extracted formal path into
-an interpretable skeleton: phases, node cards, and phase-to-phase edges.
+an interpretable skeleton: phases, node cards, phase-to-phase edges, and ranked
+phase boundaries for the next expansion pass.
 """
 
 from __future__ import annotations
@@ -117,7 +118,53 @@ def phase_gloss(chunk):
     return f"This phase {ROLE_GLOSS.get(dominant_role, ROLE_GLOSS['unknown'])}. Dominant tags: {dominant_tags}."
 
 
+def boundary_candidates(chunks):
+    candidates = []
+    for i in range(len(chunks) - 1):
+        left = chunks[i]
+        right = chunks[i + 1]
+        from_item = left["items"][-1]
+        to_item = right["items"][0]
+        left_tags = set(from_item["tags"])
+        right_tags = set(to_item["tags"])
+        lost = sorted(left_tags - right_tags)
+        gained = sorted(right_tags - left_tags)
+        shared = sorted(left_tags & right_tags)
+        score = 2 * len(gained) + 2 * len(lost) + (1 if from_item["role"] != to_item["role"] else 0)
+        candidates.append({
+            "rank_key": (-score, i),
+            "score": score,
+            "boundary_index": i + 1,
+            "from_phase": left["phase"],
+            "to_phase": right["phase"],
+            "from_node": from_item["node"],
+            "to_node": to_item["node"],
+            "from_role": from_item["role"],
+            "to_role": to_item["role"],
+            "lost_tags": lost,
+            "gained_tags": gained,
+            "shared_tags": shared,
+        })
+    return sorted(candidates, key=lambda c: c["rank_key"])
+
+
+def render_boundary(candidate):
+    lost = ",".join(candidate["lost_tags"]) or "none"
+    gained = ",".join(candidate["gained_tags"]) or "none"
+    shared = ",".join(candidate["shared_tags"]) or "none"
+    return [
+        f"score: {candidate['score']}",
+        f"phase_edge: `{candidate['from_phase']}` -> `{candidate['to_phase']}`",
+        f"node_edge: `{candidate['from_node']}` -> `{candidate['to_node']}`",
+        f"role_shift: {candidate['from_role']} -> {candidate['to_role']}",
+        f"lost_tags: {lost}",
+        f"gained_tags: {gained}",
+        f"shared_tags: {shared}",
+    ]
+
+
 def render_report(data, chunks):
+    boundaries = boundary_candidates(chunks)
     lines = [
         "# HMDG cognitive reading report",
         "",
@@ -181,13 +228,27 @@ def render_report(data, chunks):
         dst = chunks[i + 1]["phase"]
         lines.append(f"- `{src}` -> `{dst}`")
 
-    lines += [
-        "",
-        "## Next expansion target",
-        "",
-        "The best next expansion target is usually the first phase boundary that is not cognitively obvious.",
-        "For this path, inspect the bridge from `kernel setup` to `criterion bridge`, then from `constraint bridge` to `eigenspace conclusion`.",
-    ]
+    lines += ["", "## Ranked expansion boundaries", ""]
+    if boundaries:
+        for rank, candidate in enumerate(boundaries, start=1):
+            lines.append(f"### {rank:02d}. boundary {candidate['boundary_index']}")
+            lines.append("")
+            for row in render_boundary(candidate):
+                lines.append(row)
+            lines.append("")
+    else:
+        lines.append("No phase boundary found. The path has only one phase.")
+        lines.append("")
+
+    lines += ["## Next expansion target", ""]
+    if boundaries:
+        top = boundaries[0]
+        lines.append(f"Expand boundary {top['boundary_index']} first:")
+        lines.append(f"`{top['from_node']}` -> `{top['to_node']}`")
+        lines.append("")
+        lines.append("Reason: this boundary has the largest role/tag shift in the current path.")
+    else:
+        lines.append("No boundary expansion target is available.")
     return "\n".join(lines)
 
 
@@ -219,6 +280,11 @@ def main():
     print(f"Wrote: {output_path}")
     print("cognitive spine:")
     print(" -> ".join(chunk["phase"] for chunk in chunks))
+    boundaries = boundary_candidates(chunks)
+    if boundaries:
+        top = boundaries[0]
+        print("next expansion target:")
+        print(f"boundary {top['boundary_index']}: {top['from_node']} -> {top['to_node']}")
 
 
 if __name__ == "__main__":
