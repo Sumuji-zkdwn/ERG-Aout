@@ -1,0 +1,268 @@
+# Concept patch audit schema extension
+
+status: candidate schema extension plan
+scope: `data/hmdg/concept_patch.json`
+related issue: `#68`
+related PRs: `#69`, `#70`
+
+## Purpose
+
+This document proposes a machine-readable audit metadata extension for HMDG concept patch artifacts.
+
+It does not modify `data/hmdg/concept_patch.json` yet.
+
+It defines how to represent the distinction between:
+
+```text
+candidate phase bridge
+proof-used bridge
+over-compressed bridge
+proof-facing subbridge
+formal dependency artifact
+```
+
+The immediate motivating case is C003.
+
+## Problem
+
+The current concept patch graph can represent candidate bridge nodes such as:
+
+```text
+C001 kernel_to_criterion
+C002 criterion_to_constraint
+C003 constraint_to_eigenspace
+```
+
+But after auditing C003, the graph needs to record more than `status: candidate`.
+
+C003 has a refined status:
+
+```text
+proof-level dependency confirmed
+but bridge is over-compressed as one proof-facing step
+```
+
+The current JSON needs a way to express that without pretending that C003a-C003e are ordinary generated dependency-path nodes.
+
+## Design principle
+
+Do not mix three layers:
+
+```text
+1. declaration dependency layer
+2. high-level cognitive phase bridge layer
+3. proof-facing explanatory subbridge layer
+```
+
+C003 belongs to layer 2.
+
+C003a-C003e belong to layer 3.
+
+The source and target declarations remain layer 1.
+
+## Proposed node fields
+
+Add optional fields to concept bridge nodes:
+
+```json
+{
+  "audit_status": "proof_used_but_over_compressed",
+  "audit_source": "issue-68",
+  "is_parent_bridge": true,
+  "subbridges": ["C003a", "C003b", "C003c", "C003d", "C003e"],
+  "proof_use": {
+    "confirmed": true,
+    "proof_file": "Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean",
+    "proof_declaration": "Submodule.inf_iSup_genEigenspace",
+    "used_declaration": "LinearMap.ker_noncommProd_eq_of_supIndep_ker",
+    "use_site_summary": "used while proving injectivity of an auxiliary product map on a selected generalized-eigenspace component"
+  }
+}
+```
+
+These fields are optional.
+
+Existing bridge nodes without audit do not need to change immediately.
+
+## Proposed subbridge node shape
+
+Proof-facing subbridges should be represented as explanatory nodes, not ordinary declaration nodes.
+
+Example:
+
+```json
+{
+  "id": "C003a",
+  "kind": "ProofBridge",
+  "label": "iSup_component_extraction",
+  "parent": "C003",
+  "status": "candidate",
+  "layer": "proof_facing_explanation",
+  "role": "decomposition",
+  "summary": "Convert membership in an indexed supremum into a finite-support generalized-eigenspace component decomposition.",
+  "proof_markers": [
+    "mem_iSup_iff_exists_finsupp",
+    "Finsupp.support",
+    "m μ"
+  ]
+}
+```
+
+Recommended subbridge labels:
+
+```text
+C003a iSup_component_extraction
+C003b product_kernel_isolation
+C003c kernel_independence_to_injectivity
+C003d invariant_submodule_surjectivity_transfer
+C003e componentwise_reassembly
+```
+
+## Proposed edge fields
+
+Edges involving proof-facing subbridges should be typed separately from declaration dependency edges.
+
+Example:
+
+```json
+{
+  "source": "C003a",
+  "target": "C003b",
+  "type": "proof_explanation_next",
+  "status": "candidate",
+  "parent_bridge": "C003"
+}
+```
+
+Recommended edge types:
+
+```text
+proof_explanation_next
+parent_has_subbridge
+subbridge_uses_declaration
+subbridge_explains_target_step
+```
+
+## Proposed C003 representation
+
+Parent node:
+
+```json
+{
+  "id": "C003",
+  "kind": "ConceptBridge",
+  "label": "constraint_to_eigenspace",
+  "status": "candidate",
+  "audit_status": "proof_used_but_over_compressed",
+  "audit_source": "issue-68",
+  "is_parent_bridge": true,
+  "subbridges": ["C003a", "C003b", "C003c", "C003d", "C003e"]
+}
+```
+
+Subbridge chain:
+
+```text
+C003a iSup_component_extraction
+→ C003b product_kernel_isolation
+→ C003c kernel_independence_to_injectivity
+→ C003d invariant_submodule_surjectivity_transfer
+→ C003e componentwise_reassembly
+```
+
+Declaration connection:
+
+```text
+D007 LinearMap.ker_noncommProd_eq_of_supIndep_ker
+→ C003c kernel_independence_to_injectivity
+```
+
+Target connection:
+
+```text
+C003e componentwise_reassembly
+→ D008 Submodule.inf_iSup_genEigenspace
+```
+
+## Audit status enum proposal
+
+Use a small closed vocabulary:
+
+```text
+not_audited
+proof_used
+proof_used_but_over_compressed
+possible_formal_artifact
+formal_artifact
+accepted_phase_bridge
+accepted_proof_bridge
+rejected
+```
+
+Initial assignment:
+
+```text
+C001: not_audited
+C002: not_audited
+C003: proof_used_but_over_compressed
+```
+
+This avoids overclaiming C001/C002 merely because they are intuitively safer.
+
+## Rendering guidance
+
+Mermaid rendering should distinguish parent bridges from proof-facing subbridges.
+
+Suggested visual convention:
+
+```text
+ConceptBridge parent node:
+  C003["C003\nconstraint_to_eigenspace\nparent / over-compressed"]
+
+ProofBridge subnode:
+  C003a["C003a\niSup_component_extraction\nproof bridge"]
+```
+
+The graph should not imply that C003a-C003e were generated by the same dependency extraction process as D-nodes.
+
+## Migration plan
+
+Step 1:
+
+```text
+Add audit metadata to C003 only.
+```
+
+Step 2:
+
+```text
+Add C003a-C003e as optional proof-facing subnodes.
+```
+
+Step 3:
+
+```text
+Update Mermaid renderer to optionally show proof-facing subbridges.
+```
+
+Step 4:
+
+```text
+Update docs to explain the three-layer distinction.
+```
+
+Step 5:
+
+```text
+Only after this, consider continuing toward C004.
+```
+
+## Non-goals
+
+This document does not change `data/hmdg/concept_patch.json`.
+
+This document does not add C004.
+
+This document does not accept C003a-C003e as stable ERG kernel definitions.
+
+This document does not require every ConceptBridge to have proof-facing subbridges.
