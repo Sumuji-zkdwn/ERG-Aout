@@ -140,6 +140,19 @@ def build_patch(data):
 
     decl_id_by_label = {node["label"]: node["id"] for node in nodes if node["type"] == "Declaration"}
 
+    # Preserve the full extracted declaration path. Boundary bridge edges are
+    # additional proposed expansions, not replacements for the original path.
+    for index in range(len(path_display) - 1):
+        src_label = path_display[index]
+        dst_label = path_display[index + 1]
+        edges.append({
+            "source": decl_id_by_label[src_label],
+            "target": decl_id_by_label[dst_label],
+            "type": "main_path_edge",
+            "label": "adjacent declarations in the extracted weighted longest path",
+            "path_index": index + 1,
+        })
+
     for i in range(len(chunks) - 1):
         left = chunks[i]
         right = chunks[i + 1]
