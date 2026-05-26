@@ -1,13 +1,14 @@
 # HMDG concept bridge review summary
 
-status: candidate review summary / C003 audit-updated
+status: candidate review summary / C003 proof-bridge materialized
 scope: C001-C003 only
 target theorem path: `Module.End.iSup_genEigenspace_restrict_eq_top`
 related issue: `#68`
+related PRs: `#72`, `#73`, `#74`, `#75`, `#76`
 
 ## Purpose
 
-This document summarizes the current HMDG ConceptBridge expansion set produced after the real-graph pipeline and the three boundary expansion PRs.
+This document summarizes the current HMDG ConceptBridge expansion set produced after the real-graph pipeline, the three boundary expansion PRs, and the C003 proof-facing subbridge pass.
 
 It does not promote any candidate bridge to an accepted ERG kernel definition.
 
@@ -17,6 +18,7 @@ It is meant to answer:
 What has been expanded?
 Which bridges are relatively safe?
 Which bridges are high-risk?
+What was decided about C003?
 What should be reviewed next?
 ```
 
@@ -34,6 +36,17 @@ D003 LinearMap.ker_restrict
 → D008 Submodule.inf_iSup_genEigenspace
 ```
 
+C003 is now also represented as a parent bridge with candidate proof-facing subbridges:
+
+```text
+C003 constraint_to_eigenspace
+  ├─ C003a iSup_component_extraction
+  ├─ C003b product_kernel_isolation
+  ├─ C003c kernel_independence_to_injectivity
+  ├─ C003d invariant_submodule_surjectivity_transfer
+  └─ C003e componentwise_reassembly
+```
+
 ## Artifact index
 
 ```text
@@ -41,7 +54,7 @@ concept_patch.md
   Candidate ConceptBridge proposal generated from the path.
 
 concept_patch_graph.md
-  Mermaid and typed-edge view of the candidate bridge graph.
+  Mermaid and typed-edge view of the candidate bridge graph, including C003 ProofBridge nodes.
 
 boundary_expansion.md
   Initial generated review tasks for the three compressed boundary edges.
@@ -55,6 +68,12 @@ C002_criterion_to_constraint_expansion.md
 C003_constraint_to_eigenspace_expansion.md
   Candidate high-risk expansion of Boundary 3, updated after proof-body audit.
 
+C003_split_plan.md
+  Proposed proof-facing split for over-compressed C003.
+
+concept_patch_schema_audit_extension.md
+  Audit metadata schema plan for parent bridges and proof-facing subbridges.
+
 concept_bridge_review_summary.md
   This overview document.
 ```
@@ -65,13 +84,21 @@ Machine-readable patch data is stored at:
 data/hmdg/concept_patch.json
 ```
 
+The rendered graph can be refreshed from the repository root with:
+
+```bash
+python prototypes/cognitive_math_graph_v0/render_concept_patch_graph.py \
+  --input data/hmdg/concept_patch.json \
+  --output docs/hmdg/concept_patch_graph.md
+```
+
 ## Bridge summary table
 
 | Bridge | Source | Target | Role shift | Current status | Risk |
 |---|---|---|---|---|---|
 | C001 `kernel_to_criterion` | `LinearMap.ker_restrict` | `LinearMap.injective_restrict_iff_disjoint` | kernel -> criterion | candidate expansion | lower |
 | C002 `criterion_to_constraint` | `LinearMap.injective_restrict_iff_disjoint` | `LinearMap.comap_eq_sup_ker_of_disjoint` | criterion -> constraint | candidate expansion | medium |
-| C003 `constraint_to_eigenspace` | `LinearMap.ker_noncommProd_eq_of_supIndep_ker` | `Submodule.inf_iSup_genEigenspace` | constraint -> eigenspace | candidate expansion / proof-used / over-compressed | high |
+| C003 `constraint_to_eigenspace` | `LinearMap.ker_noncommProd_eq_of_supIndep_ker` | `Submodule.inf_iSup_genEigenspace` | constraint -> eigenspace | candidate parent bridge / proof-used / over-compressed / split into candidate ProofBridge nodes | high |
 
 ## C001 review summary
 
@@ -108,6 +135,7 @@ Default recommendation:
 
 ```text
 Keep C001 as one HMDG phase-level node for now.
+Review it for mathematical faithfulness before any accepted-status promotion.
 ```
 
 ## C002 review summary
@@ -169,9 +197,10 @@ kernel of product decomposes as sup of kernels
 Current assessment:
 
 ```text
-High-risk candidate HMDG bridge.
+High-risk candidate HMDG parent bridge.
 Proof-level dependency confirmed.
-Over-compression still unresolved.
+Over-compression represented explicitly.
+Candidate ProofBridge subnodes added, but not accepted.
 ```
 
 Reason:
@@ -192,25 +221,14 @@ The refined concern is:
 C003 is real at proof level, but it compresses too many human-facing moves into one bridge.
 ```
 
-The proof-local route appears to include:
+The current representation keeps two levels separate:
 
 ```text
-1. iSup membership is decomposed into finitely supported generalized-eigenspace components.
-2. One component μ is selected.
-3. An auxiliary noncommutative product g is built over the other support components.
-4. Product-kernel decomposition plus generalized-eigenspace independence controls ker g.
-5. This gives injectivity on the selected component.
-6. Invariance of p plus finite-dimensional transfer recovers a representative inside p.
-7. Components are reassembled into the target iSup.
+C003 = high-level candidate ConceptBridge parent
+C003a-C003e = candidate proof-facing explanatory ProofBridge nodes
 ```
 
-Main open question:
-
-```text
-Should C003 be kept as a high-level phase node while also adding proof-facing subnodes?
-```
-
-Recommended split:
+Proof-facing subbridge set:
 
 ```text
 C003a iSup_component_extraction
@@ -220,12 +238,43 @@ C003d invariant_submodule_surjectivity_transfer
 C003e componentwise_reassembly
 ```
 
+Important limitation:
+
+```text
+The split is represented in JSON and rendered Markdown.
+The split has not been mathematically accepted as final.
+The summaries and proof markers still need review against the Lean proof body.
+```
+
 Default recommendation:
 
 ```text
-Keep C003 as a high-level candidate phase node for now.
-Do not treat it as an atomic proof-facing bridge.
-Do not add C004 until the C003 split decision is made.
+Keep C003 as a high-level parent bridge.
+Keep C003a-C003e as candidate proof-facing subbridges.
+Do not treat C003 as an atomic proof-facing bridge.
+Do not add C004 until C003a-C003e have at least one pass of proof-body review.
+```
+
+## Current machine-readable state
+
+The machine-readable patch now records:
+
+```text
+C003 audit_status: proof_used_but_over_compressed
+C003 is_parent_bridge: true
+C003 subbridges: [C003a, C003b, C003c, C003d, C003e]
+C003a-C003e type: ProofBridge
+C003a-C003e layer: proof_facing_explanation
+C003a-C003e status: candidate
+```
+
+The rendered graph now records:
+
+```text
+node_count: 18
+edge_count: 29
+ProofBridge table: present
+ConceptBridge audit status / subbridges columns: present
 ```
 
 ## Overall status
@@ -237,6 +286,9 @@ The repository now contains a real-graph HMDG pipeline.
 The repository now contains candidate ConceptBridge artifacts for C001-C003.
 The repository now contains human-readable expansion notes for C001-C003.
 The repository now records that C003 is proof-used but over-compressed.
+The repository now represents C003a-C003e as candidate proof-facing ProofBridge nodes.
+The repository now renders ConceptBridge and ProofBridge nodes separately.
+The repository now documents how to refresh the rendered graph.
 No candidate bridge has been accepted as a stable ERG kernel definition.
 No final theorem explanation has been claimed.
 ```
@@ -246,19 +298,19 @@ No final theorem explanation has been claimed.
 ```text
 1. Review C001 for mathematical faithfulness.
 2. Review C002 for finite-dimensionality and theorem-hypothesis accuracy.
-3. Decide whether C003 should be split into C003a-C003e.
-4. If split is accepted, update the machine-readable concept patch with audit metadata.
-5. Only after that, consider generating C004 or expanding the remaining declaration path.
+3. Review C003a-C003e against the Lean proof body.
+4. Only after that, decide whether to generate C004 or expand the remaining declaration path.
 ```
 
 ## Stop condition
 
-Do not add new ConceptBridge nodes until the C003 split decision has been made.
+Do not add new ConceptBridge nodes until C003a-C003e have at least one proof-body review pass.
 
 Reason:
 
 ```text
-Adding more nodes now would increase graph size without increasing trust.
+The graph has enough structure to inspect.
+Adding more nodes now would increase graph size before increasing trust.
 ```
 
 The current priority is trust calibration, not graph expansion.
@@ -272,3 +324,5 @@ This document does not modify the accepted ERG schema.
 This document does not assert that the generated dependency path is the unique human explanation path.
 
 This document does not resolve whether HMDG should operate at proof-operation granularity or cognitive-phase granularity.
+
+This document does not accept C003a-C003e as final proof decomposition nodes.
