@@ -8,6 +8,7 @@ Current concept-patch artifacts:
 - `concept_patch_graph.md`: Mermaid and typed-edge view of the candidate bridge graph.
 - `boundary_expansion.md`: review tasks for the three compressed boundary edges.
 - `C001_kernel_to_criterion_expansion.md`: candidate expansion of Boundary 1 only.
+- `C001_review_checklist.md`: review checklist for C001 before any status change.
 - `C002_criterion_to_constraint_expansion.md`: candidate expansion of Boundary 2 only.
 - `C003_constraint_to_eigenspace_expansion.md`: candidate high-risk expansion of Boundary 3 only.
 - `C003_split_plan.md`: proposed proof-facing split for over-compressed C003.
