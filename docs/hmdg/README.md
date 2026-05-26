@@ -20,6 +20,7 @@ C005: candidate ConceptBridge with audit_status source_checked
 - `concept_patch.md`: candidate concept bridge proposal generated from the original extracted path.
 - `concept_patch_graph.md`: Mermaid and typed-edge view of the current candidate bridge graph, including C003 ProofBridge nodes and C005.
 - `D010_human_explanation.md`: human-facing explanation of the target theorem and the D008 -> R004 -> D009 -> C005 -> D010 ending.
+- `D010_concrete_example.md`: concrete R² example showing the difference between the D009 big-space viewpoint and the D010 restricted-space viewpoint.
 - `boundary_expansion.md`: initial generated review tasks for the three compressed boundary edges.
 - `C001_kernel_to_criterion_expansion.md`: candidate expansion of Boundary 1.
 - `C001_review_checklist.md`: review checklist for C001 before any status change.
