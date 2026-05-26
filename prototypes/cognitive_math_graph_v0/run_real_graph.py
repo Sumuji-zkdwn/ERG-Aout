@@ -17,7 +17,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
-from collections import defaultdict, deque
+from collections import Counter, defaultdict, deque
 from pathlib import Path
 
 NODE_WEIGHT = {
@@ -53,56 +53,72 @@ def has_any(text: str, patterns: list[str]) -> bool:
     return any(pattern in text for pattern in patterns)
 
 
-def classify(name: str) -> str:
-    """Assign a rough human-facing role from a Lean declaration name.
+def role_tags(name: str) -> list[str]:
+    """Return all rough human-facing tags detected from a Lean declaration name.
 
-    This is deliberately heuristic. The aim is not semantic truth, but better
-    first-pass labels than treating every occurrence of `map` as kernel/image.
+    Tags are heuristic. They are not intended as semantic truth. They preserve
+    mixed information such as `comap_eq_sup_ker_of_disjoint` being at once a
+    constraint, transfer, lattice, and kernel-related declaration.
     """
     low = name.lower()
+    tags: list[str] = []
 
     if has_any(low, TECHNICAL_PATTERNS):
-        return "technical"
+        return ["technical"]
 
-    # Very specific cognitive objects first.
     if has_any(low, ["geneigenspace", "eigenspace", "eigenvalue", "eigenvector"]):
-        return "eigenspace"
+        tags.append("eigenspace")
     if has_any(low, ["jordan", "normal", "block"]):
-        return "normal_form"
+        tags.append("normal_form")
     if has_any(low, ["nilpotent", "generalized", "chain"]):
-        return "failure_repair"
+        tags.append("failure_repair")
 
-    # Criteria should not be swallowed by ker/map substrings.
     if has_any(low, ["injective", "surjective", "bijective", "isunit", "eq_bot", "eq_top", "iff"]):
-        return "criterion"
-    if has_any(low, ["disjoint", "independent", "supindep", "commute", "mapsTo".lower(), "inj_on", "injon"]):
-        return "constraint"
+        tags.append("criterion")
+    if has_any(low, ["disjoint", "independent", "supindep", "commute", "mapsto", "inj_on", "injon"]):
+        tags.append("constraint")
 
-    # Kernel/image are split. `map` alone is not classified as kernel/image.
     if has_any(low, ["ker", "kernel"]):
-        return "kernel"
+        tags.append("kernel")
     if has_any(low, ["range", "image"]):
-        return "image"
-
+        tags.append("image")
     if has_any(low, ["quot", "quotient", "mkq"]):
-        return "quotient"
-    if has_any(low, ["comap", "codrestrict", "domrestrict", "restrict", "lmap", "rmap"]):
-        return "transfer"
+        tags.append("quotient")
+
+    if has_any(low, ["comap", "map_", "_map", ".map", "codrestrict", "domrestrict", "restrict", "ltensor", "rtensor"]):
+        tags.append("transfer")
     if has_any(low, ["isup", "inf", "sup", "bot", "top", "le_", "_le", "lt_", "_lt"]):
-        return "lattice_operation"
+        tags.append("lattice_operation")
 
     if has_any(low, ["dim", "rank", "finrank", "spectrum", "minimalpolynomial", "det", "trace"]):
-        return "invariant"
+        tags.append("invariant")
     if has_any(low, ["directsum", "iscompl", "decomp", "span", "basis"]):
-        return "decomposition"
+        tags.append("decomposition")
     if has_any(low, ["def", ".mk", ".of", ".to"]):
-        return "definition"
+        tags.append("definition")
 
-    return "unknown"
+    if not tags:
+        tags.append("unknown")
+
+    # Preserve order but remove duplicates.
+    seen = set()
+    unique = []
+    for tag in tags:
+        if tag not in seen:
+            unique.append(tag)
+            seen.add(tag)
+    return unique
+
+
+def classify(name: str) -> str:
+    return role_tags(name)[0]
 
 
 def weight(name: str) -> int:
-    return NODE_WEIGHT.get(classify(name), NODE_WEIGHT["unknown"])
+    tags = role_tags(name)
+    if tags == ["technical"]:
+        return NODE_WEIGHT["technical"]
+    return max(NODE_WEIGHT.get(tag, NODE_WEIGHT["unknown"]) for tag in tags)
 
 
 def read_csv_edges(path: Path):
@@ -205,10 +221,10 @@ def pick_direction(nodes, edges, target, mode):
         keep = ancestors(target, in_edges) | {target}
         return rev, "reverse", len(keep)
 
-    out_a, in_a = build_adjacency(nodes, edges)
+    _out_a, in_a = build_adjacency(nodes, edges)
     count_a = len(ancestors(target, in_a) | {target})
     rev = reverse_edges(edges)
-    out_r, in_r = build_adjacency(nodes, rev)
+    _out_r, in_r = build_adjacency(nodes, rev)
     count_r = len(ancestors(target, in_r) | {target})
     if count_r > count_a:
         return rev, "reverse", count_r
@@ -288,6 +304,22 @@ def weighted_longest_path(nodes, out_edges, in_edges, target, component_members)
     return path, dp[target]
 
 
+def display_member(node, component_members):
+    members = component_members.get(node, [node])
+    if len(members) == 1:
+        return members[0]
+    return f"SCC({len(members)}): " + ", ".join(members[:3])
+
+
+def role_counts_for_path(path, component_members):
+    counts = Counter()
+    for node in path:
+        members = component_members.get(node, [node])
+        tags = role_tags(members[0])
+        counts[tags[0]] += 1
+    return dict(counts)
+
+
 def render_output(out_dir, *, input_path, target, matches, path, score, total_nodes, total_edges, ancestor_count, edge_direction, condensed, component_members):
     out_dir.mkdir(parents=True, exist_ok=True)
     lines = [
@@ -300,21 +332,33 @@ def render_output(out_dir, *, input_path, target, matches, path, score, total_no
         "## Candidate matches", "",
     ]
     for item in matches:
-        lines.append(f"- `{item}` / role={classify(item)} / weight={weight(item)}")
+        tags = role_tags(item)
+        lines.append(f"- `{item}` / role={tags[0]} / tags={','.join(tags)} / weight={weight(item)}")
+
+    counts = role_counts_for_path(path, component_members)
+    lines += ["", "## Path role counts", ""]
+    for role, count in sorted(counts.items(), key=lambda item: (-item[1], item[0])):
+        lines.append(f"- {role}: {count}")
+
     lines += ["", "## Main weighted longest path", "", f"score: {score}", f"length: {len(path)}", ""]
     for index, node in enumerate(path, 1):
-        members = component_members.get(node, [node])
-        display = members[0] if len(members) == 1 else f"SCC({len(members)}): " + ", ".join(members[:3])
-        lines.append(f"{index:03d}. `{display}` / role={classify(display)}")
+        display = display_member(node, component_members)
+        tags = role_tags(display)
+        lines.append(f"{index:03d}. `{display}` / role={tags[0]} / tags={','.join(tags)}")
     if len(path) <= 1:
         lines += ["", "## Warning", "", "Path length is 1. Try `--edge-direction reverse` or a less primitive target."]
     (out_dir / "real_main_path.md").write_text("\n".join(lines), encoding="utf-8")
 
+    path_displays = [display_member(node, component_members) for node in path]
     data = {
         "input": str(input_path),
         "target": target,
         "score": score,
         "path": path,
+        "path_display": path_displays,
+        "path_roles": [classify(item) for item in path_displays],
+        "path_role_tags": {item: role_tags(item) for item in path_displays},
+        "path_role_counts": role_counts_for_path(path, component_members),
         "total_nodes": total_nodes,
         "total_edges": total_edges,
         "ancestor_count": ancestor_count,
@@ -341,7 +385,8 @@ def main():
     target, matches = choose_target(nodes, args.target_substring or [], args.target_exact)
     if args.list_targets_only:
         for item in matches:
-            print(item)
+            tags = role_tags(item)
+            print(f"{item}\trole={tags[0]}\ttags={','.join(tags)}\tweight={weight(item)}")
         return
 
     edges, edge_direction, ancestor_count = pick_direction(nodes, raw_edges, target, args.edge_direction)
