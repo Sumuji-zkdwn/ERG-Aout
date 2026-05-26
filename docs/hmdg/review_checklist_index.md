@@ -1,6 +1,6 @@
 # HMDG review checklist index
 
-status: review navigation index
+status: review navigation index / C001-C003 outcomes updated
 scope: C001-C003 review checklists
 
 ## Purpose
@@ -11,7 +11,7 @@ It does not accept any ConceptBridge or ProofBridge node.
 
 It does not prove any mathlib theorem.
 
-It defines the order in which the current review checklists should be used.
+It defines the current review state and the next decision point after the first review pass.
 
 ## Current review targets
 
@@ -22,31 +22,48 @@ C003 constraint_to_eigenspace parent bridge
 C003a-C003e proof-facing ProofBridge nodes
 ```
 
-## Review files
-
-| Target | Checklist | Related expansion | Current review focus |
-|---|---|---|---|
-| C001 `kernel_to_criterion` | `C001_review_checklist.md` | `C001_kernel_to_criterion_expansion.md` | Check whether the kernel/injectivity/disjointness bridge is faithful and whether it should remain one node. |
-| C002 `criterion_to_constraint` | `C002_review_checklist.md` | `C002_criterion_to_constraint_expansion.md` | Check whether the disjointness-to-comap/sup/kernel bridge is faithful, especially finite-dimensionality and scalar assumptions. |
-| C003 parent + C003a-C003e | `C003_proofbridge_review_checklist.md` | `C003_constraint_to_eigenspace_expansion.md`, `C003_split_plan.md` | Check whether the candidate ProofBridge chain matches the actual Lean proof body. |
-
-## Recommended order
-
-Use this order unless a later issue gives a stronger reason to reorder:
+## Current review outcomes
 
 ```text
-1. C001 review
-2. C002 review
-3. C003 ProofBridge review
-4. Only after these reviews, decide whether C004 or further path expansion is safe
+C001 review outcome: keep_candidate_one_node
+C002 review outcome: keep_candidate_but_reword
+C003 ProofBridge review outcome: keep_candidate_parent_and_subbridges
+```
+
+Interpretation:
+
+```text
+C001 has been source-checked and remains a one-node candidate ConceptBridge.
+C002 has been source-checked and remains a one-node candidate ConceptBridge, but its explanation required rewording to keep target assumptions visible.
+C003 has been proof-body checked and remains a high-level parent ConceptBridge with C003a-C003e candidate ProofBridge subnodes.
+No C001-C003 node has been promoted to accepted status.
+```
+
+## Review files
+
+| Target | Checklist | Review record | Related expansion | Current status |
+|---|---|---|---|---|
+| C001 `kernel_to_criterion` | `C001_review_checklist.md` | `C001_review_record.md` | `C001_kernel_to_criterion_expansion.md` | Reviewed; outcome `keep_candidate_one_node`. |
+| C002 `criterion_to_constraint` | `C002_review_checklist.md` | `C002_review_record.md` | `C002_criterion_to_constraint_expansion.md` | Reviewed; outcome `keep_candidate_but_reword`; expansion reworded after review. |
+| C003 parent + C003a-C003e | `C003_proofbridge_review_checklist.md` | `C003_proofbridge_review_record.md` | `C003_constraint_to_eigenspace_expansion.md`, `C003_split_plan.md` | Proof-body reviewed; outcome `keep_candidate_parent_and_subbridges`. |
+
+## Review order status
+
+The initial review pass is now recorded:
+
+```text
+1. C001 review — done; keep_candidate_one_node
+2. C002 review — done; keep_candidate_but_reword; explanation reworded
+3. C003 ProofBridge review — done; keep_candidate_parent_and_subbridges
+4. Next decision: decide whether C004 or further path expansion is safe
 ```
 
 Reason:
 
 ```text
-C001 is the smallest and lowest-risk bridge.
-C002 introduces additional theorem-hypothesis and finite-dimensionality risks.
-C003 is proof-used but over-compressed and now has proof-facing subbridge candidates.
+C001 is the smallest and lowest-risk bridge and has passed a source-check review as a one-node candidate.
+C002 introduced additional theorem-hypothesis and finite-dimensionality risks; source-check review preserved it as a candidate but required rewording.
+C003 is proof-used, over-compressed, and now proof-body reviewed as a parent ConceptBridge plus candidate ProofBridge subnodes.
 ```
 
 ## Review outcome vocabulary
@@ -61,6 +78,13 @@ reject_candidate_bridge
 needs_source_check
 ```
 
+Recorded outcomes so far:
+
+```text
+C001: keep_candidate_one_node
+C002: keep_candidate_but_reword
+```
+
 For C003 ProofBridge review, use one of:
 
 ```text
@@ -72,19 +96,38 @@ reject_subbridge_split
 needs_source_check
 ```
 
+Recorded outcome so far:
+
+```text
+C003: keep_candidate_parent_and_subbridges
+```
+
 Do not use `accepted` unless a separate accepted-status policy and review record have been added.
 
 ## Stop condition before C004
 
-Do not generate C004 or expand the remaining declaration path until the following are recorded:
+The first-pass review outcomes are now recorded:
 
 ```text
-C001 review outcome
-C002 review outcome
-C003 ProofBridge review outcome
+C001 review outcome: recorded
+C002 review outcome: recorded
+C003 ProofBridge review outcome: recorded
 ```
 
-This is a trust-calibration stop condition, not a claim that the current graph is wrong.
+Current C004 status:
+
+```text
+review_gate_satisfied_but_not_automatic
+```
+
+Meaning:
+
+```text
+C004 is no longer blocked by missing C001-C003 review records.
+However, C004 should still be introduced only by an explicit next-step PR that states its scope, source/target boundary, risk level, and whether it is a ConceptBridge or some other node type.
+```
+
+This is a trust-calibration checkpoint, not a claim that the current graph is accepted.
 
 ## Non-goals
 
