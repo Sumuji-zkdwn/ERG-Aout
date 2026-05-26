@@ -1,14 +1,14 @@
 # HMDG concept bridge review summary
 
-status: candidate review summary / first C001-C003 review pass recorded
-scope: C001-C003 only
+status: candidate review summary / C001-C003, R004, and C005 recorded
+scope: C001-C003, R004 documentation note, C005 candidate
 target theorem path: `Module.End.iSup_genEigenspace_restrict_eq_top`
 related issue: `#68`
-related PRs: `#72`, `#73`, `#74`, `#75`, `#76`, `#78`, `#79`, `#80`, `#81`, `#82`, `#83`, `#84`, `#85`, `#86`
+related PRs: `#72`, `#73`, `#74`, `#75`, `#76`, `#78`, `#79`, `#80`, `#81`, `#82`, `#83`, `#84`, `#85`, `#86`, `#87`, `#88`, `#89`, `#90`, `#91`, `#92`, `#93`, `#94`
 
 ## Purpose
 
-This document summarizes the current HMDG ConceptBridge expansion set produced after the real-graph pipeline, the three boundary expansion PRs, the C003 proof-facing subbridge pass, and the first C001-C003 review pass.
+This document summarizes the current HMDG ConceptBridge expansion set produced after the real-graph pipeline, the three initial boundary expansion PRs, the C003 proof-facing subbridge pass, the R004 rewrite-note decision, and the C005 source-checked candidate addition.
 
 It does not promote any candidate bridge to an accepted ERG kernel definition.
 
@@ -18,7 +18,8 @@ It is meant to answer:
 What has been expanded?
 Which review outcomes have been recorded?
 Which bridges remain candidates?
-What was decided about C003?
+What was decided about R004?
+What was added as C005?
 What is the next safe decision point?
 ```
 
@@ -34,6 +35,10 @@ D003 LinearMap.ker_restrict
 → D007 LinearMap.ker_noncommProd_eq_of_supIndep_ker
 → C003 constraint_to_eigenspace
 → D008 Submodule.inf_iSup_genEigenspace
+→ R004 global_span_rewrite_to_submodule_equality
+→ D009 Submodule.eq_iSup_inf_genEigenspace
+→ C005 ambient_intersection_to_restricted_eigenspace
+→ D010 Module.End.iSup_genEigenspace_restrict_eq_top
 ```
 
 C003 is also represented as a parent bridge with candidate proof-facing subbridges:
@@ -47,12 +52,19 @@ C003 constraint_to_eigenspace
   └─ C003e componentwise_reassembly
 ```
 
+R004 is not currently a machine-readable graph node. It is recorded as a documentation-only rewrite note.
+
 ## Current review outcomes
 
 ```text
 C001 review outcome: keep_candidate_one_node
 C002 review outcome: keep_candidate_but_reword
 C003 ProofBridge review outcome: keep_candidate_parent_and_subbridges
+C004 scoped boundary outcome: record_as_rewrite_note_only
+R004 representation: documentation-only RewriteNote
+D009-D010 source-check outcome: keep_as_C005_candidate_after_review
+C005 checklist outcome: ready_for_candidate_json_pr_after_checklist
+C005 JSON status: candidate / source_checked
 ```
 
 Interpretation:
@@ -61,7 +73,9 @@ Interpretation:
 C001 has been source-checked and remains a one-node candidate ConceptBridge.
 C002 has been source-checked and remains a one-node candidate ConceptBridge, but its explanation was reworded to preserve target theorem assumptions.
 C003 has been proof-body checked and remains a high-level parent ConceptBridge with C003a-C003e candidate ProofBridge subnodes.
-No C001-C003 node has been promoted to accepted status.
+R004 records the D008 -> D009 global-span rewrite, but is not represented as a JSON node.
+C005 has been source-checked and added to JSON as a candidate ConceptBridge for the ambient-to-restricted generalized-eigenspace transfer.
+No C001-C003, C003a-C003e, R004, or C005 item has been promoted to accepted status.
 ```
 
 ## Artifact index
@@ -71,7 +85,7 @@ concept_patch.md
   Candidate ConceptBridge proposal generated from the path.
 
 concept_patch_graph.md
-  Mermaid and typed-edge view of the candidate bridge graph, including C003 ProofBridge nodes.
+  Mermaid and typed-edge view of the candidate bridge graph, including C003 ProofBridge nodes and C005.
 
 boundary_expansion.md
   Initial generated review tasks for the three compressed boundary edges.
@@ -106,8 +120,26 @@ C003_proofbridge_review_checklist.md
 C003_proofbridge_review_record.md
   First proof-body review record for the C003 parent bridge and C003a-C003e ProofBridge nodes.
 
+C004_scoping_note.md
+  Scoping note for D008 -> D009 before deciding against C004 as a ConceptBridge.
+
+C004_source_check_record.md
+  Source-check record recommending that the scoped C004 boundary be treated as a rewrite note, not a ConceptBridge.
+
+R004_global_span_rewrite_to_submodule_equality.md
+  Documentation-only rewrite note for D008 -> D009.
+
+D009_D010_scoping_note.md
+  Scoping note for the ambient-to-restricted generalized-eigenspace boundary.
+
+D009_D010_source_check_record.md
+  Source-check record recommending C005 as a candidate ConceptBridge.
+
+C005_review_checklist.md
+  Review checklist before adding C005 to JSON.
+
 review_checklist_index.md
-  Navigation index and current review outcome index for C001-C003.
+  Navigation index and current review outcome index for early bridge review.
 
 concept_patch_schema_audit_extension.md
   Audit metadata schema plan for parent bridges and proof-facing subbridges.
@@ -137,6 +169,8 @@ python prototypes/cognitive_math_graph_v0/render_concept_patch_graph.py \
 | C001 `kernel_to_criterion` | `LinearMap.ker_restrict` | `LinearMap.injective_restrict_iff_disjoint` | kernel -> criterion | `keep_candidate_one_node` | candidate ConceptBridge / source-checked | lower |
 | C002 `criterion_to_constraint` | `LinearMap.injective_restrict_iff_disjoint` | `LinearMap.comap_eq_sup_ker_of_disjoint` | criterion -> constraint | `keep_candidate_but_reword` | candidate ConceptBridge / source-checked / expansion reworded | medium |
 | C003 `constraint_to_eigenspace` | `LinearMap.ker_noncommProd_eq_of_supIndep_ker` | `Submodule.inf_iSup_genEigenspace` | constraint -> eigenspace | `keep_candidate_parent_and_subbridges` | candidate parent ConceptBridge / proof-body checked / has candidate ProofBridge subnodes | high |
+| R004 `global_span_rewrite_to_submodule_equality` | `Submodule.inf_iSup_genEigenspace` | `Submodule.eq_iSup_inf_genEigenspace` | eigenspace rewrite -> submodule equality | `record_as_rewrite_note_only` | documentation-only RewriteNote / not JSON node | low-medium |
+| C005 `ambient_intersection_to_restricted_eigenspace` | `Submodule.eq_iSup_inf_genEigenspace` | `Module.End.iSup_genEigenspace_restrict_eq_top` | ambient eigenspace -> restricted eigenspace | `ready_for_candidate_json_pr_after_checklist` | candidate ConceptBridge / source_checked / added to JSON | medium-high |
 
 ## C001 review summary
 
@@ -289,6 +323,83 @@ Minor wording caution:
 C003d should describe finite-dimensional transfer as mediated through LinearMap.injOn_iff_surjOn in the existing theorem context, rather than as a separate explicit dimension calculation at that line.
 ```
 
+## R004 review summary
+
+R004 explains the D008 -> D009 transition as a documentation-only rewrite note.
+
+Core transition:
+
+```text
+p
+= p ⊓ ⊤
+= p ⊓ ⨆ μ, f.genEigenspace μ k
+= ⨆ μ, p ⊓ f.genEigenspace μ k
+```
+
+Observed proof-body result:
+
+```text
+rw [← inf_iSup_genEigenspace h, h', inf_top_eq]
+```
+
+Review outcome:
+
+```text
+record_as_rewrite_note_only
+```
+
+Current assessment:
+
+```text
+Meaningful for human reading.
+Too lightweight to add as a ConceptBridge.
+Recorded as documentation-only R004.
+Not present in data/hmdg/concept_patch.json.
+```
+
+## C005 review summary
+
+C005 explains how an ambient equality for an invariant submodule becomes a top-supremum statement for generalized eigenspaces of the restricted endomorphism.
+
+Core transition:
+
+```text
+ambient equality:
+p = ⨆ μ, p ⊓ f.genEigenspace μ k
+
+apply comap along p.subtype and rewrite:
+Submodule.comap p.subtype p = ⊤
+ambient intersections become restricted generalized eigenspaces
+
+restricted equality:
+⨆ μ, Module.End.genEigenspace (LinearMap.restrict f h) μ k = ⊤
+```
+
+Observed proof-body result:
+
+```text
+have := congr_arg (Submodule.comap p.subtype) (Submodule.eq_iSup_inf_genEigenspace k h h')
+have h_inj : Function.Injective p.subtype := Subtype.coe_injective
+simp_rw [Submodule.inf_genEigenspace f p h, Submodule.comap_subtype_self,
+  ← Submodule.map_iSup, Submodule.comap_map_eq_of_injective h_inj] at this
+exact this.symm
+```
+
+Review outcome:
+
+```text
+ready_for_candidate_json_pr_after_checklist
+```
+
+Current assessment:
+
+```text
+Medium-high-risk candidate HMDG bridge.
+Source-check confirmed direct D009 use in the target proof.
+C005 has been added to JSON as candidate / source_checked.
+Do not mark accepted without a separate accepted-status policy.
+```
+
 ## Current machine-readable state
 
 The machine-readable patch records:
@@ -300,15 +411,21 @@ C003 subbridges: [C003a, C003b, C003c, C003d, C003e]
 C003a-C003e type: ProofBridge
 C003a-C003e layer: proof_facing_explanation
 C003a-C003e status: candidate
+C005 audit_status: source_checked
+C005 status: candidate
+C005 proof_use.confirmed: true
+C005 used_declaration: Submodule.eq_iSup_inf_genEigenspace
+C005 key_transfer_lemma: Submodule.inf_genEigenspace f p h
 ```
 
 The rendered graph records:
 
 ```text
-node_count: 18
-edge_count: 29
+node_count: 19
+edge_count: 32
 ProofBridge table: present
 ConceptBridge audit status / subbridges columns: present
+C005 appears in the Mermaid graph, typed adjacency list, and ConceptBridge table.
 ```
 
 ## Overall status
@@ -317,11 +434,12 @@ Confirmed project-level status:
 
 ```text
 The repository contains a real-graph HMDG pipeline.
-The repository contains candidate ConceptBridge artifacts for C001-C003.
+The repository contains candidate ConceptBridge artifacts for C001-C003 and C005.
 The repository contains human-readable expansion notes for C001-C003.
-The repository contains review checklists and review records for C001-C003.
+The repository contains review checklists and review records for C001-C003 and C005.
 The repository records that C003 is proof-used but over-compressed.
 The repository represents C003a-C003e as candidate proof-facing ProofBridge nodes.
+The repository records R004 as a documentation-only rewrite note.
 The repository renders ConceptBridge and ProofBridge nodes separately.
 The repository documents how to refresh the rendered graph.
 No candidate bridge has been accepted as a stable ERG kernel definition.
@@ -330,31 +448,19 @@ No final theorem explanation has been claimed.
 
 ## Next decision point
 
-The first-pass review gate is now satisfied:
+The post-C005 review state is now:
 
 ```text
-C001 review outcome: recorded
-C002 review outcome: recorded
-C003 ProofBridge review outcome: recorded
-```
-
-Current C004 status:
-
-```text
-review_gate_satisfied_but_not_automatic
-```
-
-Meaning:
-
-```text
-C004 is no longer blocked by missing C001-C003 review records.
-However, C004 should still be introduced only by an explicit next-step PR that states its scope, source/target boundary, risk level, and whether it is a ConceptBridge or some other node type.
+C001-C003 reviewed and retained as candidates.
+R004 recorded as a rewrite note, not a ConceptBridge.
+C005 source-checked and added as a candidate ConceptBridge.
+The rendered graph matches the current JSON counts: node_count 19, edge_count 32.
 ```
 
 Recommended next step:
 
 ```text
-Create a C004 scoping note before adding any new ConceptBridge node.
+Run a consistency pass over docs/hmdg after C005, especially review_checklist_index.md and any wording that still says C001-C003 only.
 ```
 
 The current priority remains trust calibration, not uncontrolled graph expansion.
@@ -369,4 +475,4 @@ This document does not assert that the generated dependency path is the unique h
 
 This document does not resolve whether HMDG should operate at proof-operation granularity or cognitive-phase granularity.
 
-This document does not accept C001-C003 or C003a-C003e as final ERG kernel definitions.
+This document does not accept C001-C003, C003a-C003e, R004, or C005 as final ERG kernel definitions.
