@@ -2,8 +2,8 @@
 
 target: `Module.End.iSup_genEigenspace_restrict_eq_top`
 path_length: 10
-node_count: 13
-edge_count: 18
+node_count: 18
+edge_count: 29
 
 ## Mermaid graph
 
@@ -19,9 +19,14 @@ flowchart LR
     D008["D008\nSubmodule.inf_iSup_genEigenspace\nDeclaration / eigenspace"]
     D009["D009\nSubmodule.eq_iSup_inf_genEigenspace\nDeclaration / eigenspace"]
     D010["D010\nModule.End.iSup_genEigenspace_restrict_eq_top\nDeclaration / eigenspace"]
-    C001_kernel_to_criterion{"C001_kernel_to_criterion\nkernel_to_criterion\nConceptBridge / kernel->criterion"}
-    C002_criterion_to_constraint{"C002_criterion_to_constraint\ncriterion_to_constraint\nConceptBridge / criterion->constraint"}
-    C003_constraint_to_eigenspace{"C003_constraint_to_eigenspace\nconstraint_to_eigenspace\nConceptBridge / constraint->eigenspace"}
+    C001_kernel_to_criterion{"C001_kernel_to_criterion\nkernel_to_criterion\nConceptBridge / kernel->criterion\ncandidate"}
+    C002_criterion_to_constraint{"C002_criterion_to_constraint\ncriterion_to_constraint\nConceptBridge / criterion->constraint\ncandidate"}
+    C003_constraint_to_eigenspace{"C003_constraint_to_eigenspace\nconstraint_to_eigenspace\nConceptBridge / constraint->eigenspace\nproof_used_but_over_compressed"}
+    C003a(["C003a\niSup_component_extraction\nProofBridge / decomposition\nproof_facing_explanation"])
+    C003b(["C003b\nproduct_kernel_isolation\nProofBridge / kernel_product\nproof_facing_explanation"])
+    C003c(["C003c\nkernel_independence_to_injectivity\nProofBridge / injectivity\nproof_facing_explanation"])
+    C003d(["C003d\ninvariant_submodule_surjectivity_transfer\nProofBridge / transfer\nproof_facing_explanation"])
+    C003e(["C003e\ncomponentwise_reassembly\nProofBridge / reassembly\nproof_facing_explanation"])
     D001 -- main_path_edge --> D002
     D002 -- main_path_edge --> D003
     D003 -- main_path_edge --> D004
@@ -40,6 +45,17 @@ flowchart LR
     D007 -- needs_bridge --> C003_constraint_to_eigenspace
     C003_constraint_to_eigenspace -- bridges_to --> D008
     D007 -. original_boundary_edge .-> D008
+    C003_constraint_to_eigenspace -. parent_has_subbridge .-> C003a
+    C003_constraint_to_eigenspace -. parent_has_subbridge .-> C003b
+    C003_constraint_to_eigenspace -. parent_has_subbridge .-> C003c
+    C003_constraint_to_eigenspace -. parent_has_subbridge .-> C003d
+    C003_constraint_to_eigenspace -. parent_has_subbridge .-> C003e
+    C003a -- proof_explanation_next --> C003b
+    C003b -- proof_explanation_next --> C003c
+    C003c -- proof_explanation_next --> C003d
+    C003d -- proof_explanation_next --> C003e
+    D007 -. subbridge_uses_declaration .-> C003c
+    C003e -. subbridge_explains_target_step .-> D008
 ```
 
 ## Typed adjacency list
@@ -62,14 +78,35 @@ flowchart LR
 - `D007:LinearMap.ker_noncommProd_eq_of_supIndep_ker` -[needs_bridge]-> `C003_constraint_to_eigenspace:constraint_to_eigenspace`
 - `C003_constraint_to_eigenspace:constraint_to_eigenspace` -[bridges_to]-> `D008:Submodule.inf_iSup_genEigenspace`
 - `D007:LinearMap.ker_noncommProd_eq_of_supIndep_ker` -[original_boundary_edge]-> `D008:Submodule.inf_iSup_genEigenspace`
+- `C003_constraint_to_eigenspace:constraint_to_eigenspace` -[parent_has_subbridge]-> `C003a:iSup_component_extraction`
+- `C003_constraint_to_eigenspace:constraint_to_eigenspace` -[parent_has_subbridge]-> `C003b:product_kernel_isolation`
+- `C003_constraint_to_eigenspace:constraint_to_eigenspace` -[parent_has_subbridge]-> `C003c:kernel_independence_to_injectivity`
+- `C003_constraint_to_eigenspace:constraint_to_eigenspace` -[parent_has_subbridge]-> `C003d:invariant_submodule_surjectivity_transfer`
+- `C003_constraint_to_eigenspace:constraint_to_eigenspace` -[parent_has_subbridge]-> `C003e:componentwise_reassembly`
+- `C003a:iSup_component_extraction` -[proof_explanation_next]-> `C003b:product_kernel_isolation`
+- `C003b:product_kernel_isolation` -[proof_explanation_next]-> `C003c:kernel_independence_to_injectivity`
+- `C003c:kernel_independence_to_injectivity` -[proof_explanation_next]-> `C003d:invariant_submodule_surjectivity_transfer`
+- `C003d:invariant_submodule_surjectivity_transfer` -[proof_explanation_next]-> `C003e:componentwise_reassembly`
+- `D007:LinearMap.ker_noncommProd_eq_of_supIndep_ker` -[subbridge_uses_declaration]-> `C003c:kernel_independence_to_injectivity`
+- `C003e:componentwise_reassembly` -[subbridge_explains_target_step]-> `D008:Submodule.inf_iSup_genEigenspace`
 
 ## Concept bridge table
 
-| id | label | phase edge | role shift | score | status |
-|---|---|---|---|---:|---|
-| `C001_kernel_to_criterion` | `kernel_to_criterion` | kernel setup -> criterion bridge | kernel -> criterion | 7 | candidate |
-| `C002_criterion_to_constraint` | `criterion_to_constraint` | criterion bridge -> constraint bridge | criterion -> constraint | 7 | candidate |
-| `C003_constraint_to_eigenspace` | `constraint_to_eigenspace` | constraint bridge -> eigenspace conclusion | constraint -> eigenspace | 7 | candidate |
+| id | label | phase edge | role shift | score | status | audit status | subbridges |
+|---|---|---|---|---:|---|---|---|
+| `C001_kernel_to_criterion` | `kernel_to_criterion` | kernel setup -> criterion bridge | kernel -> criterion | 7 | candidate |  |  |
+| `C002_criterion_to_constraint` | `criterion_to_constraint` | criterion bridge -> constraint bridge | criterion -> constraint | 7 | candidate |  |  |
+| `C003_constraint_to_eigenspace` | `constraint_to_eigenspace` | constraint bridge -> eigenspace conclusion | constraint -> eigenspace | 7 | candidate | proof_used_but_over_compressed | C003a, C003b, C003c, C003d, C003e |
+
+## Proof bridge table
+
+| id | label | parent | role | status | summary | proof markers |
+|---|---|---|---|---|---|---|
+| `C003a` | `iSup_component_extraction` | `C003_constraint_to_eigenspace` | decomposition | candidate | Convert membership in an indexed supremum into a finite-support generalized-eigenspace component decomposition. | mem_iSup_iff_exists_finsupp, Finsupp.support, m μ |
+| `C003b` | `product_kernel_isolation` | `C003_constraint_to_eigenspace` | kernel_product | candidate | Isolate the kernel condition for the auxiliary product map acting on the selected component. | noncommProd, ker, aeval, support |
+| `C003c` | `kernel_independence_to_injectivity` | `C003_constraint_to_eigenspace` | injectivity | candidate | Use the kernel product and independence constraints to obtain injectivity on the relevant auxiliary map. | LinearMap.ker_noncommProd_eq_of_supIndep_ker, supIndep, injective, ker_eq_bot |
+| `C003d` | `invariant_submodule_surjectivity_transfer` | `C003_constraint_to_eigenspace` | transfer | candidate | Transfer the componentwise map result through invariant submodule structure toward the generalized-eigenspace infimum claim. | map, comap, invariant, restrict |
+| `C003e` | `componentwise_reassembly` | `C003_constraint_to_eigenspace` | reassembly | candidate | Reassemble the componentwise argument into the target infimum and indexed-supremum generalized-eigenspace statement. | Submodule.inf_iSup_genEigenspace, inf, iSup, genEigenspace |
 
 ## Declaration table
 
@@ -88,4 +125,6 @@ flowchart LR
 
 ## Reading note
 
-Solid edges are proposed bridge expansions. Dotted edges preserve the original compressed boundary edge for auditability.
+Solid edges are proposed bridge expansions. Dotted edges preserve compressed boundary edges or show non-declaration explanatory links for auditability.
+
+`ConceptBridge` nodes are high-level cognitive phase bridges. `ProofBridge` nodes are candidate proof-facing explanatory subbridges and should not be read as declarations extracted from the formal dependency graph.
