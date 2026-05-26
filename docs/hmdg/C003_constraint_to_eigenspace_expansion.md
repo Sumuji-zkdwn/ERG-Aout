@@ -1,8 +1,9 @@
 # C003 constraint_to_eigenspace expansion
 
-status: candidate expansion / high-risk bridge
+status: candidate expansion / high-risk bridge / audit-updated
 source boundary: `LinearMap.ker_noncommProd_eq_of_supIndep_ker` -> `Submodule.inf_iSup_genEigenspace`
 target theorem path: `Module.End.iSup_genEigenspace_restrict_eq_top`
+related issue: `#68`
 
 ## Purpose
 
@@ -10,7 +11,37 @@ This note expands only Boundary 3 from `docs/hmdg/boundary_expansion.md`.
 
 It is not an accepted mathematical proof of the final target theorem. It is a candidate cognitive bridge explaining how kernel/sup-independence constraints begin to connect to generalized eigenspace decompositions.
 
-This bridge is less direct than C001 and C002. It should be treated as a high-risk HMDG candidate until reviewed against the actual proof graph.
+This bridge is less direct than C001 and C002. It remains a high-risk HMDG candidate, but the reason has been refined after proof-body audit.
+
+## Audit update
+
+Issue `#68` checked the current proof body of `Submodule.inf_iSup_genEigenspace` in `Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean`.
+
+The audit found that the proof does directly use:
+
+```text
+LinearMap.ker_noncommProd_eq_of_supIndep_ker
+```
+
+inside the proof of an auxiliary injectivity statement:
+
+```text
+have hg₃ : InjOn g ↑(f.genEigenspace μ k) := by
+  apply LinearMap.injOn_of_disjoint_ker subset_rfl
+  have this := f.independent_genEigenspace k
+  ...
+  rw [LinearMap.ker_noncommProd_eq_of_supIndep_ker, ← Finset.sup_eq_iSup]
+  ...
+```
+
+Therefore C003 should no longer be treated as merely a possible formal dependency artifact.
+
+Updated assessment:
+
+```text
+The dependency is real at proof level.
+The current C003 bridge is still high-risk because it compresses several proof moves into one cognitive node.
+```
 
 ## Source declaration in plain language
 
@@ -67,9 +98,22 @@ C001 and C002 each connect neighboring declarations whose plain-language meaning
 
 C003 is different. The source theorem talks about kernels of finite products of commuting endomorphisms. The target theorem talks about intersections of an invariant submodule with a supremum of generalized eigenspaces.
 
-The hidden mathematical content is likely the idea that generalized eigenspaces arise as kernels of powers or polynomial factors of an endomorphism. Therefore a theorem about kernels of products can contribute to a theorem about sums of generalized eigenspaces.
+The audit confirms that the proof of `Submodule.inf_iSup_genEigenspace` really uses `LinearMap.ker_noncommProd_eq_of_supIndep_ker`. The high-risk status is therefore not because the dependency is imaginary.
 
-However, this file does not verify the exact proof route. It only records the cognitive bridge suggested by the extracted dependency path.
+The high-risk status is because the human-facing bridge is over-compressed.
+
+The proof route contains several distinct moves:
+
+```text
+1. decompose an element of p ∩ iSup genEigenspace into finitely supported generalized-eigenspace components;
+2. isolate one component μ using a product over the other support components;
+3. use kernel-product decomposition and independence to prove injectivity on the μ component;
+4. use finite-dimensional injective/surjective transfer on p ∩ genEigenspace μ;
+5. conclude the μ component lies in p;
+6. rebuild the iSup membership componentwise.
+```
+
+A single node named `constraint_to_eigenspace` hides most of this route.
 
 ## Token expansion
 
@@ -79,13 +123,15 @@ However, this file does not verify the exact proof route. It only records the co
 
 In the source theorem, kernels of individual factors combine to describe the kernel of the whole product.
 
-In the target region, generalized eigenspaces can be read as kernel-like spectral components.
+In the target proof region, generalized eigenspaces are treated through kernel-like conditions such as powers of shifted endomorphisms.
 
 ### noncommProd
 
 `noncommProd` indicates a finite product of endomorphisms where multiplication order matters in general.
 
-The theorem requires commutation hypotheses so that the product behaves well enough for a clean kernel decomposition.
+In the proof of `Submodule.inf_iSup_genEigenspace`, an auxiliary product `g` is built from the support components other than the selected component `μ`.
+
+The theorem requires commutation hypotheses so that this product behaves well enough for kernel decomposition.
 
 ### eq
 
@@ -99,7 +145,7 @@ The target theorem gives exact equality between an intersection with a supremum 
 
 `supIndep` says that a family of submodules is independent with respect to supremum.
 
-This is the structural condition that prevents the kernel components from overlapping in a way that would destroy a clean decomposition.
+In the proof region, independence of generalized eigenspaces is used with the kernel-product theorem to control the kernel of the auxiliary product and prove injectivity on one component.
 
 ### inf
 
@@ -111,29 +157,32 @@ In the target theorem, `p ⊓ ...` asks for the part of a larger decomposition t
 
 `iSup` is an indexed supremum.
 
-In the target theorem, generalized eigenspace components are assembled by taking the supremum over eigenvalues.
+The target proof begins with membership in an indexed supremum, decomposes that membership into finitely supported components, and then rebuilds the componentwise `iSup` membership.
 
 ### genEigenspace
 
 `genEigenspace` is the generalized eigenspace associated with an eigenvalue and a generalized exponent parameter.
 
-It functions as the spectral-component analogue of a kernel of a polynomial-like expression in the endomorphism.
+In this proof region, generalized eigenspaces function as the spectral components that must be isolated one at a time.
 
 ## Atomic bridge steps
 
 ```text
-B001. Start with a finite-dimensional vector space and endomorphisms acting on it.
-B002. Kernels of endomorphisms are submodules.
-B003. If the relevant endomorphisms commute, a finite product of them can be handled coherently.
-B004. If the kernels are SupIndep, the product kernel decomposes as the supremum of the factor kernels.
-B005. Generalized eigenspaces can be understood as kernel-like components associated with powers or polynomial factors of an endomorphism.
-B006. Therefore a kernel-of-product theorem becomes relevant to eigenspace-sum structure.
-B007. The target theorem introduces an invariant submodule p.
-B008. Invariance means f sends elements of p back into p, so spectral behavior can be restricted to p.
-B009. The question becomes how p intersects a supremum of generalized eigenspaces.
-B010. The desired lattice movement is from p ⊓ ⨆ components to ⨆ componentwise intersections.
-B011. Kernel decomposition and independence principles supply the conceptual model for why the componentwise decomposition should be valid.
-B012. Thus a constraint/kernel theorem can serve as a bridge toward generalized eigenspace lattice decomposition.
+B001. Start with an element m in p ⊓ ⨆ μ, f.genEigenspace μ k.
+B002. Use membership in the iSup to express m as a finite support sum of generalized-eigenspace components.
+B003. Fix one component μ.
+B004. Build an auxiliary endomorphism g as a noncommutative product over the other support components.
+B005. Use commutation of shifted powers of f to make g well-behaved.
+B006. Use the fact that other components are killed by their corresponding factors.
+B007. Use `LinearMap.ker_noncommProd_eq_of_supIndep_ker` to rewrite the kernel of g as a supremum of factor kernels.
+B008. Use independence of generalized eigenspaces to show that this kernel is disjoint from the selected μ component.
+B009. Conclude that g is injective on the selected generalized eigenspace component.
+B010. Use invariance of p to show g maps p into p.
+B011. Use finite-dimensional injective/surjective transfer on p ⊓ f.genEigenspace μ k.
+B012. Recover a representative of the μ component inside p.
+B013. Use injectivity to identify that representative with the original μ component.
+B014. Conclude that each finite-support component lies in p.
+B015. Reassemble the components to prove membership in ⨆ μ, p ⊓ f.genEigenspace μ k.
 ```
 
 ## HMDG edge interpretation
@@ -145,7 +194,7 @@ D007: LinearMap.ker_noncommProd_eq_of_supIndep_ker
 
 C003: constraint_to_eigenspace
   role: bridge
-  cognitive content: reinterpret kernel decomposition constraints as spectral-component decomposition principles.
+  cognitive content: use product-kernel decomposition and eigenspace independence to isolate a generalized-eigenspace component.
 
 D008: Submodule.inf_iSup_genEigenspace
   role: eigenspace
@@ -176,21 +225,23 @@ generalized eigenspace
 componentwise decomposition
 ```
 
-A human reader must supply the spectral interpretation connecting generalized eigenspaces to kernel-like components. Therefore `constraint_to_eigenspace` is a justified candidate bridge.
+The audit shows that the kernel-product theorem is genuinely used in the proof. However, the human bridge is not simply `constraint -> eigenspace`; it passes through component isolation, auxiliary products, injectivity, surjectivity, and reassembly.
 
-## Possible split
+## Recommended split
 
-C003 is likely too broad as a single proof-level node.
+C003 is too broad as a single proof-level node.
 
-Possible finer bridge sequence:
+Recommended finer bridge sequence:
 
 ```text
-constraint_to_kernel_decomposition
-→ kernel_decomposition_to_spectral_components
-→ spectral_components_to_invariant_submodule_inf_iSup
+C003a iSup_component_extraction
+C003b product_kernel_isolation
+C003c kernel_independence_to_injectivity
+C003d invariant_submodule_surjectivity_transfer
+C003e componentwise_reassembly
 ```
 
-However, keeping C003 as one HMDG phase node may be reasonable if the graph is meant to show high-level cognitive phase transitions rather than proof granularity.
+Keeping C003 as one HMDG phase node may still be useful for a high-level cognitive graph, but proof-level documentation should not treat it as one atomic move.
 
 ## Review status
 
@@ -198,15 +249,17 @@ Accepted as HMDG candidate expansion: no.
 
 Ready for mathematical review: partially.
 
-This file needs stricter review than C001 and C002.
+Dependency artifact concern: mostly resolved. The source theorem is directly used in the target proof region.
+
+Over-compression concern: still unresolved. C003 should likely be split before any accepted proof-facing graph is generated.
 
 Required review questions:
 
-1. Does the actual proof of `Submodule.inf_iSup_genEigenspace` use `LinearMap.ker_noncommProd_eq_of_supIndep_ker` directly, or is this edge an artifact of dependency extraction?
-2. Is the phrase "generalized eigenspaces are kernel-like spectral components" sufficiently precise for HMDG documentation?
-3. Should C003 be split into three smaller bridge nodes?
-4. Is `supIndep` actually the right human-facing concept here, or merely a proof-level dependency?
-5. Does the HMDG graph need an explicit intermediate node for polynomial factors of an endomorphism?
+1. Should C003 remain as a high-level phase node while also adding C003a-C003e as proof-facing subnodes?
+2. Is the phrase "generalized eigenspaces are kernel-like spectral components" precise enough, or should it be replaced with the more proof-local phrase "components killed by powers of shifted endomorphisms"?
+3. Is `supIndep` a human-facing concept in this bridge, or should the user-facing explanation emphasize disjointness/injectivity instead?
+4. Should the current graph mark C003 as `over_compressed` rather than merely `high_risk`?
+5. Should `data/hmdg/concept_patch.json` gain an audit status field before more bridges are generated?
 
 ## Non-goals
 
@@ -214,6 +267,6 @@ This file does not expand C001 or C002.
 
 This file does not prove `Submodule.inf_iSup_genEigenspace`.
 
-This file does not claim that `Module.End.iSup_genEigenspace_restrict_eq_top` has been explained.
+This file does not claim that `Module.End.iSup_genEigenspace_restrict_eq_top` has been fully explained.
 
 This file does not promote any candidate bridge into an accepted ERG kernel definition.
