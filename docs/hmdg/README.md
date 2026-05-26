@@ -22,6 +22,7 @@ Current concept-patch artifacts:
 - `R004_global_span_rewrite_to_submodule_equality.md`: lightweight rewrite note for the D008 -> D009 global-span step.
 - `D009_D010_scoping_note.md`: scoping note for the ambient-to-restricted generalized-eigenspace boundary.
 - `D009_D010_source_check_record.md`: source-check record recommending C005 as a candidate ConceptBridge for the ambient-to-restricted boundary.
+- `C005_review_checklist.md`: review checklist before adding the ambient-to-restricted C005 candidate to JSON.
 - `review_checklist_index.md`: navigation index and recommended order for C001-C003 review.
 - `concept_bridge_review_summary.md`: status, risk, and next-review summary for C001-C003.
 - `concept_patch_schema_audit_extension.md`: proposed audit metadata schema for parent bridges and proof-facing subbridges.
