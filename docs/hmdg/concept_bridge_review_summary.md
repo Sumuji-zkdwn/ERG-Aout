@@ -4,11 +4,11 @@ status: candidate review summary / C001-C003, R004, and C005 recorded
 scope: C001-C003, R004 documentation note, C005 candidate
 target theorem path: `Module.End.iSup_genEigenspace_restrict_eq_top`
 related issue: `#68`
-related PRs: `#72`, `#73`, `#74`, `#75`, `#76`, `#78`, `#79`, `#80`, `#81`, `#82`, `#83`, `#84`, `#85`, `#86`, `#87`, `#88`, `#89`, `#90`, `#91`, `#92`, `#93`, `#94`
+related PRs: `#72`, `#73`, `#74`, `#75`, `#76`, `#78`, `#79`, `#80`, `#81`, `#82`, `#83`, `#84`, `#85`, `#86`, `#87`, `#88`, `#89`, `#90`, `#91`, `#92`, `#93`, `#94`, `#95`, `#96`
 
 ## Purpose
 
-This document summarizes the current HMDG ConceptBridge expansion set produced after the real-graph pipeline, the three initial boundary expansion PRs, the C003 proof-facing subbridge pass, the R004 rewrite-note decision, and the C005 source-checked candidate addition.
+This document summarizes the current HMDG ConceptBridge expansion set produced after the real-graph pipeline, the three initial boundary expansion PRs, the C003 proof-facing subbridge pass, the R004 rewrite-note decision, the C005 source-checked candidate addition, and the post-C005 documentation consistency pass.
 
 It does not promote any candidate bridge to an accepted ERG kernel definition.
 
@@ -65,6 +65,7 @@ R004 representation: documentation-only RewriteNote
 D009-D010 source-check outcome: keep_as_C005_candidate_after_review
 C005 checklist outcome: ready_for_candidate_json_pr_after_checklist
 C005 JSON status: candidate / source_checked
+Post-C005 docs consistency pass: in_progress / README and navigation wording refreshed
 ```
 
 Interpretation:
@@ -75,6 +76,7 @@ C002 has been source-checked and remains a one-node candidate ConceptBridge, but
 C003 has been proof-body checked and remains a high-level parent ConceptBridge with C003a-C003e candidate ProofBridge subnodes.
 R004 records the D008 -> D009 global-span rewrite, but is not represented as a JSON node.
 C005 has been source-checked and added to JSON as a candidate ConceptBridge for the ambient-to-restricted generalized-eigenspace transfer.
+Post-C005 navigation wording has been refreshed where it was still pointing only to C001-C003.
 No C001-C003, C003a-C003e, R004, or C005 item has been promoted to accepted status.
 ```
 
@@ -139,7 +141,7 @@ C005_review_checklist.md
   Review checklist before adding C005 to JSON.
 
 review_checklist_index.md
-  Navigation index and current review outcome index for early bridge review.
+  Navigation index and current review outcome index for HMDG review work.
 
 concept_patch_schema_audit_extension.md
   Audit metadata schema plan for parent bridges and proof-facing subbridges.
@@ -455,12 +457,13 @@ C001-C003 reviewed and retained as candidates.
 R004 recorded as a rewrite note, not a ConceptBridge.
 C005 source-checked and added as a candidate ConceptBridge.
 The rendered graph matches the current JSON counts: node_count 19, edge_count 32.
+Post-C005 navigation wording has been refreshed where it was stale.
 ```
 
 Recommended next step:
 
 ```text
-Run a consistency pass over docs/hmdg after C005, especially review_checklist_index.md and any wording that still says C001-C003 only.
+Stop expanding this target path unless a specific stale doc, validation failure, or new target theorem is identified.
 ```
 
 The current priority remains trust calibration, not uncontrolled graph expansion.
