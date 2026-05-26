@@ -1,0 +1,91 @@
+# HMDG concept patch graph
+
+target: `Module.End.iSup_genEigenspace_restrict_eq_top`
+path_length: 10
+node_count: 13
+edge_count: 18
+
+## Mermaid graph
+
+```mermaid
+flowchart LR
+    D001["D001\nLinearMap.ker\nDeclaration / kernel"]
+    D002["D002\nLinearMap.ker_codRestrict\nDeclaration / kernel"]
+    D003["D003\nLinearMap.ker_restrict\nDeclaration / kernel"]
+    D004["D004\nLinearMap.injective_restrict_iff_disjoint\nDeclaration / criterion"]
+    D005["D005\nLinearMap.comap_eq_sup_ker_of_disjoint\nDeclaration / constraint"]
+    D006["D006\nLinearMap.ker_comp_eq_of_commute_of_disjoint_ker\nDeclaration / constraint"]
+    D007["D007\nLinearMap.ker_noncommProd_eq_of_supIndep_ker\nDeclaration / constraint"]
+    D008["D008\nSubmodule.inf_iSup_genEigenspace\nDeclaration / eigenspace"]
+    D009["D009\nSubmodule.eq_iSup_inf_genEigenspace\nDeclaration / eigenspace"]
+    D010["D010\nModule.End.iSup_genEigenspace_restrict_eq_top\nDeclaration / eigenspace"]
+    C001_kernel_to_criterion{"C001_kernel_to_criterion\nkernel_to_criterion\nConceptBridge / kernel->criterion"}
+    C002_criterion_to_constraint{"C002_criterion_to_constraint\ncriterion_to_constraint\nConceptBridge / criterion->constraint"}
+    C003_constraint_to_eigenspace{"C003_constraint_to_eigenspace\nconstraint_to_eigenspace\nConceptBridge / constraint->eigenspace"}
+    D001 -- main_path_edge --> D002
+    D002 -- main_path_edge --> D003
+    D003 -- main_path_edge --> D004
+    D004 -- main_path_edge --> D005
+    D005 -- main_path_edge --> D006
+    D006 -- main_path_edge --> D007
+    D007 -- main_path_edge --> D008
+    D008 -- main_path_edge --> D009
+    D009 -- main_path_edge --> D010
+    D003 -- needs_bridge --> C001_kernel_to_criterion
+    C001_kernel_to_criterion -- bridges_to --> D004
+    D003 -. original_boundary_edge .-> D004
+    D004 -- needs_bridge --> C002_criterion_to_constraint
+    C002_criterion_to_constraint -- bridges_to --> D005
+    D004 -. original_boundary_edge .-> D005
+    D007 -- needs_bridge --> C003_constraint_to_eigenspace
+    C003_constraint_to_eigenspace -- bridges_to --> D008
+    D007 -. original_boundary_edge .-> D008
+```
+
+## Typed adjacency list
+
+- `D001:LinearMap.ker` -[main_path_edge]-> `D002:LinearMap.ker_codRestrict`
+- `D002:LinearMap.ker_codRestrict` -[main_path_edge]-> `D003:LinearMap.ker_restrict`
+- `D003:LinearMap.ker_restrict` -[main_path_edge]-> `D004:LinearMap.injective_restrict_iff_disjoint`
+- `D004:LinearMap.injective_restrict_iff_disjoint` -[main_path_edge]-> `D005:LinearMap.comap_eq_sup_ker_of_disjoint`
+- `D005:LinearMap.comap_eq_sup_ker_of_disjoint` -[main_path_edge]-> `D006:LinearMap.ker_comp_eq_of_commute_of_disjoint_ker`
+- `D006:LinearMap.ker_comp_eq_of_commute_of_disjoint_ker` -[main_path_edge]-> `D007:LinearMap.ker_noncommProd_eq_of_supIndep_ker`
+- `D007:LinearMap.ker_noncommProd_eq_of_supIndep_ker` -[main_path_edge]-> `D008:Submodule.inf_iSup_genEigenspace`
+- `D008:Submodule.inf_iSup_genEigenspace` -[main_path_edge]-> `D009:Submodule.eq_iSup_inf_genEigenspace`
+- `D009:Submodule.eq_iSup_inf_genEigenspace` -[main_path_edge]-> `D010:Module.End.iSup_genEigenspace_restrict_eq_top`
+- `D003:LinearMap.ker_restrict` -[needs_bridge]-> `C001_kernel_to_criterion:kernel_to_criterion`
+- `C001_kernel_to_criterion:kernel_to_criterion` -[bridges_to]-> `D004:LinearMap.injective_restrict_iff_disjoint`
+- `D003:LinearMap.ker_restrict` -[original_boundary_edge]-> `D004:LinearMap.injective_restrict_iff_disjoint`
+- `D004:LinearMap.injective_restrict_iff_disjoint` -[needs_bridge]-> `C002_criterion_to_constraint:criterion_to_constraint`
+- `C002_criterion_to_constraint:criterion_to_constraint` -[bridges_to]-> `D005:LinearMap.comap_eq_sup_ker_of_disjoint`
+- `D004:LinearMap.injective_restrict_iff_disjoint` -[original_boundary_edge]-> `D005:LinearMap.comap_eq_sup_ker_of_disjoint`
+- `D007:LinearMap.ker_noncommProd_eq_of_supIndep_ker` -[needs_bridge]-> `C003_constraint_to_eigenspace:constraint_to_eigenspace`
+- `C003_constraint_to_eigenspace:constraint_to_eigenspace` -[bridges_to]-> `D008:Submodule.inf_iSup_genEigenspace`
+- `D007:LinearMap.ker_noncommProd_eq_of_supIndep_ker` -[original_boundary_edge]-> `D008:Submodule.inf_iSup_genEigenspace`
+
+## Concept bridge table
+
+| id | label | phase edge | role shift | score | status |
+|---|---|---|---|---:|---|
+| `C001_kernel_to_criterion` | `kernel_to_criterion` | kernel setup -> criterion bridge | kernel -> criterion | 7 | candidate |
+| `C002_criterion_to_constraint` | `criterion_to_constraint` | criterion bridge -> constraint bridge | criterion -> constraint | 7 | candidate |
+| `C003_constraint_to_eigenspace` | `constraint_to_eigenspace` | constraint bridge -> eigenspace conclusion | constraint -> eigenspace | 7 | candidate |
+
+## Declaration table
+
+| id | path index | role | label |
+|---|---:|---|---|
+| `D001` | 1 | kernel | `LinearMap.ker` |
+| `D002` | 2 | kernel | `LinearMap.ker_codRestrict` |
+| `D003` | 3 | kernel | `LinearMap.ker_restrict` |
+| `D004` | 4 | criterion | `LinearMap.injective_restrict_iff_disjoint` |
+| `D005` | 5 | constraint | `LinearMap.comap_eq_sup_ker_of_disjoint` |
+| `D006` | 6 | constraint | `LinearMap.ker_comp_eq_of_commute_of_disjoint_ker` |
+| `D007` | 7 | constraint | `LinearMap.ker_noncommProd_eq_of_supIndep_ker` |
+| `D008` | 8 | eigenspace | `Submodule.inf_iSup_genEigenspace` |
+| `D009` | 9 | eigenspace | `Submodule.eq_iSup_inf_genEigenspace` |
+| `D010` | 10 | eigenspace | `Module.End.iSup_genEigenspace_restrict_eq_top` |
+
+## Reading note
+
+Solid edges are proposed bridge expansions. Dotted edges preserve the original compressed boundary edge for auditability.
