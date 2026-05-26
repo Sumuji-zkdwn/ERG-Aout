@@ -1,14 +1,14 @@
 # HMDG concept bridge review summary
 
-status: candidate review summary / C003 proof-bridge materialized
+status: candidate review summary / first C001-C003 review pass recorded
 scope: C001-C003 only
 target theorem path: `Module.End.iSup_genEigenspace_restrict_eq_top`
 related issue: `#68`
-related PRs: `#72`, `#73`, `#74`, `#75`, `#76`
+related PRs: `#72`, `#73`, `#74`, `#75`, `#76`, `#78`, `#79`, `#80`, `#81`, `#82`, `#83`, `#84`, `#85`, `#86`
 
 ## Purpose
 
-This document summarizes the current HMDG ConceptBridge expansion set produced after the real-graph pipeline, the three boundary expansion PRs, and the C003 proof-facing subbridge pass.
+This document summarizes the current HMDG ConceptBridge expansion set produced after the real-graph pipeline, the three boundary expansion PRs, the C003 proof-facing subbridge pass, and the first C001-C003 review pass.
 
 It does not promote any candidate bridge to an accepted ERG kernel definition.
 
@@ -16,10 +16,10 @@ It is meant to answer:
 
 ```text
 What has been expanded?
-Which bridges are relatively safe?
-Which bridges are high-risk?
+Which review outcomes have been recorded?
+Which bridges remain candidates?
 What was decided about C003?
-What should be reviewed next?
+What is the next safe decision point?
 ```
 
 ## Current expanded bridge chain
@@ -36,7 +36,7 @@ D003 LinearMap.ker_restrict
 → D008 Submodule.inf_iSup_genEigenspace
 ```
 
-C003 is now also represented as a parent bridge with candidate proof-facing subbridges:
+C003 is also represented as a parent bridge with candidate proof-facing subbridges:
 
 ```text
 C003 constraint_to_eigenspace
@@ -45,6 +45,23 @@ C003 constraint_to_eigenspace
   ├─ C003c kernel_independence_to_injectivity
   ├─ C003d invariant_submodule_surjectivity_transfer
   └─ C003e componentwise_reassembly
+```
+
+## Current review outcomes
+
+```text
+C001 review outcome: keep_candidate_one_node
+C002 review outcome: keep_candidate_but_reword
+C003 ProofBridge review outcome: keep_candidate_parent_and_subbridges
+```
+
+Interpretation:
+
+```text
+C001 has been source-checked and remains a one-node candidate ConceptBridge.
+C002 has been source-checked and remains a one-node candidate ConceptBridge, but its explanation was reworded to preserve target theorem assumptions.
+C003 has been proof-body checked and remains a high-level parent ConceptBridge with C003a-C003e candidate ProofBridge subnodes.
+No C001-C003 node has been promoted to accepted status.
 ```
 
 ## Artifact index
@@ -62,14 +79,35 @@ boundary_expansion.md
 C001_kernel_to_criterion_expansion.md
   Candidate expansion of Boundary 1.
 
+C001_review_checklist.md
+  Review checklist for C001 before any status change.
+
+C001_review_record.md
+  First source-check review record for C001.
+
 C002_criterion_to_constraint_expansion.md
-  Candidate expansion of Boundary 2.
+  Candidate expansion of Boundary 2, reworded after source-check review.
+
+C002_review_checklist.md
+  Review checklist for C002 before any status change.
+
+C002_review_record.md
+  First source-check review record for C002.
 
 C003_constraint_to_eigenspace_expansion.md
-  Candidate high-risk expansion of Boundary 3, updated after proof-body audit.
+  Candidate high-risk expansion of Boundary 3.
 
 C003_split_plan.md
   Proposed proof-facing split for over-compressed C003.
+
+C003_proofbridge_review_checklist.md
+  Review checklist for the C003 parent bridge and C003a-C003e ProofBridge nodes.
+
+C003_proofbridge_review_record.md
+  First proof-body review record for the C003 parent bridge and C003a-C003e ProofBridge nodes.
+
+review_checklist_index.md
+  Navigation index and current review outcome index for C001-C003.
 
 concept_patch_schema_audit_extension.md
   Audit metadata schema plan for parent bridges and proof-facing subbridges.
@@ -94,11 +132,11 @@ python prototypes/cognitive_math_graph_v0/render_concept_patch_graph.py \
 
 ## Bridge summary table
 
-| Bridge | Source | Target | Role shift | Current status | Risk |
-|---|---|---|---|---|---|
-| C001 `kernel_to_criterion` | `LinearMap.ker_restrict` | `LinearMap.injective_restrict_iff_disjoint` | kernel -> criterion | candidate expansion | lower |
-| C002 `criterion_to_constraint` | `LinearMap.injective_restrict_iff_disjoint` | `LinearMap.comap_eq_sup_ker_of_disjoint` | criterion -> constraint | candidate expansion | medium |
-| C003 `constraint_to_eigenspace` | `LinearMap.ker_noncommProd_eq_of_supIndep_ker` | `Submodule.inf_iSup_genEigenspace` | constraint -> eigenspace | candidate parent bridge / proof-used / over-compressed / split into candidate ProofBridge nodes | high |
+| Bridge | Source | Target | Role shift | Review outcome | Current status | Risk |
+|---|---|---|---|---|---|---|
+| C001 `kernel_to_criterion` | `LinearMap.ker_restrict` | `LinearMap.injective_restrict_iff_disjoint` | kernel -> criterion | `keep_candidate_one_node` | candidate ConceptBridge / source-checked | lower |
+| C002 `criterion_to_constraint` | `LinearMap.injective_restrict_iff_disjoint` | `LinearMap.comap_eq_sup_ker_of_disjoint` | criterion -> constraint | `keep_candidate_but_reword` | candidate ConceptBridge / source-checked / expansion reworded | medium |
+| C003 `constraint_to_eigenspace` | `LinearMap.ker_noncommProd_eq_of_supIndep_ker` | `Submodule.inf_iSup_genEigenspace` | constraint -> eigenspace | `keep_candidate_parent_and_subbridges` | candidate parent ConceptBridge / proof-body checked / has candidate ProofBridge subnodes | high |
 
 ## C001 review summary
 
@@ -113,29 +151,28 @@ kernel of restricted map
 → disjointness of p and ker f
 ```
 
+Observed source-check result:
+
+```text
+LinearMap.ker_restrict:
+(f.restrict hf).ker = Submodule.comap p.subtype f.ker
+
+LinearMap.injective_restrict_iff_disjoint:
+Function.Injective ⇑(f.restrict hf) ↔ Disjoint p f.ker
+```
+
+Review outcome:
+
+```text
+keep_candidate_one_node
+```
+
 Current assessment:
 
 ```text
 Relatively safe as a candidate HMDG bridge.
-```
-
-Reason:
-
-The source and target declarations are close in mathematical meaning. The human-facing bridge is a standard linear-algebra move: injectivity is detected by trivial kernel, and trivial kernel after restriction is expressed as disjointness from the original kernel.
-
-Main open question:
-
-```text
-Should C001 remain one node, or split into:
-  kernel_to_zero_kernel
-  zero_kernel_to_disjointness
-```
-
-Default recommendation:
-
-```text
-Keep C001 as one HMDG phase-level node for now.
-Review it for mathematical faithfulness before any accepted-status promotion.
+Keep as one HMDG phase-level candidate for now.
+Do not mark accepted without a separate accepted-status policy.
 ```
 
 ## C002 review summary
@@ -146,44 +183,50 @@ Core transition:
 
 ```text
 injectivity/disjointness criterion on p
-→ disjoint side condition usable in a theorem
-→ analyze the preimage/comap of p under f
-→ express the preimage as p plus the kernel of f
+→ disjoint side condition usable as a theorem hypothesis
+→ finite-dimensional submodule theorem about the preimage/comap of p under f
+→ express that preimage as p plus the kernel of f
+```
+
+Observed source-check result:
+
+```text
+LinearMap.injective_restrict_iff_disjoint:
+Function.Injective ⇑(f.restrict hf) ↔ Disjoint p f.ker
+
+LinearMap.comap_eq_sup_ker_of_disjoint:
+Submodule.comap f p = p ⊔ f.ker
+```
+
+Important target assumptions observed:
+
+```text
+K is a DivisionRing
+[FiniteDimensional K ↥p]
+f maps p into p
+Disjoint p f.ker
+```
+
+Review outcome:
+
+```text
+keep_candidate_but_reword
 ```
 
 Current assessment:
 
 ```text
 Moderate-risk candidate HMDG bridge.
+Keep as one HMDG phase-level candidate for now.
+Preserve the target theorem assumptions explicitly.
+Do not imply that disjointness alone gives the equality.
 ```
 
-Reason:
-
-The source is a criterion, while the target is a structural lattice equality. The bridge is plausible because the disjointness condition from C001 becomes a side condition for controlling the preimage of a submodule under a linear map.
-
-Main open question:
-
-```text
-Should C002 remain one node, or split into:
-  criterion_to_disjoint_side_condition
-  disjoint_side_condition_to_comap_sup_ker
-```
-
-Additional review issue:
-
-```text
-The role of finite-dimensionality must be checked against the actual theorem and proof route.
-```
-
-Default recommendation:
-
-```text
-Keep C002 as one HMDG phase-level node for readability, but mark the finite-dimensionality explanation as review-required.
-```
+The C002 expansion has been reworded after review to avoid overclaiming a proof mechanism.
 
 ## C003 review summary
 
-C003 explains how kernel/product/sup-independence constraints begin to connect to generalized eigenspace decomposition.
+C003 explains how kernel/product/sup-independence constraints connect to generalized eigenspace decomposition in the proof of `Submodule.inf_iSup_genEigenspace`.
 
 Core transition:
 
@@ -200,25 +243,21 @@ Current assessment:
 High-risk candidate HMDG parent bridge.
 Proof-level dependency confirmed.
 Over-compression represented explicitly.
-Candidate ProofBridge subnodes added, but not accepted.
+Candidate ProofBridge subnodes added and first proof-body review recorded.
+Still not accepted as a stable ERG kernel definition.
 ```
 
-Reason:
-
-The source and target declarations are much farther apart than in C001 or C002. The source theorem is about kernels of finite products of commuting endomorphisms under `SupIndep` assumptions. The target theorem is about distributing an invariant submodule intersection across an indexed supremum of generalized eigenspaces.
-
-Issue `#68` checked the current proof body of `Submodule.inf_iSup_genEigenspace`. The proof does directly use `LinearMap.ker_noncommProd_eq_of_supIndep_ker` while proving injectivity of an auxiliary product map on a selected generalized-eigenspace component.
-
-Therefore the concern is no longer mainly:
+The proof body of `Submodule.inf_iSup_genEigenspace` was checked against:
 
 ```text
-Maybe C003 is only a formal dependency artifact.
+Mathlib/LinearAlgebra/Eigenspace/Triangularizable.lean
+mathlib4 ref: 75adafcaf8c4a0fcde8e1508f503bed2263ab055
 ```
 
-The refined concern is:
+The source theorem occurrence is confirmed inside the C003c region:
 
 ```text
-C003 is real at proof level, but it compresses too many human-facing moves into one bridge.
+LinearMap.ker_noncommProd_eq_of_supIndep_ker
 ```
 
 The current representation keeps two levels separate:
@@ -238,26 +277,21 @@ C003d invariant_submodule_surjectivity_transfer
 C003e componentwise_reassembly
 ```
 
-Important limitation:
+Review outcome:
 
 ```text
-The split is represented in JSON and rendered Markdown.
-The split has not been mathematically accepted as final.
-The summaries and proof markers still need review against the Lean proof body.
+keep_candidate_parent_and_subbridges
 ```
 
-Default recommendation:
+Minor wording caution:
 
 ```text
-Keep C003 as a high-level parent bridge.
-Keep C003a-C003e as candidate proof-facing subbridges.
-Do not treat C003 as an atomic proof-facing bridge.
-Do not add C004 until C003a-C003e have at least one pass of proof-body review.
+C003d should describe finite-dimensional transfer as mediated through LinearMap.injOn_iff_surjOn in the existing theorem context, rather than as a separate explicit dimension calculation at that line.
 ```
 
 ## Current machine-readable state
 
-The machine-readable patch now records:
+The machine-readable patch records:
 
 ```text
 C003 audit_status: proof_used_but_over_compressed
@@ -268,7 +302,7 @@ C003a-C003e layer: proof_facing_explanation
 C003a-C003e status: candidate
 ```
 
-The rendered graph now records:
+The rendered graph records:
 
 ```text
 node_count: 18
@@ -282,38 +316,48 @@ ConceptBridge audit status / subbridges columns: present
 Confirmed project-level status:
 
 ```text
-The repository now contains a real-graph HMDG pipeline.
-The repository now contains candidate ConceptBridge artifacts for C001-C003.
-The repository now contains human-readable expansion notes for C001-C003.
-The repository now records that C003 is proof-used but over-compressed.
-The repository now represents C003a-C003e as candidate proof-facing ProofBridge nodes.
-The repository now renders ConceptBridge and ProofBridge nodes separately.
-The repository now documents how to refresh the rendered graph.
+The repository contains a real-graph HMDG pipeline.
+The repository contains candidate ConceptBridge artifacts for C001-C003.
+The repository contains human-readable expansion notes for C001-C003.
+The repository contains review checklists and review records for C001-C003.
+The repository records that C003 is proof-used but over-compressed.
+The repository represents C003a-C003e as candidate proof-facing ProofBridge nodes.
+The repository renders ConceptBridge and ProofBridge nodes separately.
+The repository documents how to refresh the rendered graph.
 No candidate bridge has been accepted as a stable ERG kernel definition.
 No final theorem explanation has been claimed.
 ```
 
-## Recommended next review order
+## Next decision point
+
+The first-pass review gate is now satisfied:
 
 ```text
-1. Review C001 for mathematical faithfulness.
-2. Review C002 for finite-dimensionality and theorem-hypothesis accuracy.
-3. Review C003a-C003e against the Lean proof body.
-4. Only after that, decide whether to generate C004 or expand the remaining declaration path.
+C001 review outcome: recorded
+C002 review outcome: recorded
+C003 ProofBridge review outcome: recorded
 ```
 
-## Stop condition
-
-Do not add new ConceptBridge nodes until C003a-C003e have at least one proof-body review pass.
-
-Reason:
+Current C004 status:
 
 ```text
-The graph has enough structure to inspect.
-Adding more nodes now would increase graph size before increasing trust.
+review_gate_satisfied_but_not_automatic
 ```
 
-The current priority is trust calibration, not graph expansion.
+Meaning:
+
+```text
+C004 is no longer blocked by missing C001-C003 review records.
+However, C004 should still be introduced only by an explicit next-step PR that states its scope, source/target boundary, risk level, and whether it is a ConceptBridge or some other node type.
+```
+
+Recommended next step:
+
+```text
+Create a C004 scoping note before adding any new ConceptBridge node.
+```
+
+The current priority remains trust calibration, not uncontrolled graph expansion.
 
 ## Non-goals
 
@@ -325,4 +369,4 @@ This document does not assert that the generated dependency path is the unique h
 
 This document does not resolve whether HMDG should operate at proof-operation granularity or cognitive-phase granularity.
 
-This document does not accept C003a-C003e as final proof decomposition nodes.
+This document does not accept C001-C003 or C003a-C003e as final ERG kernel definitions.
