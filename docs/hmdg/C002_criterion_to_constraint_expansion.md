@@ -1,14 +1,23 @@
 # C002 criterion_to_constraint expansion
 
-status: candidate expansion
+status: candidate expansion / source-reviewed rewording
 source boundary: `LinearMap.injective_restrict_iff_disjoint` -> `LinearMap.comap_eq_sup_ker_of_disjoint`
 target theorem path: `Module.End.iSup_genEigenspace_restrict_eq_top`
+related review: `docs/hmdg/C002_review_record.md`
 
 ## Purpose
 
 This note expands only Boundary 2 from `docs/hmdg/boundary_expansion.md`.
 
 It is not an accepted mathematical proof of the final target theorem. It is a candidate cognitive bridge explaining how an injectivity/disjointness criterion becomes a structural equality involving `comap`, `sup`, and `ker`.
+
+This version incorporates the first source-check review for C002. The review outcome was:
+
+```text
+keep_candidate_but_reword
+```
+
+The main caution is that the target theorem uses division-ring and finite-dimensional-submodule assumptions. The explanation should not imply that disjointness alone gives the equality.
 
 ## Source declaration in plain language
 
@@ -24,7 +33,7 @@ This is a criterion. It tells when restriction to `p` loses no information.
 
 ## Target declaration in plain language
 
-`LinearMap.comap_eq_sup_ker_of_disjoint` says that, over a division ring and for a finite-dimensional submodule `p`, if `f` maps `p` into `p` and `p` is disjoint from `f.ker`, then:
+`LinearMap.comap_eq_sup_ker_of_disjoint` says that, over a division ring and assuming the submodule `p` is finite-dimensional as a module, if `f` maps `p` into `p` and `p` is disjoint from `f.ker`, then:
 
 ```text
 Submodule.comap f p = p ⊔ f.ker
@@ -36,7 +45,13 @@ Plainly:
 The full preimage of p under f is exactly the span/supremum of p and the kernel of f.
 ```
 
-So every vector whose image lands in `p` can be accounted for by a part already in `p` plus a part killed by `f`.
+So every vector whose image lands in `p` can be accounted for by a part already in `p` plus a part killed by `f`, under the hypotheses of the theorem.
+
+Important source-check note:
+
+```text
+The finite-dimensionality assumption is on the submodule p, not necessarily on the whole ambient module.
+```
 
 ## Boundary-crossing operation
 
@@ -44,9 +59,9 @@ The boundary-crossing operation is:
 
 ```text
 injectivity/disjointness criterion on p
-→ disjoint side condition usable in a theorem
-→ analyze the preimage/comap of p under f
-→ express the preimage as p plus the kernel of f
+→ disjoint side condition usable as a theorem hypothesis
+→ finite-dimensional submodule theorem about the preimage/comap of p under f
+→ express that preimage as p plus the kernel of f
 ```
 
 C001 produced a criterion:
@@ -55,13 +70,21 @@ C001 produced a criterion:
 f.restrict hf injective ↔ Disjoint p f.ker
 ```
 
-C002 uses the disjointness side as a structural hypothesis:
+C002 reuses the disjointness side condition as a hypothesis:
 
 ```text
 Disjoint p f.ker
 ```
 
-and turns it into a lattice equality:
+in a theorem with additional assumptions, including:
+
+```text
+DivisionRing scalar setting
+FiniteDimensional K ↥p
+f maps p into p
+```
+
+The conclusion is the lattice equality:
 
 ```text
 Submodule.comap f p = p ⊔ f.ker
@@ -79,7 +102,7 @@ In C002, injectivity itself is no longer the final output. It is used through it
 
 `restrict` marks that the condition is local to the submodule `p`.
 
-The later equality is global in the ambient module, but it is controlled by how `f` behaves on `p`.
+The later equality is global in the ambient module, but it is controlled by a theorem whose hypotheses include how `f` behaves on `p`.
 
 ### iff
 
@@ -91,7 +114,7 @@ C002 uses the disjointness side of that equivalence as a hypothesis for a new st
 
 `disjoint` says that `p` and `f.ker` overlap only trivially.
 
-This prevents ambiguity when representing a preimage element as a contribution from `p` plus a contribution from the kernel.
+In the target theorem, this is one required hypothesis. It should not be read as the only reason the equality holds.
 
 ### comap
 
@@ -103,7 +126,7 @@ It consists of all vectors `x` such that `f x ∈ p`.
 
 `eq` indicates that the theorem is not merely an inclusion.
 
-It says the whole preimage `comap f p` is exactly `p ⊔ f.ker`.
+It says the whole preimage `comap f p` is exactly `p ⊔ f.ker`, under the theorem's assumptions.
 
 ### sup
 
@@ -124,14 +147,13 @@ B001. Start with a submodule p preserved by f.
 B002. The restricted map f.restrict hf describes the action of f inside p.
 B003. C001 identifies injectivity of f.restrict hf with Disjoint p f.ker.
 B004. Treat Disjoint p f.ker as a structural side condition, not merely as a yes/no criterion.
-B005. Consider Submodule.comap f p, the set of all x whose image f x lies in p.
-B006. Every element of p lies in comap f p because f maps p into p.
-B007. Every element of f.ker lies in comap f p because f sends it to zero, and zero lies in p.
-B008. Therefore p ⊔ f.ker is included in comap f p.
-B009. The hard direction is that every x with f x ∈ p can be expressed using p plus f.ker.
-B010. Disjointness ensures the kernel directions do not overlap nontrivially with p.
-B011. Finite-dimensionality of p supplies the dimension/rank control needed for equality rather than only inclusion.
-B012. Thus the criterion-like disjointness condition becomes the lattice equality Submodule.comap f p = p ⊔ f.ker.
+B005. Keep the target theorem's extra assumptions visible: division-ring scalar setting and finite-dimensionality of p.
+B006. Consider Submodule.comap f p, the set of all x whose image f x lies in p.
+B007. Every element of p lies in comap f p because f maps p into p.
+B008. Every element of f.ker lies in comap f p because f sends it to zero, and zero lies in p.
+B009. Therefore p ⊔ f.ker is included in comap f p.
+B010. The reverse inclusion is supplied by LinearMap.comap_eq_sup_ker_of_disjoint under its stated hypotheses.
+B011. Thus the criterion-like disjointness condition becomes a hypothesis in the theorem identifying Submodule.comap f p with p ⊔ f.ker.
 ```
 
 ## HMDG edge interpretation
@@ -143,11 +165,11 @@ D004: LinearMap.injective_restrict_iff_disjoint
 
 C002: criterion_to_constraint
   role: bridge
-  cognitive content: reuse the criterion as a side condition controlling a submodule-preimage equality.
+  cognitive content: reuse the criterion's disjointness side condition as one hypothesis in a finite-dimensional submodule preimage theorem.
 
 D005: LinearMap.comap_eq_sup_ker_of_disjoint
   role: constraint
-  cognitive content: express the preimage of p under f as p plus the kernel of f, under the disjointness condition.
+  cognitive content: express the preimage of p under f as p plus the kernel of f, under the theorem's division-ring, finite-dimensionality, invariance, and disjointness hypotheses.
 ```
 
 ## Why the intermediate concept node is justified
@@ -163,12 +185,12 @@ When is the restriction injective?
 The target theorem answers:
 
 ```text
-What is the full preimage of p under f?
+What is the full preimage of p under f, under the target theorem's hypotheses?
 ```
 
-The connection is that the injectivity criterion provides the disjointness condition needed to make the preimage decompose cleanly as `p ⊔ f.ker`.
+The connection is that the injectivity criterion exposes the disjointness condition that appears as a hypothesis in the preimage decomposition theorem.
 
-Thus `criterion_to_constraint` is a justified ConceptBridge candidate.
+Thus `criterion_to_constraint` remains a justified ConceptBridge candidate, but it should be read with the target assumptions visible.
 
 ## Possible split
 
@@ -183,19 +205,31 @@ criterion_to_disjoint_side_condition
 
 However, keeping C002 as one node may be better for HMDG readability if the aim is to expose phase transitions rather than every proof operation.
 
+Current source-check review outcome:
+
+```text
+keep_candidate_but_reword
+```
+
+This means C002 stays one candidate node for now, but its explanation should preserve the target theorem's assumptions explicitly.
+
 ## Review status
 
 Accepted as HMDG candidate expansion: no.
 
-Ready for mathematical review: yes.
+Source-check reviewed: yes.
 
-Required review questions:
+Review outcome:
 
-1. Is the description of `Submodule.comap f p` as preimage faithful enough?
-2. Is the role of finite-dimensionality stated too strongly or too vaguely?
-3. Should C002 explicitly mention the dimension argument needed for equality?
-4. Should the bridge be split into two nodes, or kept as one phase-level bridge?
-5. Does the target theorem depend on assumptions not represented in the current HMDG node labels?
+```text
+keep_candidate_but_reword
+```
+
+Remaining review questions:
+
+1. Should the bridge later be split into two nodes, or kept as one phase-level bridge?
+2. Does the proof of `LinearMap.comap_eq_sup_ker_of_disjoint` use a mechanism that should be exposed if HMDG moves to proof-operation granularity?
+3. Does the target theorem depend on assumptions that should be promoted into node labels or audit metadata?
 
 ## Non-goals
 
