@@ -1,8 +1,9 @@
 # HMDG concept bridge review summary
 
-status: candidate review summary
+status: candidate review summary / C003 audit-updated
 scope: C001-C003 only
 target theorem path: `Module.End.iSup_genEigenspace_restrict_eq_top`
+related issue: `#68`
 
 ## Purpose
 
@@ -52,7 +53,7 @@ C002_criterion_to_constraint_expansion.md
   Candidate expansion of Boundary 2.
 
 C003_constraint_to_eigenspace_expansion.md
-  Candidate high-risk expansion of Boundary 3.
+  Candidate high-risk expansion of Boundary 3, updated after proof-body audit.
 
 concept_bridge_review_summary.md
   This overview document.
@@ -70,7 +71,7 @@ data/hmdg/concept_patch.json
 |---|---|---|---|---|---|
 | C001 `kernel_to_criterion` | `LinearMap.ker_restrict` | `LinearMap.injective_restrict_iff_disjoint` | kernel -> criterion | candidate expansion | lower |
 | C002 `criterion_to_constraint` | `LinearMap.injective_restrict_iff_disjoint` | `LinearMap.comap_eq_sup_ker_of_disjoint` | criterion -> constraint | candidate expansion | medium |
-| C003 `constraint_to_eigenspace` | `LinearMap.ker_noncommProd_eq_of_supIndep_ker` | `Submodule.inf_iSup_genEigenspace` | constraint -> eigenspace | candidate high-risk expansion | high |
+| C003 `constraint_to_eigenspace` | `LinearMap.ker_noncommProd_eq_of_supIndep_ker` | `Submodule.inf_iSup_genEigenspace` | constraint -> eigenspace | candidate expansion / proof-used / over-compressed | high |
 
 ## C001 review summary
 
@@ -169,32 +170,62 @@ Current assessment:
 
 ```text
 High-risk candidate HMDG bridge.
+Proof-level dependency confirmed.
+Over-compression still unresolved.
 ```
 
 Reason:
 
 The source and target declarations are much farther apart than in C001 or C002. The source theorem is about kernels of finite products of commuting endomorphisms under `SupIndep` assumptions. The target theorem is about distributing an invariant submodule intersection across an indexed supremum of generalized eigenspaces.
 
-The cognitive bridge is plausible only if the actual proof route uses kernel decompositions as a meaningful path toward generalized eigenspace decompositions.
+Issue `#68` checked the current proof body of `Submodule.inf_iSup_genEigenspace`. The proof does directly use `LinearMap.ker_noncommProd_eq_of_supIndep_ker` while proving injectivity of an auxiliary product map on a selected generalized-eigenspace component.
+
+Therefore the concern is no longer mainly:
+
+```text
+Maybe C003 is only a formal dependency artifact.
+```
+
+The refined concern is:
+
+```text
+C003 is real at proof level, but it compresses too many human-facing moves into one bridge.
+```
+
+The proof-local route appears to include:
+
+```text
+1. iSup membership is decomposed into finitely supported generalized-eigenspace components.
+2. One component μ is selected.
+3. An auxiliary noncommutative product g is built over the other support components.
+4. Product-kernel decomposition plus generalized-eigenspace independence controls ker g.
+5. This gives injectivity on the selected component.
+6. Invariance of p plus finite-dimensional transfer recovers a representative inside p.
+7. Components are reassembled into the target iSup.
+```
 
 Main open question:
 
 ```text
-Is this a genuine human-facing bridge, or mostly a formal dependency artifact?
+Should C003 be kept as a high-level phase node while also adding proof-facing subnodes?
 ```
 
-Possible split:
+Recommended split:
 
 ```text
-constraint_to_kernel_decomposition
-→ kernel_decomposition_to_spectral_components
-→ spectral_components_to_invariant_submodule_inf_iSup
+C003a iSup_component_extraction
+C003b product_kernel_isolation
+C003c kernel_independence_to_injectivity
+C003d invariant_submodule_surjectivity_transfer
+C003e componentwise_reassembly
 ```
 
 Default recommendation:
 
 ```text
-Do not promote C003 beyond candidate status without proof-source review.
+Keep C003 as a high-level candidate phase node for now.
+Do not treat it as an atomic proof-facing bridge.
+Do not add C004 until the C003 split decision is made.
 ```
 
 ## Overall status
@@ -205,6 +236,7 @@ Confirmed project-level status:
 The repository now contains a real-graph HMDG pipeline.
 The repository now contains candidate ConceptBridge artifacts for C001-C003.
 The repository now contains human-readable expansion notes for C001-C003.
+The repository now records that C003 is proof-used but over-compressed.
 No candidate bridge has been accepted as a stable ERG kernel definition.
 No final theorem explanation has been claimed.
 ```
@@ -214,14 +246,14 @@ No final theorem explanation has been claimed.
 ```text
 1. Review C001 for mathematical faithfulness.
 2. Review C002 for finite-dimensionality and theorem-hypothesis accuracy.
-3. Review C003 against the actual mathlib proof route.
-4. Decide whether C003 must be split.
+3. Decide whether C003 should be split into C003a-C003e.
+4. If split is accepted, update the machine-readable concept patch with audit metadata.
 5. Only after that, consider generating C004 or expanding the remaining declaration path.
 ```
 
 ## Stop condition
 
-Do not add new ConceptBridge nodes until at least C003 has been reviewed.
+Do not add new ConceptBridge nodes until the C003 split decision has been made.
 
 Reason:
 
