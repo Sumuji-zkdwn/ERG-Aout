@@ -236,6 +236,13 @@ If optional dependencies are unavailable, the PR body should state that the visu
 
 For schema or validator changes, add focused positive and negative examples or state why no example change is required.
 
+The R003 runner treats graph JSON files named `invalid_*.json` as negative
+fixtures: the R001 validator must report `INVALID` with a diagnostic and exit
+with status 1. A valid result, a crash, or another exit status fails the check.
+Other graph examples must validate successfully. Run
+`python -m unittest discover -s tests -v` to exercise this convention, including
+the named invariant for each existing negative fixture.
+
 ## 12. Risk labels for PR summaries
 
 Every automation PR should include a compact risk summary:
