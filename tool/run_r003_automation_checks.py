@@ -26,13 +26,23 @@ class CheckResult:
     returncode: int
     stdout: str
     stderr: str
+    expected_invalid: bool = False
 
     @property
     def ok(self) -> bool:
+        if self.expected_invalid:
+            lines = self.stdout.splitlines()
+            return (
+                self.returncode == 1
+                and len(lines) >= 2
+                and lines[0] == "INVALID"
+                and any(line.startswith("- ") for line in lines[1:])
+                and not self.stderr
+            )
         return self.returncode == 0
 
 
-def run_command(name: str, command: Sequence[str]) -> CheckResult:
+def run_command(name: str, command: Sequence[str], *, expected_invalid: bool = False) -> CheckResult:
     completed = subprocess.run(
         list(command),
         cwd=ROOT,
@@ -46,6 +56,7 @@ def run_command(name: str, command: Sequence[str]) -> CheckResult:
         returncode=completed.returncode,
         stdout=completed.stdout.strip(),
         stderr=completed.stderr.strip(),
+        expected_invalid=expected_invalid,
     )
 
 
@@ -126,12 +137,23 @@ def risk_summary(files: Sequence[str]) -> str:
     return "\n".join(lines)
 
 
-def build_checks() -> List[tuple[str, List[str]]]:
+@dataclass
+class Check:
+    name: str
+    command: List[str]
+    expected_invalid: bool = False
+
+
+def build_checks() -> List[Check]:
     python = sys.executable
-    checks: List[tuple[str, List[str]]] = []
+    checks: List[Check] = []
 
     for graph in graph_jsons():
-        checks.append((f"validate {graph.relative_to(ROOT)}", [python, "tool/validate_r001_kernel.py", str(graph.relative_to(ROOT))]))
+        checks.append(Check(
+            f"validate {graph.relative_to(ROOT)}",
+            [python, "tool/validate_r001_kernel.py", str(graph.relative_to(ROOT))],
+            expected_invalid=graph.name.startswith("invalid_"),
+        ))
 
     r002_graphs = existing(
         [
@@ -142,13 +164,13 @@ def build_checks() -> List[tuple[str, List[str]]]:
         ]
     )
     for graph in r002_graphs:
-        checks.append((
+        checks.append(Check(
             f"mapping consistency {graph.relative_to(ROOT)}",
             [python, "tool/check_r002_mapping_consistency.py", str(graph.relative_to(ROOT))],
         ))
 
     for graph, sidecar in sidecar_pairs():
-        checks.append((
+        checks.append(Check(
             f"sidecar consistency {graph.relative_to(ROOT)}",
             [
                 python,
@@ -157,7 +179,7 @@ def build_checks() -> List[tuple[str, List[str]]]:
                 str(sidecar.relative_to(ROOT)),
             ],
         ))
-        checks.append((
+        checks.append(Check(
             f"candidate review table {graph.relative_to(ROOT)}",
             [
                 python,
@@ -172,7 +194,7 @@ def build_checks() -> List[tuple[str, List[str]]]:
     semantics_doc = ROOT / "docs/R001_SEMANTICS.md"
     coverage_tool = ROOT / "tool/check_r001_semantics_coverage.py"
     if semantics_graph.exists() and semantics_doc.exists() and coverage_tool.exists():
-        checks.append((
+        checks.append(Check(
             "semantics coverage",
             [python, "tool/check_r001_semantics_coverage.py", "examples/r001/sample_r001_development_graph.json", "docs/R001_SEMANTICS.md"],
         ))
@@ -196,10 +218,12 @@ def main() -> int:
         return 1
 
     failed: List[CheckResult] = []
-    for name, command in checks:
-        result = run_command(name, command)
+    for check in checks:
+        name, command = check.name, check.command
+        result = run_command(name, command, expected_invalid=check.expected_invalid)
         status = "PASS" if result.ok else "FAIL"
-        print(f"[{status}] {name}")
+        expectation = " (expected invalid)" if check.expected_invalid else ""
+        print(f"[{status}] {name}{expectation}")
         print("  $ " + " ".join(command))
         if result.stdout:
             for line in result.stdout.splitlines():

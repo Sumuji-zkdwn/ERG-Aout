@@ -13,15 +13,16 @@ jobs:
       pull-requests: read
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
       - name: Run R003 automation checks
         run: |
+          python -m unittest discover -s tests -v
           python tool/run_r003_automation_checks.py --base-ref origin/main
