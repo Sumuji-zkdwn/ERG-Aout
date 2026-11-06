@@ -1,0 +1,1005 @@
+{
+ "nodes": [
+  {
+   "id": "raw.primitive_lean.kernel_dependency_report",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "git.primitive_lean.main.67fdf6b",
+   "layer": "L_gitlog",
+   "type": "GitCommit"
+  },
+  {
+   "id": "accepted.primitive_lean.baseline",
+   "layer": "L_accepted",
+   "type": "KernelDecision"
+  },
+  {
+   "id": "accepted.primitive_lean.pr68",
+   "layer": "L_accepted",
+   "type": "KernelDecision"
+  },
+  {
+   "id": "accepted.primitive_lean.pr3",
+   "layer": "L_accepted",
+   "type": "KernelDecision"
+  },
+  {
+   "id": "accepted.primitive_lean.pr74",
+   "layer": "L_accepted",
+   "type": "KernelDecision"
+  },
+  {
+   "id": "raw.primitive_lean.pr29",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr29.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr30",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr30.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr31",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr31.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr32",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr32.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr33",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr33.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr34",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr34.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr35",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr35.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr36",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr36.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr37",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr37.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr38",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr38.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr39",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr39.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr40",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr40.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr41",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr41.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr42",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr42.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr43",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr43.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr44",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr44.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr45",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr45.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr46",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr46.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr47",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr47.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr48",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr48.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr49",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr49.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr50",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr50.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr51",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr51.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr52",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr52.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr53",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr53.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr54",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr54.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr58",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr58.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr59",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr59.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr65",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr65.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr66",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr66.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr67",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr67.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr69",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr69.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr70",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr70.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "cand.primitive_lean.question.version_pr70_pr71",
+   "layer": "L_candidate",
+   "type": "CandidateQuestion"
+  },
+  {
+   "id": "raw.primitive_lean.pr71",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr71.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr72",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr72.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr75",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr75.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr76",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr76.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr77",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr77.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr78",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr78.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr79",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr79.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr80",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr80.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr81",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr81.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr82",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr82.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr83",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr83.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr84",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr84.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr85",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr85.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr86",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr86.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr87",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr87.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr88",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr88.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr89",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr89.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr90",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr90.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr91",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr91.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr92",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr92.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr93",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr93.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr94",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr94.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr95",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr95.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr96",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr96.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  },
+  {
+   "id": "raw.primitive_lean.pr97",
+   "layer": "L_raw",
+   "type": "RawArtifact"
+  },
+  {
+   "id": "cand.primitive_lean.pr97.content",
+   "layer": "L_candidate",
+   "type": "CandidateClaim"
+  }
+ ],
+ "edges": [
+  {
+   "id": "e0001",
+   "type": "extends_main",
+   "source": "accepted.primitive_lean.baseline",
+   "target": "accepted.primitive_lean.pr68"
+  },
+  {
+   "id": "e0002",
+   "type": "extends_main",
+   "source": "accepted.primitive_lean.pr68",
+   "target": "accepted.primitive_lean.pr3"
+  },
+  {
+   "id": "e0003",
+   "type": "extends_main",
+   "source": "accepted.primitive_lean.pr3",
+   "target": "accepted.primitive_lean.pr74"
+  },
+  {
+   "id": "e0004",
+   "type": "observes_kernel_change",
+   "source": "git.primitive_lean.main.67fdf6b",
+   "target": "accepted.primitive_lean.pr74"
+  },
+  {
+   "id": "e0005",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr29",
+   "target": "cand.primitive_lean.pr29.content"
+  },
+  {
+   "id": "e0006",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr30",
+   "target": "cand.primitive_lean.pr30.content"
+  },
+  {
+   "id": "e0007",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr31",
+   "target": "cand.primitive_lean.pr31.content"
+  },
+  {
+   "id": "e0008",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr32",
+   "target": "cand.primitive_lean.pr32.content"
+  },
+  {
+   "id": "e0009",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr33",
+   "target": "cand.primitive_lean.pr33.content"
+  },
+  {
+   "id": "e0010",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr34",
+   "target": "cand.primitive_lean.pr34.content"
+  },
+  {
+   "id": "e0011",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr35",
+   "target": "cand.primitive_lean.pr35.content"
+  },
+  {
+   "id": "e0012",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr36",
+   "target": "cand.primitive_lean.pr36.content"
+  },
+  {
+   "id": "e0013",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr37",
+   "target": "cand.primitive_lean.pr37.content"
+  },
+  {
+   "id": "e0014",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr38",
+   "target": "cand.primitive_lean.pr38.content"
+  },
+  {
+   "id": "e0015",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr39",
+   "target": "cand.primitive_lean.pr39.content"
+  },
+  {
+   "id": "e0016",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr40",
+   "target": "cand.primitive_lean.pr40.content"
+  },
+  {
+   "id": "e0017",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr41",
+   "target": "cand.primitive_lean.pr41.content"
+  },
+  {
+   "id": "e0018",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr42",
+   "target": "cand.primitive_lean.pr42.content"
+  },
+  {
+   "id": "e0019",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr43",
+   "target": "cand.primitive_lean.pr43.content"
+  },
+  {
+   "id": "e0020",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr44",
+   "target": "cand.primitive_lean.pr44.content"
+  },
+  {
+   "id": "e0021",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr45",
+   "target": "cand.primitive_lean.pr45.content"
+  },
+  {
+   "id": "e0022",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr46",
+   "target": "cand.primitive_lean.pr46.content"
+  },
+  {
+   "id": "e0023",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr47",
+   "target": "cand.primitive_lean.pr47.content"
+  },
+  {
+   "id": "e0024",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr48",
+   "target": "cand.primitive_lean.pr48.content"
+  },
+  {
+   "id": "e0025",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr49",
+   "target": "cand.primitive_lean.pr49.content"
+  },
+  {
+   "id": "e0026",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr50",
+   "target": "cand.primitive_lean.pr50.content"
+  },
+  {
+   "id": "e0027",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr51",
+   "target": "cand.primitive_lean.pr51.content"
+  },
+  {
+   "id": "e0028",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr52",
+   "target": "cand.primitive_lean.pr52.content"
+  },
+  {
+   "id": "e0029",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr53",
+   "target": "cand.primitive_lean.pr53.content"
+  },
+  {
+   "id": "e0030",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr54",
+   "target": "cand.primitive_lean.pr54.content"
+  },
+  {
+   "id": "e0031",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr58",
+   "target": "cand.primitive_lean.pr58.content"
+  },
+  {
+   "id": "e0032",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr59",
+   "target": "cand.primitive_lean.pr59.content"
+  },
+  {
+   "id": "e0033",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr65",
+   "target": "cand.primitive_lean.pr65.content"
+  },
+  {
+   "id": "e0034",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr66",
+   "target": "cand.primitive_lean.pr66.content"
+  },
+  {
+   "id": "e0035",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr67",
+   "target": "cand.primitive_lean.pr67.content"
+  },
+  {
+   "id": "e0036",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr69",
+   "target": "cand.primitive_lean.pr69.content"
+  },
+  {
+   "id": "e0037",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr70",
+   "target": "cand.primitive_lean.pr70.content"
+  },
+  {
+   "id": "e0038",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr70",
+   "target": "cand.primitive_lean.question.version_pr70_pr71"
+  },
+  {
+   "id": "e0039",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr71",
+   "target": "cand.primitive_lean.pr71.content"
+  },
+  {
+   "id": "e0040",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr71",
+   "target": "cand.primitive_lean.question.version_pr70_pr71"
+  },
+  {
+   "id": "e0041",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr72",
+   "target": "cand.primitive_lean.pr72.content"
+  },
+  {
+   "id": "e0042",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr75",
+   "target": "cand.primitive_lean.pr75.content"
+  },
+  {
+   "id": "e0043",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr76",
+   "target": "cand.primitive_lean.pr76.content"
+  },
+  {
+   "id": "e0044",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr77",
+   "target": "cand.primitive_lean.pr77.content"
+  },
+  {
+   "id": "e0045",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr78",
+   "target": "cand.primitive_lean.pr78.content"
+  },
+  {
+   "id": "e0046",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr79",
+   "target": "cand.primitive_lean.pr79.content"
+  },
+  {
+   "id": "e0047",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr80",
+   "target": "cand.primitive_lean.pr80.content"
+  },
+  {
+   "id": "e0048",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr81",
+   "target": "cand.primitive_lean.pr81.content"
+  },
+  {
+   "id": "e0049",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr82",
+   "target": "cand.primitive_lean.pr82.content"
+  },
+  {
+   "id": "e0050",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr83",
+   "target": "cand.primitive_lean.pr83.content"
+  },
+  {
+   "id": "e0051",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr84",
+   "target": "cand.primitive_lean.pr84.content"
+  },
+  {
+   "id": "e0052",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr85",
+   "target": "cand.primitive_lean.pr85.content"
+  },
+  {
+   "id": "e0053",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr86",
+   "target": "cand.primitive_lean.pr86.content"
+  },
+  {
+   "id": "e0054",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr87",
+   "target": "cand.primitive_lean.pr87.content"
+  },
+  {
+   "id": "e0055",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr88",
+   "target": "cand.primitive_lean.pr88.content"
+  },
+  {
+   "id": "e0056",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr89",
+   "target": "cand.primitive_lean.pr89.content"
+  },
+  {
+   "id": "e0057",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr90",
+   "target": "cand.primitive_lean.pr90.content"
+  },
+  {
+   "id": "e0058",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr91",
+   "target": "cand.primitive_lean.pr91.content"
+  },
+  {
+   "id": "e0059",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr92",
+   "target": "cand.primitive_lean.pr92.content"
+  },
+  {
+   "id": "e0060",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr93",
+   "target": "cand.primitive_lean.pr93.content"
+  },
+  {
+   "id": "e0061",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr94",
+   "target": "cand.primitive_lean.pr94.content"
+  },
+  {
+   "id": "e0062",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr95",
+   "target": "cand.primitive_lean.pr95.content"
+  },
+  {
+   "id": "e0063",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr96",
+   "target": "cand.primitive_lean.pr96.content"
+  },
+  {
+   "id": "e0064",
+   "type": "introduces",
+   "source": "raw.primitive_lean.pr97",
+   "target": "cand.primitive_lean.pr97.content"
+  }
+ ]
+}
