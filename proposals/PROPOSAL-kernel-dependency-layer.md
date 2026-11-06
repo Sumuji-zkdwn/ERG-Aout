@@ -57,4 +57,4 @@ HMDG v0 は、外部の定理依存 DAG（LeanDojo の mathlib グラフ）を�
 
 ## データの扱い
 
-この提案は、公開リポジトリ（primitive-lean）の成果物を参照するだけで、ERG-Aout の非公開の内容を外へ出さない。逆方向でも、ERG のスキーマや記録を primitive-lean にコピーしない。
+ERG-Aout と primitive-lean はどちらも公開リポジトリである（ERG-Aout は 2026-11-07 に公開へ変更）。この提案は primitive-lean の公開成果物を参照するだけで、データの複製はしない。変換スクリプトを追加する場合も、`deps.json` は primitive-lean 側を正とし、ERG-Aout には変換結果だけを置く。
