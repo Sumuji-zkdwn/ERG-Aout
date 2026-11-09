@@ -1,0 +1,114 @@
+{
+  "binding_version": 1,
+  "formal_source": {
+    "repository": "Sumuji-zkdwn/primitive-lean",
+    "commit": "09f141ea6845ccb658b82b69ff788aab5522fbc5",
+    "language": "Lean 4 (v4.30.0-rc2, pinned mathlib; --trust=0 and axiom audit in the formal repository CI)",
+    "files": {
+      "linear_input/lean_check/F0Retractions.inc": "7dd831498e91cce9806f6f97362c8b4f70c9239ab23fdd26e9f7508b10880b05",
+      "linear_input/lean_check/F0Counting.inc": "fa8d45beeca6b7df13024d377254bcad9c8622cd07d70236f3d478b89dc5df60"
+    },
+    "verification_record": "sources/f0_formalization_2026-10-30.json",
+    "verification_note": "F0 の61定理・91宣言は形式化側で別途検証済みとして記録されている。この束縛は対応関係の記録であり、証明の再検査ではない。"
+  },
+  "bindings": [
+    {
+      "id": "fb.f0.system",
+      "node": "cand.f0.system",
+      "relation": "defines",
+      "declarations": [
+        {"name": "LinearInputF0.Idempotent", "kind": "def", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.Fixed", "kind": "abbrev", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.Fiber", "kind": "abbrev", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.liftK", "kind": "def", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.Compatible", "kind": "def", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.Reconstructs", "kind": "def", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.step", "kind": "def", "file": "linear_input/lean_check/F0Retractions.inc"}
+      ],
+      "fidelity_note": "K²=K を Idempotent、K^(d) を liftK、条件 A を Reconstructs、条件 B を Compatible、T を step（K (C (liftK K (S x)))）で表す。出力成分 d 個は Lean では任意の添字型 I（Fin d に限らない）として一般化されている。",
+      "non_claims": [
+        "𝓑 の非空性は定義に含めず、必要な定理で個別に仮定する",
+        "会話の省略部分にあった可能性のある追加の公理は含めない"
+      ]
+    },
+    {
+      "id": "fb.f0.fiber_decomposition",
+      "node": "cand.f0.fiber_decomposition",
+      "relation": "proves",
+      "declarations": [
+        {"name": "LinearInputF0.fiberDecomposition", "kind": "def", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.fiber_card_sum", "kind": "theorem", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.fiber_nonempty", "kind": "theorem", "file": "linear_input/lean_check/F0Retractions.inc"}
+      ],
+      "fidelity_note": "𝓑=⊔B_a は型の同値 α ≃ Σ a : Fixed K, Fiber K a、a∈B_a は各ファイバーの非空性、N=Σm_a は有限型の濃度の等式として、それぞれ仮定を足さずに表されている。",
+      "non_claims": [
+        "ラベルを忘れた塊サイズ列（整数分割）としての扱いはこの束縛に含めない"
+      ]
+    },
+    {
+      "id": "fb.f0.image_in_fixed",
+      "node": "cand.f0.image_in_fixed",
+      "relation": "proves",
+      "declarations": [
+        {"name": "LinearInputF0.step_fixed", "kind": "theorem", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.fixed_iff_in_range", "kind": "theorem", "file": "linear_input/lean_check/F0Retractions.inc"}
+      ],
+      "fidelity_note": "step_fixed は K (T x) = T x、すなわち T の値が Fix K に入ることを A・B なしで示す。fixed_iff_in_range は冪等性の下で Fix K = im K を示し、会話の F = Fix(K) = im(K) に対応する。",
+      "non_claims": []
+    },
+    {
+      "id": "fb.f0.period_bound",
+      "node": "cand.f0.period_bound",
+      "relation": "proves_restricted",
+      "declarations": [
+        {"name": "LinearInputF0.periodic_point_fixed", "kind": "theorem", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.periodic_cycle_bound", "kind": "theorem", "file": "linear_input/lean_check/F0Retractions.inc"}
+      ],
+      "fidelity_note": "periodic_cycle_bound は、周期 p の軌道で最初の p 点が相異なること（hdistinct）を仮定して p ≤ |Fix K| を結論する。会話の「任意の周期の長さ ≤ r」を最小周期の意味に読んだ場合に一致する。",
+      "non_claims": [
+        "最小でない周期（最小周期の倍数など）に対する上限は主張しない",
+        "𝓑 が無限集合の場合は扱わない（Fintype α を仮定する）"
+      ]
+    },
+    {
+      "id": "fb.f0.idempotent_counts",
+      "node": "cand.f0.idempotent_counts",
+      "relation": "proves",
+      "declarations": [
+        {"name": "LinearInputF0Counting.seven_point_idempotents", "kind": "theorem", "file": "linear_input/lean_check/F0Counting.inc"},
+        {"name": "LinearInputF0Counting.eight_point_idempotents", "kind": "theorem", "file": "linear_input/lean_check/F0Counting.inc"},
+        {"name": "LinearInputF0Counting.idempotent_count_sum", "kind": "theorem", "file": "linear_input/lean_check/F0Counting.inc"}
+      ],
+      "fidelity_note": "会話では有限計算で得た 6,322 と 41,393 を、Lean では一般の階数別公式 idempotent_count_sum から導いた定理として証明している。数値の主張としては一致する。",
+      "non_claims": [
+        "7点・8点の塊サイズ型の個数（15型・22型）や二塊合流の辺数は含めない"
+      ]
+    },
+    {
+      "id": "fb.f0.drop_b_separates",
+      "node": "cand.f0.drop_b_separates",
+      "relation": "proves",
+      "declarations": [
+        {"name": "LinearInputF0.exampleK", "kind": "def", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.exampleBadS", "kind": "def", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.exampleK_idempotent", "kind": "theorem", "file": "linear_input/lean_check/F0Retractions.inc"},
+        {"name": "LinearInputF0.incompatible_can_separate", "kind": "theorem", "file": "linear_input/lean_check/F0Retractions.inc"}
+      ],
+      "fidelity_note": "会話の例 𝓑={0,1,2}, K=(0,0,2), d=1, S=(0,2,0) を、Fin 3 上の exampleK と exampleBadS（I=Fin 1）でそのまま表し、B の不成立、K0=K1、K^(1)S(0)≠K^(1)S(1) を証明している。",
+      "non_claims": [
+        "B の不成立が常に区別を復活させるとは主張しない",
+        "r=1 や K が単射の場合に区別が不可能であることはこの束縛に含めない"
+      ]
+    }
+  ],
+  "unbound": [
+    {
+      "node": "cand.f0.drop_b_not_always",
+      "reason": "対応する定理が形式化側に見当たらない。名前の近い failure_does_not_imply_noncollapse は条件 A（Reconstructs）の不成立についての例であり、条件 B についての主張ではないため束縛しない。"
+    },
+    {
+      "node": "cand.f0.imbalance_monotonicity",
+      "reason": "未証明予想。形式化側の記録（verification_record の excluded）に、一般証明・反例とも対象外と明記されている。N=1〜12 の有限検証は Lean の証明ではない。"
+    }
+  ]
+}

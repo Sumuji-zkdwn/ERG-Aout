@@ -1,0 +1,35 @@
+{
+  "nodes": [
+    {"id": "raw.f0.defs", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.f0.blocks", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.f0.period", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.f0.counts", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.f0.drop_b", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "raw.f0.conjecture", "layer": "L_raw", "type": "RawArtifact"},
+    {"id": "cand.f0.system", "layer": "L_candidate", "type": "CandidateDefinition"},
+    {"id": "cand.f0.fiber_decomposition", "layer": "L_candidate", "type": "CandidateClaim"},
+    {"id": "cand.f0.image_in_fixed", "layer": "L_candidate", "type": "CandidateClaim"},
+    {"id": "cand.f0.period_bound", "layer": "L_candidate", "type": "CandidateClaim"},
+    {"id": "cand.f0.idempotent_counts", "layer": "L_candidate", "type": "CandidateExample"},
+    {"id": "cand.f0.drop_b_separates", "layer": "L_candidate", "type": "CandidateFailureCase"},
+    {"id": "cand.f0.drop_b_not_always", "layer": "L_candidate", "type": "CandidateClaim"},
+    {"id": "cand.f0.imbalance_monotonicity", "layer": "L_candidate", "type": "CandidateQuestion"}
+  ],
+  "edges": [
+    {"id": "e.f0.intro.system", "type": "introduces", "source": "raw.f0.defs", "target": "cand.f0.system"},
+    {"id": "e.f0.intro.fiber", "type": "introduces", "source": "raw.f0.blocks", "target": "cand.f0.fiber_decomposition"},
+    {"id": "e.f0.intro.image", "type": "introduces", "source": "raw.f0.period", "target": "cand.f0.image_in_fixed"},
+    {"id": "e.f0.intro.period", "type": "introduces", "source": "raw.f0.period", "target": "cand.f0.period_bound"},
+    {"id": "e.f0.intro.counts", "type": "introduces", "source": "raw.f0.counts", "target": "cand.f0.idempotent_counts"},
+    {"id": "e.f0.intro.drop_b", "type": "introduces", "source": "raw.f0.drop_b", "target": "cand.f0.drop_b_separates"},
+    {"id": "e.f0.intro.drop_b_not_always", "type": "introduces", "source": "raw.f0.drop_b", "target": "cand.f0.drop_b_not_always"},
+    {"id": "e.f0.intro.conjecture", "type": "introduces", "source": "raw.f0.conjecture", "target": "cand.f0.imbalance_monotonicity"},
+    {"id": "e.f0.dep.fiber", "type": "depends_on_candidate", "source": "cand.f0.fiber_decomposition", "target": "cand.f0.system"},
+    {"id": "e.f0.dep.image", "type": "depends_on_candidate", "source": "cand.f0.image_in_fixed", "target": "cand.f0.system"},
+    {"id": "e.f0.dep.period", "type": "depends_on_candidate", "source": "cand.f0.period_bound", "target": "cand.f0.image_in_fixed"},
+    {"id": "e.f0.dep.counts", "type": "depends_on_candidate", "source": "cand.f0.idempotent_counts", "target": "cand.f0.fiber_decomposition"},
+    {"id": "e.f0.dep.drop_b", "type": "depends_on_candidate", "source": "cand.f0.drop_b_separates", "target": "cand.f0.system"},
+    {"id": "e.f0.refine.drop_b", "type": "depends_on_candidate", "source": "cand.f0.drop_b_not_always", "target": "cand.f0.drop_b_separates"},
+    {"id": "e.f0.dep.conjecture", "type": "depends_on_candidate", "source": "cand.f0.imbalance_monotonicity", "target": "cand.f0.fiber_decomposition"}
+  ]
+}
