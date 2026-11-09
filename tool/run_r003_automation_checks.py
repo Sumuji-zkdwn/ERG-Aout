@@ -66,7 +66,7 @@ def existing(paths: Iterable[str]) -> List[Path]:
 
 
 FORMAL_BINDING_SUFFIX = ".formal_binding.json"
-GRAPH_FOLDERS = ("examples/r001", "examples/r002", "examples/formal_binding")
+GRAPH_FOLDERS = ("examples/r001", "examples/r002", "examples/r005")
 
 
 def graph_jsons() -> List[Path]:
@@ -105,8 +105,8 @@ def sidecar_pairs() -> List[tuple[Path, Path]]:
             "examples/r002/real_log_pilot_01_raw_text_sidecar.md",
         ),
         (
-            "examples/formal_binding/f0_chat.json",
-            "examples/formal_binding/f0_chat_raw_text_sidecar.md",
+            "examples/r005/f0_chat.json",
+            "examples/r005/f0_chat_raw_text_sidecar.md",
         ),
     ]
     pairs: List[tuple[Path, Path]] = []
@@ -197,7 +197,7 @@ def build_checks(
             "examples/r002/real_log_pilot_01.json",
             "examples/r001/manual_conversation_to_erg_example.json",
             "examples/r001/manual_conversation_cpr_origin_example.json",
-            "examples/formal_binding/f0_chat.json",
+            "examples/r005/f0_chat.json",
         ]
     )
     for graph in r002_graphs:

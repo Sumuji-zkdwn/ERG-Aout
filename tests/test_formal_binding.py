@@ -190,14 +190,13 @@ class FormalBindingTests(unittest.TestCase):
         self.graph["edges"].append(
             {"id": "e4", "type": "accepted_from_candidate", "source": "cand.claim", "target": "acc.claim"}
         )
-        self.binding["unbound"].append({"node": "acc.claim", "reason": "covered via its candidate"})
 
     def test_refuted_candidate_is_flagged_not_promoted(self):
         self.binding["bindings"][1]["relation"] = "refutes"
         code, out = self.check()
         self.assertEqual(code, 0, out)
         self.assertIn("refuted candidate: 'cand.claim'", out)
-        self.assertNotIn("promotion candidate", out)
+        self.assertNotIn("promotion candidate: 'cand.claim'", out)
 
     def test_refuting_an_already_promoted_candidate_warns(self):
         self.promote_claim()
@@ -210,8 +209,38 @@ class FormalBindingTests(unittest.TestCase):
         self.promote_claim()
         code, out = self.check()
         self.assertEqual(code, 0, out)
-        self.assertNotIn("promotion candidate", out)
+        self.assertNotIn("promotion candidate: 'cand.claim'", out)
         self.assertNotIn("neither bound", out)
+        self.assertIn("accepted nodes covered via their candidate: 1", out)
+
+    def test_unpromoted_definition_is_suggested(self):
+        code, out = self.check()
+        self.assertEqual(code, 0, out)
+        self.assertIn("promotion candidate (definition): 'cand.def'", out)
+
+    def test_kernel_claim_can_be_bound_directly(self):
+        self.graph["nodes"].append({"id": "acc.k", "layer": "L_accepted", "type": "KernelClaim"})
+        extra = dict(self.binding["bindings"][1], id="fb.k", node="acc.k")
+        self.binding["bindings"].append(extra)
+        code, out = self.check()
+        self.assertEqual(code, 0, out)
+        self.binding["bindings"][-1]["relation"] = "refutes"
+        self.assertInvalid("cannot be attached to node type 'KernelClaim'")
+
+
+class KernelClaimValidatorTests(unittest.TestCase):
+    def validate(self, layer):
+        graph = {"nodes": [{"id": "n", "layer": layer, "type": "KernelClaim"}], "edges": []}
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "g.json"
+            path.write_text(json.dumps(graph), encoding="utf-8")
+            return run_command("kernel claim", [sys.executable, "tool/validate_r001_kernel.py", str(path)])
+
+    def test_kernel_claim_only_in_accepted_layer(self):
+        self.assertEqual(self.validate("L_accepted").returncode, 0)
+        result = self.validate("L_candidate")
+        self.assertEqual(result.returncode, 1)
+        self.assertIn("has invalid type 'KernelClaim'", result.stdout)
 
 
 class LeanScannerTests(unittest.TestCase):
@@ -231,8 +260,8 @@ class LeanScannerTests(unittest.TestCase):
 class RunnerIntegrationTests(unittest.TestCase):
     def test_runner_checks_f0_binding_and_skips_it_as_graph(self):
         names = [c.name for c in build_checks()]
-        self.assertIn("formal binding examples/formal_binding/f0_chat.formal_binding.json", names)
-        self.assertIn("validate examples/formal_binding/f0_chat.json", names)
+        self.assertIn("formal binding examples/r005/f0_chat.formal_binding.json", names)
+        self.assertIn("validate examples/r005/f0_chat.json", names)
         self.assertFalse(any(n.startswith("validate") and n.endswith(".formal_binding.json") for n in names))
 
     def test_f0_example_is_structurally_valid(self):
@@ -240,6 +269,7 @@ class RunnerIntegrationTests(unittest.TestCase):
         result = run_command(check.name, check.command)
         self.assertTrue(result.ok, result.stdout + result.stderr)
         self.assertIn("unbound nodes: 2", result.stdout)
+        self.assertIn("accepted nodes covered via their candidate: 4", result.stdout)
 
 
 if __name__ == "__main__":

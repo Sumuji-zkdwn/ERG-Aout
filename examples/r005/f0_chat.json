@@ -13,7 +13,11 @@
     {"id": "cand.f0.idempotent_counts", "layer": "L_candidate", "type": "CandidateExample"},
     {"id": "cand.f0.drop_b_separates", "layer": "L_candidate", "type": "CandidateFailureCase"},
     {"id": "cand.f0.drop_b_not_always", "layer": "L_candidate", "type": "CandidateClaim"},
-    {"id": "cand.f0.imbalance_monotonicity", "layer": "L_candidate", "type": "CandidateQuestion"}
+    {"id": "cand.f0.imbalance_monotonicity", "layer": "L_candidate", "type": "CandidateQuestion"},
+    {"id": "acc.f0.fiber_decomposition", "layer": "L_accepted", "type": "KernelClaim"},
+    {"id": "acc.f0.image_in_fixed", "layer": "L_accepted", "type": "KernelClaim"},
+    {"id": "acc.f0.idempotent_counts", "layer": "L_accepted", "type": "KernelExample"},
+    {"id": "acc.f0.drop_b_separates", "layer": "L_accepted", "type": "KernelFailureCase"}
   ],
   "edges": [
     {"id": "e.f0.intro.system", "type": "introduces", "source": "raw.f0.defs", "target": "cand.f0.system"},
@@ -30,6 +34,10 @@
     {"id": "e.f0.dep.counts", "type": "depends_on_candidate", "source": "cand.f0.idempotent_counts", "target": "cand.f0.fiber_decomposition"},
     {"id": "e.f0.dep.drop_b", "type": "depends_on_candidate", "source": "cand.f0.drop_b_separates", "target": "cand.f0.system"},
     {"id": "e.f0.refine.drop_b", "type": "depends_on_candidate", "source": "cand.f0.drop_b_not_always", "target": "cand.f0.drop_b_separates"},
-    {"id": "e.f0.dep.conjecture", "type": "depends_on_candidate", "source": "cand.f0.imbalance_monotonicity", "target": "cand.f0.fiber_decomposition"}
+    {"id": "e.f0.dep.conjecture", "type": "depends_on_candidate", "source": "cand.f0.imbalance_monotonicity", "target": "cand.f0.fiber_decomposition"},
+    {"id": "e.f0.accept.fiber_decomposition", "type": "accepted_from_candidate", "source": "cand.f0.fiber_decomposition", "target": "acc.f0.fiber_decomposition"},
+    {"id": "e.f0.accept.image_in_fixed", "type": "accepted_from_candidate", "source": "cand.f0.image_in_fixed", "target": "acc.f0.image_in_fixed"},
+    {"id": "e.f0.accept.idempotent_counts", "type": "accepted_from_candidate", "source": "cand.f0.idempotent_counts", "target": "acc.f0.idempotent_counts"},
+    {"id": "e.f0.accept.drop_b_separates", "type": "accepted_from_candidate", "source": "cand.f0.drop_b_separates", "target": "acc.f0.drop_b_separates"}
   ]
 }

@@ -3,7 +3,7 @@
 
 A formal-binding sidecar records which declarations in an external formal
 repository (for example a Lean project) correspond to candidate/accepted ERG
-nodes. See `docs/FORMAL_BINDING.md`.
+nodes. See `docs/R005_FORMAL_BINDING.md`.
 
 This helper is NOT a replacement for `tool/validate_r001_kernel.py`, and it is
 NOT a proof checker:
@@ -38,6 +38,7 @@ PROPOSITION_NODE_TYPES = {
     "CandidateClaim",
     "CandidateExample",
     "CandidateFailureCase",
+    "KernelClaim",
     "KernelExample",
     "KernelFailureCase",
 }
@@ -281,8 +282,25 @@ def check_structure(graph: dict, binding: dict, report: Report) -> Tuple[dict, L
                 )
             elif "refutes" in relations:
                 report.notes.append(f"refuted candidate: '{node_id}' should not be promoted as stated")
+            elif "defines" in relations:
+                report.notes.append(
+                    f"promotion candidate (definition): '{node_id}' has a formal definition ('defines'); "
+                    "acceptance remains a review decision"
+                )
 
-    classified = set(relations_by_node) | unbound_nodes
+    # An accepted node promoted from a bound candidate inherits that candidate's binding.
+    inherited = {
+        e.get("target")
+        for e in edges
+        if isinstance(e, dict)
+        and e.get("type") == "accepted_from_candidate"
+        and e.get("source") in relations_by_node
+    }
+    for node_id in sorted(inherited & set(relations_by_node)):
+        report.notes.append(
+            f"accepted node '{node_id}' is bound directly and also inherits its candidate's binding"
+        )
+    classified = set(relations_by_node) | unbound_nodes | inherited
     unclassified = sorted(
         n["id"]
         for n in nodes
@@ -299,6 +317,7 @@ def check_structure(graph: dict, binding: dict, report: Report) -> Tuple[dict, L
     report.summary.append(f"bindings: {len(bindings)}")
     report.summary.append(f"bound nodes: {len(relations_by_node)}")
     report.summary.append(f"unbound nodes: {len(unbound_nodes)}")
+    report.summary.append(f"accepted nodes covered via their candidate: {len(inherited - set(relations_by_node))}")
     relation_counts: Dict[str, int] = {}
     for row in bindings:
         if isinstance(row, dict) and row.get("relation") in RELATION_NODE_TYPES:

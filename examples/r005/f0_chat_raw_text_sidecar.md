@@ -1,6 +1,6 @@
 # F0 チャット由来資料の raw text sidecar
 
-`examples/formal_binding/f0_chat.json` の `L_raw` ノード対応表。
+R005 の実例 `examples/r005/f0_chat.json` の `L_raw` ノード対応表。
 
 出典は公開リポジトリ `Sumuji-zkdwn/primitive-lean` の `sources/f0_math_chat_2026-10-29/`（コミット `09f141ea6845ccb658b82b69ff788aab5522fbc5`）。この資料自体がチャットの数学的内容を整理した要約であり、元の対話の逐語記録ではない。したがって raw ノードは発話（RawMessage）ではなく資料の節（RawArtifact）として切り、`turn_index` には資料内の順序を置く。抜粋は数式を要約したもので、原文の引用ではない。
 
