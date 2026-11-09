@@ -85,6 +85,7 @@ Purpose: store accepted ERG kernel objects for the round.
 - `KernelFailureCase`
 - `KernelDecision`
 - `KConcept`
+- `KernelClaim` (added in R005 as the accepted counterpart of `CandidateClaim`; acceptance remains procedural, see `docs/R005_FORMAL_BINDING.md`)
 
 #### Edge types
 

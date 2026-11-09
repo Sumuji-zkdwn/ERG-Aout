@@ -40,6 +40,7 @@ ALLOWED_NODE_TYPES_BY_LAYER = {
         "KernelFailureCase",
         "KernelDecision",
         "KConcept",
+        "KernelClaim",  # R005: accepted counterpart of CandidateClaim
     },
     "L_gitlog": {"GitCommit", "GitFileDelta", "GitTagOrRound", "GitDecisionNote"},
 }

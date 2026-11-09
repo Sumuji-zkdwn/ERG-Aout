@@ -3,8 +3,9 @@
 
 This runner is intended for unattended PR checks. It does not generate new
 classification content and does not modify repository files. It runs existing
-R001/R002 validators and emits a compact automation risk summary based on
-changed file paths when git diff information is available.
+R001/R002 validators, the formal-binding checker, and emits a compact
+automation risk summary based on changed file paths when git diff information
+is available.
 """
 
 from __future__ import annotations
@@ -64,12 +65,33 @@ def existing(paths: Iterable[str]) -> List[Path]:
     return [ROOT / path for path in paths if (ROOT / path).exists()]
 
 
+FORMAL_BINDING_SUFFIX = ".formal_binding.json"
+GRAPH_FOLDERS = ("examples/r001", "examples/r002", "examples/r005")
+
+
 def graph_jsons() -> List[Path]:
     paths: List[Path] = []
-    for folder in [ROOT / "examples" / "r001", ROOT / "examples" / "r002"]:
+    for folder in (ROOT / name for name in GRAPH_FOLDERS):
         if folder.exists():
-            paths.extend(sorted(folder.glob("*.json")))
+            paths.extend(
+                p for p in sorted(folder.glob("*.json")) if not p.name.endswith(FORMAL_BINDING_SUFFIX)
+            )
     return paths
+
+
+def formal_binding_pairs() -> List[tuple[Path, Path]]:
+    """Pair each `<stem>.formal_binding.json` with the graph `<stem>.json` beside it.
+
+    A missing graph is returned as a pair anyway so that the check fails loudly
+    instead of being skipped.
+    """
+    pairs: List[tuple[Path, Path]] = []
+    examples = ROOT / "examples"
+    if examples.exists():
+        for binding in sorted(examples.rglob("*" + FORMAL_BINDING_SUFFIX)):
+            graph = binding.with_name(binding.name[: -len(FORMAL_BINDING_SUFFIX)] + ".json")
+            pairs.append((graph, binding))
+    return pairs
 
 
 def sidecar_pairs() -> List[tuple[Path, Path]]:
@@ -81,6 +103,10 @@ def sidecar_pairs() -> List[tuple[Path, Path]]:
         (
             "examples/r002/real_log_pilot_01.json",
             "examples/r002/real_log_pilot_01_raw_text_sidecar.md",
+        ),
+        (
+            "examples/r005/f0_chat.json",
+            "examples/r005/f0_chat_raw_text_sidecar.md",
         ),
     ]
     pairs: List[tuple[Path, Path]] = []
@@ -106,14 +132,18 @@ def risk_summary(files: Sequence[str]) -> str:
     validator_changed = any(
         path == "tool/validate_r001_kernel.py" or path.startswith("tool/check_") for path in files
     )
-    graph_changed = any(path.startswith("examples/") and path.endswith(".json") for path in files)
+    binding_changed = any(path.endswith(FORMAL_BINDING_SUFFIX) for path in files)
+    graph_changed = any(
+        path.startswith("examples/") and path.endswith(".json") and not path.endswith(FORMAL_BINDING_SUFFIX)
+        for path in files
+    )
     sidecar_changed = any(path.startswith("examples/") and path.endswith("_sidecar.md") for path in files)
     policy_changed = any(path.startswith("docs/R00") or path == "README.md" for path in files)
     unredacted_risk = any("raw_text" in path or "sidecar" in path for path in files)
 
     if not files:
         risk_level = "unknown (no git diff available)"
-    elif schema_changed or validator_changed or graph_changed or policy_changed:
+    elif schema_changed or validator_changed or graph_changed or binding_changed or policy_changed:
         risk_level = "soft-gated"
     else:
         risk_level = "routine"
@@ -127,6 +157,8 @@ def risk_summary(files: Sequence[str]) -> str:
         "- Accepted nodes changed: unknown from path summary; inspect graph diff if graph examples changed",
         "- Main spine changed: unknown from path summary; inspect graph diff if graph examples changed",
         f"- Real-log/raw sidecar changed: {'yes' if sidecar_changed else 'no'}",
+        f"- Formal binding changed: {'yes' if binding_changed else 'no'}"
+        + (" (fidelity notes are human judgments; inspect them)" if binding_changed else ""),
         "- New theory claim accepted as established: unknown; inspect docs/graph diff",
         f"- Unredacted source text risk: {'possible' if unredacted_risk else 'not indicated by path summary'}",
         f"- Changed files counted: {len(files)}",
@@ -144,7 +176,11 @@ class Check:
     expected_invalid: bool = False
 
 
-def build_checks() -> List[Check]:
+def build_checks(
+    formal_repos: Sequence[str] = (),
+    formal_main_ref: Optional[str] = None,
+    require_formal_check: bool = False,
+) -> List[Check]:
     python = sys.executable
     checks: List[Check] = []
 
@@ -161,6 +197,7 @@ def build_checks() -> List[Check]:
             "examples/r002/real_log_pilot_01.json",
             "examples/r001/manual_conversation_to_erg_example.json",
             "examples/r001/manual_conversation_cpr_origin_example.json",
+            "examples/r005/f0_chat.json",
         ]
     )
     for graph in r002_graphs:
@@ -190,6 +227,25 @@ def build_checks() -> List[Check]:
             ],
         ))
 
+    formal_options: List[str] = []
+    for repo in formal_repos:
+        formal_options += ["--formal-repo", repo]
+    if formal_main_ref:
+        formal_options += ["--formal-main-ref", formal_main_ref]
+    if require_formal_check:
+        formal_options.append("--require-formal-check")
+    for graph, binding in formal_binding_pairs():
+        checks.append(Check(
+            f"formal binding {binding.relative_to(ROOT)}",
+            [
+                python,
+                "tool/check_formal_binding.py",
+                str(graph.relative_to(ROOT)),
+                str(binding.relative_to(ROOT)),
+                *formal_options,
+            ],
+        ))
+
     semantics_graph = ROOT / "examples/r001/sample_r001_development_graph.json"
     semantics_doc = ROOT / "docs/R001_SEMANTICS.md"
     coverage_tool = ROOT / "tool/check_r001_semantics_coverage.py"
@@ -206,13 +262,26 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Run R003 unattended automation checks")
     parser.add_argument("--base-ref", default="origin/main", help="Base ref for changed-file risk summary")
     parser.add_argument("--no-diff", action="store_true", help="Skip changed-file risk summary")
+    parser.add_argument(
+        "--formal-repo",
+        action="append",
+        default=[],
+        metavar="OWNER/NAME=DIR",
+        help="Local git clone used to check formal bindings (repeatable)",
+    )
+    parser.add_argument("--formal-main-ref", help="Require pinned formal commits to be contained in this ref")
+    parser.add_argument(
+        "--require-formal-check",
+        action="store_true",
+        help="Fail formal bindings whose repository was not checked",
+    )
     args = parser.parse_args()
 
     files = [] if args.no_diff else changed_files(args.base_ref)
     print(risk_summary(files))
     print()
 
-    checks = build_checks()
+    checks = build_checks(args.formal_repo, args.formal_main_ref, args.require_formal_check)
     if not checks:
         print("No checks discovered.")
         return 1
