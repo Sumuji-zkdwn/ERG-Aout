@@ -124,7 +124,7 @@ primitive-lean の `sources/f0_math_chat_2026-10-29/`（チャットの数学的
 
 | 候補 | relation | 主な宣言 | 要点 | 状態 |
 |---|---|---|---|---|
-| `cand.f0.system` | defines | `Idempotent`, `liftK`, `Compatible`, `Reconstructs`, `step` | 出力成分 d は任意の添字型 I に一般化されている | 候補のまま |
+| `cand.f0.system` | defines | `Idempotent`, `liftK`, `Compatible`, `Reconstructs`, `step` | 出力成分 d は任意の添字型 I に一般化されている | `acc.f0.system`（KernelDefinition） |
 | `cand.f0.fiber_decomposition` | proves | `fiberDecomposition`, `fiber_card_sum` | 型の同値と濃度の等式 | `acc.f0.fiber_decomposition`（KernelClaim） |
 | `cand.f0.image_in_fixed` | proves | `step_fixed` | A・B なしで T の値は Fix K に入る | `acc.f0.image_in_fixed`（KernelClaim） |
 | `cand.f0.period_bound` | proves_restricted | `periodic_cycle_bound` | 周期内の点が相異なること（最小周期）を仮定する | 候補のまま |
@@ -133,9 +133,9 @@ primitive-lean の `sources/f0_math_chat_2026-10-29/`（チャットの数学的
 | `cand.f0.drop_b_not_always` | unbound | なし | 名前の近い `failure_does_not_imply_noncollapse` は条件 A についての例なので、束縛しない | 候補のまま |
 | `cand.f0.imbalance_monotonicity` | unbound | なし | 未証明予想。形式化側でも対象外と明記されている | 候補のまま |
 
-`proves` を持つ4候補を、レビューの判断で accepted に昇格させた。昇格は手続き上の地位であり、各束縛の `non_claims` はそのまま有効である。`extends_main` には載せていない（この例のグラフには正準の主線がない）。
+`proves` を持つ4候補と、それらが依存する定義 `cand.f0.system`（`defines`）を、レビューの判断で accepted に昇格させた。昇格は手続き上の地位であり、各束縛の `non_claims` はそのまま有効である。`extends_main` には載せていない（この例のグラフには正準の主線がない）。
 
-定義 `cand.f0.system` は、検査結果に `promotion candidate (definition)` として残っている。accepted の主張はこの定義に依存しているので、定義も昇格させるかは次のレビューで判断する。
+候補のまま残るのは、制限付きの周期上限（`proves_restricted`）と、unbound の2つである。
 
 ## 8) この文書がやらないこと
 

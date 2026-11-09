@@ -269,7 +269,7 @@ class RunnerIntegrationTests(unittest.TestCase):
         result = run_command(check.name, check.command)
         self.assertTrue(result.ok, result.stdout + result.stderr)
         self.assertIn("unbound nodes: 2", result.stdout)
-        self.assertIn("accepted nodes covered via their candidate: 4", result.stdout)
+        self.assertIn("accepted nodes covered via their candidate: 5", result.stdout)
 
 
 if __name__ == "__main__":
