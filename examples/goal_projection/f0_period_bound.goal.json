@@ -1,0 +1,16 @@
+{
+  "graph": "../r005/f0_chat.json",
+  "node": "cand.f0.period_bound",
+  "goal": "整数で点を識別する有限の台集合、冪等写像 K、T = step K S C、正整数 p を前提とする。初期点 x について、R005 の束縛 fb.f0.period_bound に記録された定理 periodic_cycle_bound を適用して p ≤ |Fix K| と言えるかを判定する。returns_at_p は T を p 回適用すると x に戻ること、first_p_distinct は x から始まる最初の p 点がすべて異なること、starts_at_zero は x = 0 を表す。covered は定理の仮定がそろう場合、outside_scope は仮定が欠ける場合に付ける。",
+  "features": ["returns_at_p", "first_p_distinct", "starts_at_zero"],
+  "cases": [
+    {"id": "singleton_0_identity_p2", "values": [true, false, true], "outcome": "outside_scope"},
+    {"id": "singleton_1_identity_p2", "values": [true, false, false], "outcome": "outside_scope"},
+    {"id": "swap_0_1_from_0_p2", "values": [true, true, true], "outcome": "covered"},
+    {"id": "swap_0_1_from_1_p2", "values": [true, true, false], "outcome": "covered"},
+    {"id": "constant_1_from_0_p2", "values": [false, true, true], "outcome": "outside_scope"},
+    {"id": "constant_0_from_1_p2", "values": [false, true, false], "outcome": "outside_scope"},
+    {"id": "constant_1_from_0_p3", "values": [false, false, true], "outcome": "outside_scope"},
+    {"id": "constant_0_from_1_p3", "values": [false, false, false], "outcome": "outside_scope"}
+  ]
+}
