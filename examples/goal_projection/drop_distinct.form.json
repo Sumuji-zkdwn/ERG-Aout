@@ -1,0 +1,7 @@
+{
+  "features": ["returns_at_p"],
+  "rows": [
+    {"values": [false], "outcome": "outside_scope"},
+    {"values": [true], "outcome": "covered"}
+  ]
+}

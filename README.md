@@ -59,6 +59,7 @@ Codex 作業は、原則として ERG-Aout 内 docs と明示指示を根拠に�
 - R002 visual export note: `docs/R002_VISUAL_EXPORT.md`
 - Formal binding checker: `tool/check_formal_binding.py` (ERG node と Lean 宣言の対応 sidecar を検査。証明そのものは形式化側の CI に委ねる)
 - Formal binding example (F0): `examples/r005/f0_chat.json`, `examples/r005/f0_chat_raw_text_sidecar.md`, `examples/r005/f0_chat.formal_binding.json`
+- [目的に必要な観測だけを残す有限実験](examples/goal_projection/README.md)。F0 の周期上限を題材に、判定を保つ最小の観測集合を求め、条件を落とした表には反例を返す。
 - Minimal examples: `examples/r001/minimal_valid.json`, `examples/r001/invalid_cycle_and_policy.json`, `examples/r001/invalid_duplicate_node_id.json`, `examples/r001/invalid_missing_edge_endpoint.json`, `examples/r001/invalid_extends_main_outside_accepted.json`, `examples/r001/invalid_node_type_for_layer.json`
 - Handmade samples: `examples/r001/sample_conversation_graph.json`, `examples/r001/sample_r001_development_graph.json`, `examples/r001/manual_conversation_to_erg_example.json`, `examples/r001/manual_conversation_cpr_origin_example.json`
 - Larger R002 sample: `examples/r002/larger_manual_conversation_example.json`
