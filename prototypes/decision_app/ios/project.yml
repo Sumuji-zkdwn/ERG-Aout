@@ -1,0 +1,31 @@
+name: DecisionApp
+options:
+  bundleIdPrefix: jp.decisionerg
+  deploymentTarget:
+    iOS: '16.0'
+settings:
+  base:
+    SWIFT_VERSION: '5.0'
+    MARKETING_VERSION: '0.6'
+    CURRENT_PROJECT_VERSION: '6'
+targets:
+  DecisionApp:
+    type: application
+    platform: iOS
+    sources:
+      - path: DecisionApp
+        excludes:
+          - index.html
+      - path: DecisionApp/index.html
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: jp.decisionerg.demo
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: やる・やらない
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+    scheme:
+      run:
+        config: Debug
+      archive:
+        config: Release
