@@ -1,0 +1,315 @@
+{
+  "binding_version": 1,
+  "formal_source": {
+    "repository": "Sumuji-zkdwn/primitive-lean",
+    "commit": "185a1713f2fca219e5f9fb1c5aa11955925cb97f",
+    "language": "Lean 4.30.0-rc2 (historical verification)",
+    "files": {
+      "linear_input/lean_check/FiniteBayes.inc": "0c3d2c443825df36a1bbb7b51b602d148c4a5ae3d64e2b1dc7cb029f78da9405",
+      "linear_input/lean_check/FourBayes.inc": "0c6f48956e71c9bcd691cc43eefaf3939f91be9fb747fb1a0e3f1d037e6ed441"
+    },
+    "verification_record": "docs/verification/2026-10-30-bayes.md",
+    "verification_note": "Pinned historical proof source; not a new Lean verification."
+  },
+  "bindings": [
+    {
+      "id": "fb.posterior",
+      "node": "cand.formal.posterior",
+      "relation": "proves_restricted",
+      "declarations": [
+        {
+          "name": "LinearInputBayes.posterior_distribution",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/FiniteBayes.inc"
+        }
+      ],
+      "fidelity_note": "Finite nonnegative weights and likelihoods with positive total evidence.",
+      "non_claims": [
+        "Does not prove the JavaScript implementation, causal counterfactuals or user satisfaction. No automatic promotion."
+      ]
+    },
+    {
+      "id": "fb.tilt",
+      "node": "cand.formal.tilt",
+      "relation": "proves_restricted",
+      "declarations": [
+        {
+          "name": "LinearInputBayes.tilt_distribution",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/FiniteBayes.inc"
+        }
+      ],
+      "fidelity_note": "Exponential tilt of a finite distribution.",
+      "non_claims": [
+        "Does not prove the JavaScript implementation, causal counterfactuals or user satisfaction. No automatic promotion."
+      ]
+    },
+    {
+      "id": "fb.exploration",
+      "node": "cand.formal.exploration",
+      "relation": "proves_restricted",
+      "declarations": [
+        {
+          "name": "LinearInputFourBayes.mixture_distribution",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/FourBayes.inc"
+        },
+        {
+          "name": "LinearInputFourBayes.exploration_floor",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/FourBayes.inc"
+        }
+      ],
+      "fidelity_note": "Convex mixture and component lower bound.",
+      "non_claims": [
+        "Does not prove the JavaScript implementation, causal counterfactuals or user satisfaction. No automatic promotion."
+      ]
+    },
+    {
+      "id": "fb.disappointment",
+      "node": "cand.formal.disappointment",
+      "relation": "proves_restricted",
+      "declarations": [
+        {
+          "name": "LinearInputFourBayes.calibrated_binary_disappointment",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/FourBayes.inc"
+        }
+      ],
+      "fidelity_note": "Calibrated binary disappointment expectation.",
+      "non_claims": [
+        "Does not prove the JavaScript implementation, causal counterfactuals or user satisfaction. No automatic promotion."
+      ]
+    },
+    {
+      "id": "fb.forgetting",
+      "node": "cand.formal.forgetting",
+      "relation": "proves_restricted",
+      "declarations": [
+        {
+          "name": "LinearInputFourBayes.forgetting_can_lose_predictive_information",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/FourBayes.inc"
+        }
+      ],
+      "fidelity_note": "Specific counterexample to predictive information preservation under forgetting.",
+      "non_claims": [
+        "Does not prove the JavaScript implementation, causal counterfactuals or user satisfaction. No automatic promotion."
+      ]
+    },
+    {
+      "id": "fb.push",
+      "node": "cand.formal.push",
+      "relation": "proves_restricted",
+      "declarations": [
+        {
+          "name": "LinearInputBayes.push_posterior",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/FiniteBayes.inc"
+        }
+      ],
+      "fidelity_note": "Likelihood must factor through the observation map.",
+      "non_claims": [
+        "Does not prove the JavaScript implementation, causal counterfactuals or user satisfaction. No automatic promotion."
+      ]
+    },
+    {
+      "id": "fb.loss",
+      "node": "cand.formal.loss",
+      "relation": "proves_restricted",
+      "declarations": [
+        {
+          "name": "LinearInputBayes.mixture_log_loss_bound",
+          "kind": "theorem",
+          "file": "linear_input/lean_check/FiniteBayes.inc"
+        }
+      ],
+      "fidelity_note": "Finite positive-weight likelihood comparison.",
+      "non_claims": [
+        "Does not prove the JavaScript implementation, causal counterfactuals or user satisfaction. No automatic promotion."
+      ]
+    }
+  ],
+  "unbound": [
+    {
+      "node": "cand.model.s.1",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r0.1",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r0.2",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r0.3",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r0.4",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r0.5",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r0.6",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r0.7",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r1.1",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r1.2",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r1.3",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r1.4",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r1.5",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r1.6",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r1.7",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r2.1",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r2.2",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r2.3",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r2.4",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r2.5",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r2.6",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r2.7",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r3.1",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r3.2",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r3.3",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r3.4",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r3.5",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r3.6",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r3.7",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r4.1",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r4.2",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r4.3",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r4.4",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r4.5",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r4.6",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.model.r4.7",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.record.1",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.alt.1",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "acc.record.1",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.record.2",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.alt.2",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "acc.record.2",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.record.3",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "cand.alt.3",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    },
+    {
+      "node": "acc.record.3",
+      "reason": "App-specific report or model candidate; no direct formal binding."
+    }
+  ]
+}

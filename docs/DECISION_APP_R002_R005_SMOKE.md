@@ -1,0 +1,3 @@
+# Decision app: synthetic interoperability fixture
+
+Three invented decisions (no personal data). Mirrors the Prototype 05 typed graph adapter. R001/R002 tools run in a focused unittest; existing R003 workflow checks the pinned R005 source. No existing accepted kernel, schema, validator, or main spine is modified. New fixture accepted nodes denote self-reported procedural records only; all alternative outcomes and formal references remain candidates. R004 is not a general accepted ERG stage; the app's nested-context rewrite extension is separate. The binding does not prove the app or causal predictions. CI pending at submission.
