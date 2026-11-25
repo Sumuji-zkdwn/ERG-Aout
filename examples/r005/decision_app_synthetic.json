@@ -1,0 +1,738 @@
+{
+  "nodes": [
+    {
+      "id": "raw.model-spec",
+      "layer": "L_raw",
+      "type": "RawArtifact"
+    },
+    {
+      "id": "git.erg.a17ffa0a26580107633e83c492c38a7fecede0e7",
+      "layer": "L_gitlog",
+      "type": "GitCommit"
+    },
+    {
+      "id": "cand.model.s.1",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r0.1",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r0.2",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r0.3",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r0.4",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r0.5",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r0.6",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r0.7",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r1.1",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r1.2",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r1.3",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r1.4",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r1.5",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r1.6",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r1.7",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r2.1",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r2.2",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r2.3",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r2.4",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r2.5",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r2.6",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r2.7",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r3.1",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r3.2",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r3.3",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r3.4",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r3.5",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r3.6",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r3.7",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r4.1",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r4.2",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r4.3",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r4.4",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r4.5",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r4.6",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "cand.model.r4.7",
+      "layer": "L_candidate",
+      "type": "CandidateDefinition"
+    },
+    {
+      "id": "raw.draw.1",
+      "layer": "L_raw",
+      "type": "RawArtifact"
+    },
+    {
+      "id": "raw.obs.1",
+      "layer": "L_raw",
+      "type": "RawObservation"
+    },
+    {
+      "id": "cand.record.1",
+      "layer": "L_candidate",
+      "type": "CandidateClaim"
+    },
+    {
+      "id": "cand.alt.1",
+      "layer": "L_candidate",
+      "type": "CandidateQuestion"
+    },
+    {
+      "id": "acc.record.1",
+      "layer": "L_accepted",
+      "type": "KernelDecision"
+    },
+    {
+      "id": "raw.draw.2",
+      "layer": "L_raw",
+      "type": "RawArtifact"
+    },
+    {
+      "id": "raw.obs.2",
+      "layer": "L_raw",
+      "type": "RawObservation"
+    },
+    {
+      "id": "cand.record.2",
+      "layer": "L_candidate",
+      "type": "CandidateClaim"
+    },
+    {
+      "id": "cand.alt.2",
+      "layer": "L_candidate",
+      "type": "CandidateQuestion"
+    },
+    {
+      "id": "acc.record.2",
+      "layer": "L_accepted",
+      "type": "KernelDecision"
+    },
+    {
+      "id": "raw.draw.3",
+      "layer": "L_raw",
+      "type": "RawArtifact"
+    },
+    {
+      "id": "raw.obs.3",
+      "layer": "L_raw",
+      "type": "RawObservation"
+    },
+    {
+      "id": "cand.record.3",
+      "layer": "L_candidate",
+      "type": "CandidateClaim"
+    },
+    {
+      "id": "cand.alt.3",
+      "layer": "L_candidate",
+      "type": "CandidateQuestion"
+    },
+    {
+      "id": "acc.record.3",
+      "layer": "L_accepted",
+      "type": "KernelDecision"
+    },
+    {
+      "id": "cand.formal.posterior",
+      "layer": "L_candidate",
+      "type": "CandidateClaim"
+    },
+    {
+      "id": "cand.formal.tilt",
+      "layer": "L_candidate",
+      "type": "CandidateClaim"
+    },
+    {
+      "id": "cand.formal.exploration",
+      "layer": "L_candidate",
+      "type": "CandidateClaim"
+    },
+    {
+      "id": "cand.formal.disappointment",
+      "layer": "L_candidate",
+      "type": "CandidateClaim"
+    },
+    {
+      "id": "cand.formal.forgetting",
+      "layer": "L_candidate",
+      "type": "CandidateClaim"
+    },
+    {
+      "id": "cand.formal.push",
+      "layer": "L_candidate",
+      "type": "CandidateClaim"
+    },
+    {
+      "id": "cand.formal.loss",
+      "layer": "L_candidate",
+      "type": "CandidateClaim"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e.0",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.s.1"
+    },
+    {
+      "id": "e.1",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r0.1"
+    },
+    {
+      "id": "e.2",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r0.2"
+    },
+    {
+      "id": "e.3",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r0.3"
+    },
+    {
+      "id": "e.4",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r0.4"
+    },
+    {
+      "id": "e.5",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r0.5"
+    },
+    {
+      "id": "e.6",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r0.6"
+    },
+    {
+      "id": "e.7",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r0.7"
+    },
+    {
+      "id": "e.8",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r1.1"
+    },
+    {
+      "id": "e.9",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r1.2"
+    },
+    {
+      "id": "e.10",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r1.3"
+    },
+    {
+      "id": "e.11",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r1.4"
+    },
+    {
+      "id": "e.12",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r1.5"
+    },
+    {
+      "id": "e.13",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r1.6"
+    },
+    {
+      "id": "e.14",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r1.7"
+    },
+    {
+      "id": "e.15",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r2.1"
+    },
+    {
+      "id": "e.16",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r2.2"
+    },
+    {
+      "id": "e.17",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r2.3"
+    },
+    {
+      "id": "e.18",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r2.4"
+    },
+    {
+      "id": "e.19",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r2.5"
+    },
+    {
+      "id": "e.20",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r2.6"
+    },
+    {
+      "id": "e.21",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r2.7"
+    },
+    {
+      "id": "e.22",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r3.1"
+    },
+    {
+      "id": "e.23",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r3.2"
+    },
+    {
+      "id": "e.24",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r3.3"
+    },
+    {
+      "id": "e.25",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r3.4"
+    },
+    {
+      "id": "e.26",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r3.5"
+    },
+    {
+      "id": "e.27",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r3.6"
+    },
+    {
+      "id": "e.28",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r3.7"
+    },
+    {
+      "id": "e.29",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r4.1"
+    },
+    {
+      "id": "e.30",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r4.2"
+    },
+    {
+      "id": "e.31",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r4.3"
+    },
+    {
+      "id": "e.32",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r4.4"
+    },
+    {
+      "id": "e.33",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r4.5"
+    },
+    {
+      "id": "e.34",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r4.6"
+    },
+    {
+      "id": "e.35",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.model.r4.7"
+    },
+    {
+      "id": "e.36",
+      "type": "records_observation",
+      "source": "raw.draw.1",
+      "target": "raw.obs.1"
+    },
+    {
+      "id": "e.37",
+      "type": "introduces",
+      "source": "raw.obs.1",
+      "target": "cand.record.1"
+    },
+    {
+      "id": "e.38",
+      "type": "introduces",
+      "source": "raw.obs.1",
+      "target": "cand.alt.1"
+    },
+    {
+      "id": "e.39",
+      "type": "accepted_from_candidate",
+      "source": "cand.record.1",
+      "target": "acc.record.1"
+    },
+    {
+      "id": "e.40",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.1",
+      "target": "cand.model.s.1"
+    },
+    {
+      "id": "e.41",
+      "type": "records_observation",
+      "source": "raw.draw.2",
+      "target": "raw.obs.2"
+    },
+    {
+      "id": "e.42",
+      "type": "introduces",
+      "source": "raw.obs.2",
+      "target": "cand.record.2"
+    },
+    {
+      "id": "e.43",
+      "type": "introduces",
+      "source": "raw.obs.2",
+      "target": "cand.alt.2"
+    },
+    {
+      "id": "e.44",
+      "type": "accepted_from_candidate",
+      "source": "cand.record.2",
+      "target": "acc.record.2"
+    },
+    {
+      "id": "e.45",
+      "type": "extends_main",
+      "source": "acc.record.1",
+      "target": "acc.record.2"
+    },
+    {
+      "id": "e.46",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.2",
+      "target": "cand.model.r2.1"
+    },
+    {
+      "id": "e.47",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.2",
+      "target": "cand.model.r2.2"
+    },
+    {
+      "id": "e.48",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.2",
+      "target": "cand.model.r2.3"
+    },
+    {
+      "id": "e.49",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.2",
+      "target": "cand.model.r2.4"
+    },
+    {
+      "id": "e.50",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.2",
+      "target": "cand.model.r2.5"
+    },
+    {
+      "id": "e.51",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.2",
+      "target": "cand.model.r2.6"
+    },
+    {
+      "id": "e.52",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.2",
+      "target": "cand.model.r2.7"
+    },
+    {
+      "id": "e.53",
+      "type": "records_observation",
+      "source": "raw.draw.3",
+      "target": "raw.obs.3"
+    },
+    {
+      "id": "e.54",
+      "type": "introduces",
+      "source": "raw.obs.3",
+      "target": "cand.record.3"
+    },
+    {
+      "id": "e.55",
+      "type": "introduces",
+      "source": "raw.obs.3",
+      "target": "cand.alt.3"
+    },
+    {
+      "id": "e.56",
+      "type": "accepted_from_candidate",
+      "source": "cand.record.3",
+      "target": "acc.record.3"
+    },
+    {
+      "id": "e.57",
+      "type": "extends_main",
+      "source": "acc.record.2",
+      "target": "acc.record.3"
+    },
+    {
+      "id": "e.58",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.3",
+      "target": "cand.model.r4.1"
+    },
+    {
+      "id": "e.59",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.3",
+      "target": "cand.model.r4.2"
+    },
+    {
+      "id": "e.60",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.3",
+      "target": "cand.model.r4.3"
+    },
+    {
+      "id": "e.61",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.3",
+      "target": "cand.model.r4.4"
+    },
+    {
+      "id": "e.62",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.3",
+      "target": "cand.model.r4.5"
+    },
+    {
+      "id": "e.63",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.3",
+      "target": "cand.model.r4.6"
+    },
+    {
+      "id": "e.64",
+      "type": "depends_on_candidate",
+      "source": "cand.alt.3",
+      "target": "cand.model.r4.7"
+    },
+    {
+      "id": "e.formal.posterior",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.formal.posterior"
+    },
+    {
+      "id": "e.formal.tilt",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.formal.tilt"
+    },
+    {
+      "id": "e.formal.exploration",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.formal.exploration"
+    },
+    {
+      "id": "e.formal.disappointment",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.formal.disappointment"
+    },
+    {
+      "id": "e.formal.forgetting",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.formal.forgetting"
+    },
+    {
+      "id": "e.formal.push",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.formal.push"
+    },
+    {
+      "id": "e.formal.loss",
+      "type": "introduces",
+      "source": "raw.model-spec",
+      "target": "cand.formal.loss"
+    }
+  ]
+}
