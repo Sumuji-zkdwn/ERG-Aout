@@ -265,7 +265,7 @@ class RunnerIntegrationTests(unittest.TestCase):
         self.assertFalse(any(n.startswith("validate") and n.endswith(".formal_binding.json") for n in names))
 
     def test_f0_example_is_structurally_valid(self):
-        check = next(c for c in build_checks() if c.name.startswith("formal binding"))
+        check = next(c for c in build_checks() if c.name == "formal binding examples/r005/f0_chat.formal_binding.json")
         result = run_command(check.name, check.command)
         self.assertTrue(result.ok, result.stdout + result.stderr)
         self.assertIn("unbound nodes: 2", result.stdout)
